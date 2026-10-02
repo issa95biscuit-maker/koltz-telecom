@@ -344,7 +344,7 @@ input,select,textarea{font:inherit;}
   border-top:1px solid var(--bd);
 }
 .proof-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:1px;background:var(--bd);
   border:1px solid var(--bd);border-radius:20px;overflow:hidden;
 }
@@ -533,6 +533,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 .code-box::before{content:"";position:absolute;top:0;left:20%;right:20%;height:1px;background:var(--lime);box-shadow:0 0 18px rgba(255,92,26,.5);}
 .code-box__lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt2);margin-bottom:12px;}
 .code-box__code{font-family:var(--blk);font-size:clamp(32px,6vw,52px);letter-spacing:.06em;color:var(--lime);margin-bottom:18px;}
+.code-box__note{font-size:13px;color:var(--txt2);margin:-6px auto 18px;max-width:42ch;line-height:1.5;}
 .code-box__btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 .btn-sm{background:var(--lime);color:#000;padding:12px 20px;font-family:var(--blk);font-size:13px;text-transform:uppercase;border-radius:999px;transition:.2s;}
 .btn-sm:hover{background:var(--lime-br);transform:translateY(-1px);}
@@ -673,6 +674,11 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 .p-card__hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;}
 .p-card__t{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt2);}
 .p-card__a{font-family:var(--mono);font-size:11px;color:var(--lime);cursor:pointer;}
+.p-card__tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);border:1px solid var(--bd2);border-radius:999px;padding:2px 8px;}
+.demo-note{border:1.5px dashed rgba(255,92,26,.45);background:rgba(255,92,26,.05);border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:var(--txt2);line-height:1.6;}
+.demo-note b{color:var(--txt);}
+.demo-note__cta{color:var(--lime);font-weight:600;text-decoration:underline;margin-left:4px;}
+.boost-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none;}
 .data-card{background:linear-gradient(135deg,rgba(255,92,26,.07),transparent 60%),rgba(255,255,255,.04)!important;}
 .ring-wrap{display:flex;align-items:center;gap:clamp(16px,3vw,32px);flex-wrap:wrap;}
 .ring{position:relative;width:148px;height:148px;flex-shrink:0;}
@@ -794,9 +800,9 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="wrap hero__inner">
-      <div class="hero__badge rv">
+      <div class="hero__badge rv hidden" id="waitlist-badge">
         <span class="dot"></span>
-        <span id="waitlist-count">847</span> sur la waitlist
+        <span id="waitlist-count"></span> sur la waitlist
       </div>
       <h1 class="hero__h1 rv">
         <span class="l1">La 5G</span>
@@ -930,8 +936,8 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
   <section class="proof-sec">
     <div class="wrap">
       <div class="proof-grid rv">
-        <div class="proof-item">
-          <div class="proof-item__n" id="cnt-wait">847</div>
+        <div class="proof-item hidden" id="proof-wait">
+          <div class="proof-item__n" id="cnt-wait"></div>
           <div class="proof-item__l">Sur la waitlist<br/>et ça grandit</div>
         </div>
         <div class="proof-item">
@@ -939,8 +945,8 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
           <div class="proof-item__l">À payer pour<br/>te pré-inscrire</div>
         </div>
         <div class="proof-item">
-          <div class="proof-item__n">4,8★</div>
-          <div class="proof-item__l">Note cible<br/>App Store</div>
+          <div class="proof-item__n">0</div>
+          <div class="proof-item__l">Engagement<br/>résiliable quand tu veux</div>
         </div>
       </div>
     </div>
@@ -1107,9 +1113,10 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
     <p class="ref-hero-p">Au lancement, chaque ami qui reste 3 mois = 500 pts + 15€ de réduction. Le 1er à 100 parrainages gagne 1 000€. Aucune limite.</p>
     <div class="code-box">
       <div class="code-box__lbl">Ton code personnel</div>
-      <div class="code-box__code">KOLTZ-2847</div>
+      <div class="code-box__code" aria-label="Code généré au lancement">KOLTZ-••••</div>
+      <p class="code-box__note">Ton code unique sera généré au lancement. En attendant, partage le lien du site.</p>
       <div class="code-box__btns">
-        <button class="btn-sm" onclick="copyCode()">📋 Copier</button>
+        <button class="btn-sm" onclick="copyCode()">📋 Copier le lien</button>
         <button class="btn-sm-o" onclick="shareNative()">🔗 Partager</button>
       </div>
     </div>
@@ -1228,19 +1235,20 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
   <div class="wrap prof-page">
     <div class="prof-head">
       <div class="prof-id">
-        <div class="prof-av">R</div>
+        <div class="prof-av" id="prof-av" aria-hidden="true">?</div>
         <div>
-          <div class="prof-id__name">Salut, Ryadh</div>
-          <div class="prof-id__meta">Membre depuis jan. 2026</div>
+          <div class="prof-id__name" id="prof-name">Mon espace Koltz</div>
+          <div class="prof-id__meta" id="prof-meta">Non connecté · espace client disponible au lancement</div>
         </div>
       </div>
-      <div class="prof-badge">⚡ Koltz Max · 100 Go</div>
+      <div class="prof-badge">Aperçu démo</div>
     </div>
-    <div class="prof-grid">
+    <div class="demo-note" role="note"><b>Aperçu de démonstration.</b> Les chiffres ci-dessous sont fictifs et ne correspondent à aucun compte. Ton espace client ouvrira au lancement. <button class="demo-note__cta" onclick="openCo()">Me pré-inscrire →</button></div>
+    <div class="prof-grid" aria-label="Exemple d'espace client (données fictives)">
       <div class="p-card data-card">
-        <div class="p-card__hd"><span class="p-card__t">Conso — Juin 2026</span><span class="p-card__a" onclick="toast('Détails dans l’app')">Détails →</span></div>
+        <div class="p-card__hd"><span class="p-card__t">Conso — exemple</span><span class="p-card__tag">Démo</span></div>
         <div class="ring-wrap">
-          <div class="ring"><svg width="148" height="148" viewBox="0 0 148 148"><circle class="ring__t" cx="74" cy="74" r="64"/><circle class="ring__f" id="ringf" cx="74" cy="74" r="64" stroke-dasharray="402" stroke-dashoffset="402"/></svg><div class="ring__c"><div class="ring__n">67</div><div class="ring__u">Go utilisés</div></div></div>
+          <div class="ring"><svg width="148" height="148" viewBox="0 0 148 148" aria-hidden="true"><circle class="ring__t" cx="74" cy="74" r="64"/><circle class="ring__f" id="ringf" cx="74" cy="74" r="64" stroke-dasharray="402" stroke-dashoffset="402"/></svg><div class="ring__c"><div class="ring__n">67</div><div class="ring__u">Go utilisés</div></div></div>
           <div class="ring-info">
             <div class="ring-info__b">100 Go total</div>
             <div class="ring-info__s">33 Go restants</div>
@@ -1250,19 +1258,19 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
             <div class="ring-stat"><span class="k">Jours rest.</span><span class="v">14</span></div>
           </div>
         </div>
-        <button class="boost-btn" onclick="toast('+10 Go ajoutés ⚡')">Data Boost +10 Go pour 2€ →</button>
+        <button class="boost-btn" disabled>Data Boost +10 Go pour 2€ · au lancement</button>
       </div>
       <div class="p-card">
-        <div class="p-card__hd"><span class="p-card__t">Prochaine facture</span><span class="p-card__a" onclick="toast('Historique bientôt')">Historique →</span></div>
+        <div class="p-card__hd"><span class="p-card__t">Facture — exemple</span><span class="p-card__tag">Démo</span></div>
         <div class="bill-amount">11,99€</div>
-        <div class="bill-date">Prélèvement le 1er juillet 2026</div>
+        <div class="bill-date">Exemple · prélèvement mensuel</div>
         <div class="bill-line"><span class="k">Forfait Max</span><span class="v">11,99€</span></div>
         <div class="bill-line"><span class="k">Data Boost</span><span class="v">0,00€</span></div>
         <div class="bill-line"><span class="k">Parrainage</span><span class="v free">−0,00€</span></div>
         <div class="bill-line" style="font-weight:700"><span style="color:var(--txt)">Total</span><span class="v" style="color:var(--lime)">11,99€</span></div>
       </div>
       <div class="p-card score-card">
-        <div class="p-card__hd"><span class="p-card__t">Koltz Score</span><span class="p-card__a" onclick="nav('parrainage')">Parrainer →</span></div>
+        <div class="p-card__hd"><span class="p-card__t">Koltz Score — exemple</span><span class="p-card__tag">Démo</span></div>
         <div class="score-row">
           <div>
             <div class="score-n bl">1 500<span style="font-family:var(--mono);font-size:.2em;color:var(--txt2);letter-spacing:.1em"> PTS</span></div>
@@ -1274,21 +1282,21 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
           </div>
         </div>
         <div class="rewards-grid">
-          <div class="reward"><div class="reward__c">500 pts</div><div class="reward__n">+1 Go offert</div><button class="reward__b" onclick="toast('1 Go ajouté ⚡')">Échanger</button></div>
-          <div class="reward"><div class="reward__c">1 000 pts</div><div class="reward__n">−1€ facture</div><button class="reward__b" onclick="toast('−1€ appliqué')">Échanger</button></div>
-          <div class="reward"><div class="reward__c">5 000 pts</div><div class="reward__n">1 mois gratuit</div><button class="reward__b" disabled>Bientôt</button></div>
+          <div class="reward"><div class="reward__c">500 pts</div><div class="reward__n">+1 Go offert</div><button class="reward__b" disabled>Au lancement</button></div>
+          <div class="reward"><div class="reward__c">1 000 pts</div><div class="reward__n">−1€ facture</div><button class="reward__b" disabled>Au lancement</button></div>
+          <div class="reward"><div class="reward__c">5 000 pts</div><div class="reward__n">1 mois gratuit</div><button class="reward__b" disabled>Au lancement</button></div>
         </div>
       </div>
       <div class="p-card hist-card">
-        <div class="p-card__hd"><span class="p-card__t">Conso 7 derniers jours</span><span class="p-card__a">Go/jour</span></div>
+        <div class="p-card__hd"><span class="p-card__t">Conso 7 jours — exemple</span><span class="p-card__tag">Go/jour</span></div>
         <div class="hbars" id="hbars"></div>
         <div class="hlabels"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
       </div>
       <div class="qa-grid">
-        <div class="qa-item" onclick="nav('forfaits')"><div class="qa-item__ic">⬆</div><div class="qa-item__t">Changer</div><div class="qa-item__s">Upgrade / downgrade</div></div>
-        <div class="qa-item" onclick="nav('parrainage')"><div class="qa-item__ic">⚡</div><div class="qa-item__t">Parrainer</div><div class="qa-item__s">−15€ par filleul</div></div>
-        <div class="qa-item" onclick="toast('Support IA — 8 sec de réponse')"><div class="qa-item__ic">💬</div><div class="qa-item__t">Support</div><div class="qa-item__s">Réponse en 8 sec</div></div>
-        <div class="qa-item" onclick="toast('Résiliation disponible dans l’app')"><div class="qa-item__ic">✕</div><div class="qa-item__t">Résilier</div><div class="qa-item__s">Sans frais, 1 clic</div></div>
+        <div class="qa-item" onclick="nav('forfaits')"><div class="qa-item__ic">⬆</div><div class="qa-item__t">Forfaits</div><div class="qa-item__s">Voir le catalogue</div></div>
+        <div class="qa-item" onclick="nav('parrainage')"><div class="qa-item__ic">⚡</div><div class="qa-item__t">Parrainer</div><div class="qa-item__s">Partager Koltz</div></div>
+        <a class="qa-item" href="mailto:contact@koltz.fr"><div class="qa-item__ic">💬</div><div class="qa-item__t">Contact</div><div class="qa-item__s">contact@koltz.fr</div></a>
+        <div class="qa-item" onclick="openCo()"><div class="qa-item__ic">🔔</div><div class="qa-item__t">Pré-inscription</div><div class="qa-item__s">Être prévenu·e au lancement</div></div>
       </div>
     </div>
   </div>
@@ -1325,7 +1333,9 @@ function setUser(u) {
 function updateNavUser() {
   const btn = document.querySelector('.nav__profil');
   if (!btn) return;
-  btn.innerHTML = koltzUser ? `👤 ${koltzUser.prenom||'Mon Koltz'}` : '👤 <span>Mon Koltz</span>';
+  btn.textContent = '👤 ';
+  const sp = document.createElement('span'); sp.textContent = (koltzUser && koltzUser.prenom) || 'Mon Koltz';
+  btn.appendChild(sp);
 }
 
 // ── WAITLIST ──
@@ -1360,6 +1370,7 @@ async function loadWaitlistCount() {
   try {
     const { count } = await supa.from('waitlist').select('*', {count:'exact',head:true});
     if (count && count > 0) {
+      ['waitlist-badge','proof-wait'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('hidden');});
       document.querySelectorAll('#waitlist-count, #cnt-wait').forEach(el => {
         let cur=0; const step=Math.max(1,Math.ceil(count/40));
         const t=setInterval(()=>{ cur=Math.min(cur+step,count); el.textContent=cur; if(cur>=count)clearInterval(t); },28);
@@ -1425,18 +1436,19 @@ async function proc(){
   setT('d-em',email);setT('d-plan',(P[pl]||{n:pl}).n);
   coGo(3);
 }
-const CODE='KOLTZ-2847',LINK='https://koltz.fr/?ref=KOLTZ-2847';
+const LINK='https://www.koltz.fr/';
 function clip(text){
   if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(text);}
   return new Promise((res,rej)=>{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(e){rej(e);}document.body.removeChild(ta);});
 }
-function copyCode(){clip(CODE).then(()=>toast('Code copié ⚡')).catch(()=>toast('Code: '+CODE));}
-function shareNative(){if(navigator.share)navigator.share({title:'KOLTZ',text:`1er mois offert avec mon code ${CODE}`,url:LINK});else clip(LINK).then(()=>toast('Lien copié'));}
-function shareWA(){open('https://wa.me/?text='+encodeURIComponent(`⚡ Essaie Koltz — 5G sans engagement. 1er mois GRATUIT avec mon code ${CODE} : ${LINK}`),'_blank');}
-function shareTT(){clip(`⚡ ${CODE} — 1er mois gratuit chez @koltz #Koltz #5G`).then(()=>toast('Caption copiée'));}
-function shareSMS(){location.href='sms:?body='+encodeURIComponent(`Code ${CODE} sur koltz.fr = 1er mois gratuit ⚡`);}
+function copyCode(){clip(LINK).then(()=>toast('Lien copié ⚡')).catch(()=>toast(LINK));}
+function shareNative(){if(navigator.share)navigator.share({title:'KOLTZ',text:'Koltz, la 5G sans engagement, arrive bientôt. Pré-inscris-toi :',url:LINK});else clip(LINK).then(()=>toast('Lien copié'));}
+function shareWA(){open('https://wa.me/?text='+encodeURIComponent(`⚡ Koltz, la 5G sans engagement, arrive bientôt. Pré-inscris-toi : ${LINK}`),'_blank');}
+function shareTT(){clip(`⚡ Koltz arrive bientôt — la 5G sans limites. Pré-inscription : ${LINK} #Koltz #5G`).then(()=>toast('Caption copiée'));}
+function shareSMS(){location.href='sms:?body='+encodeURIComponent(`Koltz, la 5G sans engagement, arrive bientôt ⚡ ${LINK}`);}
 let pd=0;
 function prof(){
+  if(koltzUser&&koltzUser.prenom){setT('prof-name','Salut, '+koltzUser.prenom);setT('prof-av',koltzUser.prenom.trim().charAt(0).toUpperCase()||'?');setT('prof-meta','Pré-inscrit·e'+(P[koltzUser.forfait]?' · '+P[koltzUser.forfait].n:'')+' · on te prévient au lancement');}
   const r=document.getElementById('ringf');
   const RC=402;if(r){r.setAttribute('stroke-dashoffset',RC);r.style.strokeDashoffset=RC;setTimeout(()=>{const off=String(RC*(1-.67));r.setAttribute('stroke-dashoffset',off);r.style.strokeDashoffset=off;},120);}
   const s=document.getElementById('scbar');
