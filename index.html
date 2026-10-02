@@ -1281,7 +1281,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
     </div>
     <div class="prof-grid">
       <div class="p-card data-card">
-        <div class="p-card__hd"><span class="p-card__t">Conso — Juin 2026</span><span class="p-card__a" onclick="toast('Détails dans l'app')">Détails →</span></div>
+        <div class="p-card__hd"><span class="p-card__t">Conso — Juin 2026</span><span class="p-card__a" onclick="toast('Détails dans l’app')">Détails →</span></div>
         <div class="ring-wrap">
           <div class="ring"><svg width="148" height="148" viewBox="0 0 148 148"><circle class="ring__t" cx="74" cy="74" r="64"/><circle class="ring__f" id="ringf" cx="74" cy="74" r="64" stroke-dasharray="402" stroke-dashoffset="402"/></svg><div class="ring__c"><div class="ring__n">67</div><div class="ring__u">Go utilisés</div></div></div>
           <div class="ring-info">
@@ -1331,7 +1331,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <div class="qa-item" onclick="nav('forfaits')"><div class="qa-item__ic">⬆</div><div class="qa-item__t">Changer</div><div class="qa-item__s">Upgrade / downgrade</div></div>
         <div class="qa-item" onclick="nav('parrainage')"><div class="qa-item__ic">⚡</div><div class="qa-item__t">Parrainer</div><div class="qa-item__s">−15€ par filleul</div></div>
         <div class="qa-item" onclick="toast('Support IA — 8 sec de réponse')"><div class="qa-item__ic">💬</div><div class="qa-item__t">Support</div><div class="qa-item__s">Réponse en 8 sec</div></div>
-        <div class="qa-item" onclick="toast('Résiliation disponible dans l'app')"><div class="qa-item__ic">✕</div><div class="qa-item__t">Résilier</div><div class="qa-item__s">Sans frais, 1 clic</div></div>
+        <div class="qa-item" onclick="toast('Résiliation disponible dans l’app')"><div class="qa-item__ic">✕</div><div class="qa-item__t">Résilier</div><div class="qa-item__s">Sans frais, 1 clic</div></div>
       </div>
     </div>
   </div>
@@ -1423,7 +1423,7 @@ function updateBolts(){}
 
 let cur='home';
 const PAGES=['home','forfaits','parrainage','checkout','profil'];
-function nav(p,skipHash){if(!PAGES.includes(p))p='home';document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById('v-'+p);if(v)v.classList.add('on');document.querySelectorAll('.nav__item').forEach(i=>i.classList.toggle('on',i.dataset.nav===p));scrollTo({top:0,behavior:'smooth'});cur=p;if(!skipHash){try{history.replaceState(null,'','#'+p);}catch(e){}}if(p==='home'){lit();rev();}if(p==='profil')prof();document.body.style.overflow='';}
+function nav(p,skipHash){if(!PAGES.includes(p))p='home';document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById('v-'+p);if(v)v.classList.add('on');document.querySelectorAll('.nav__link[data-nav]').forEach(i=>i.classList.toggle('on',i.dataset.nav===p));scrollTo({top:0,behavior:'smooth'});cur=p;if(!skipHash){try{history.replaceState(null,'','#'+p);}catch(e){}}if(p==='home'){lit();rev();}if(p==='profil')prof();document.body.style.overflow='';}
 window.addEventListener('hashchange',()=>{const p=location.hash.replace('#','');if(p&&PAGES.includes(p))nav(p,true);});
 function openCo(plan){nav('checkout');coGo(1);if(plan)pickP(plan);}
 addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>40),{passive:true});
@@ -1431,7 +1431,6 @@ addEventListener('resize',()=>{if(innerWidth>860){document.getElementById('mobme
 function mob(){const b=document.getElementById('burger'),m=document.getElementById('mobmenu');b.classList.toggle('x');m.classList.toggle('open');const o=m.classList.contains('open');b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';}
 function lit(){requestAnimationFrame(()=>document.getElementById('hero').classList.add('lit'));}
 function faq(el){const q=el.closest('.qa'),o=q.classList.contains('open');document.querySelectorAll('.qa.open').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}
-function seg(v){document.getElementById('seg-cards').style.display=v==='cards'?'block':'none';document.getElementById('seg-table').style.display=v==='table'?'block':'none';document.querySelectorAll('.seg button').forEach((b,i)=>b.classList.toggle('on',(i===0&&v==='cards')||(i===1&&v==='table')));}
 const P={mini:{n:'Koltz Mini',p:'6,99 €'},max:{n:'Koltz Max',p:'11,99 €'},ultra:{n:'Koltz Ultra',p:'14,99 €'},infinity:{n:'Koltz Infinity',p:'19,99 €'}};
 let st=1,pl='max',sm='esim',py='card';
 function setT(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
@@ -1486,10 +1485,10 @@ function shareSMS(){location.href='sms:?body='+encodeURIComponent(`Code ${CODE} 
 let pd=0;
 function prof(){
   const r=document.getElementById('ringf');
-  if(r){r.setAttribute('stroke-dashoffset','465');r.style.strokeDashoffset='465';setTimeout(()=>{const off=String(465*(1-.67));r.setAttribute('stroke-dashoffset',off);r.style.strokeDashoffset=off;},120);}
+  const RC=402;if(r){r.setAttribute('stroke-dashoffset',RC);r.style.strokeDashoffset=RC;setTimeout(()=>{const off=String(RC*(1-.67));r.setAttribute('stroke-dashoffset',off);r.style.strokeDashoffset=off;},120);}
   const s=document.getElementById('scbar');
   if(s){s.style.width='0';setTimeout(()=>{s.style.width=(getComputedStyle(s).getPropertyValue('--w').trim()||'60%');},120);}
-  const h=document.getElementById('hb');
+  const h=document.getElementById('hbars');
   if(h&&!pd){const d=[4.2,6.8,3.1,8.4,5.6,9.2,7.1],mx=Math.max(...d);h.innerHTML=d.map(x=>`<div class="hbar" style="height:0%" data-h="${(x/mx)*100}"><span class="hbar__v">${x} Go</span></div>`).join('');pd=1;setTimeout(()=>{h.querySelectorAll('.hbar').forEach(b=>b.style.height=b.dataset.h+'%');},120);}
 }
 
@@ -1506,12 +1505,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){legalClose();const 
 document.getElementById('lmodal').addEventListener('click',e=>{if(e.target.id==='lmodal')legalClose();});
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 function rev(){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.sb__bar i').forEach(b=>b.style.width=getComputedStyle(b).getPropertyValue('--w'));io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -5% 0px'});document.querySelectorAll('#v-home .rv:not(.in)').forEach(el=>io.observe(el));}
-// Count-up animation for hero metrics
-function countUp(el,target){let cur=0;const step=Math.max(1,Math.ceil(target/40));const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur;if(cur>=target)clearInterval(t);},28);}
-addEventListener('DOMContentLoaded',()=>{lit();rev();su();const hp=location.hash.replace('#','');if(hp&&PAGES.includes(hp)&&hp!=='home')nav(hp,true);
-  // animate metric numbers once
-  setTimeout(()=>{document.querySelectorAll('.metric__n').forEach(m=>{const raw=m.childNodes[0];if(raw&&raw.nodeType===3){const n=parseInt(raw.textContent);if(!isNaN(n)){raw.textContent='0';countUp(raw,n);}}});},600);
-});
+addEventListener('DOMContentLoaded',()=>{const hp=location.hash.replace('#','');try{su();}catch(e){console.warn(e);}if(hp&&PAGES.includes(hp)&&hp!=='home')nav(hp,true);else{lit();rev();}});
 
 </script>
 </body>
