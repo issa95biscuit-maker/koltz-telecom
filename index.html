@@ -1,1508 +1,486 @@
 <!doctype html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>KOLTZ — La 5G sans limites</title>
-<meta name="description" content="KOLTZ, l'opérateur mobile 5G sans engagement, arrive bientôt. Forfaits dès 6,99€/mois : pré-inscris-toi gratuitement, on te prévient au lancement."/>
-<meta name="theme-color" content="#FF5C1A"/>
+<title>KOLTZ — Joue collectif. Le forfait mobile qui level up avec ta squad</title>
+<meta name="description" content="KOLTZ, le forfait mobile qui se joue en squad : plus vous êtes, moins vous payez, plus tu restes, plus tu gagnes d'XP. Sans engagement. Pré-inscription gratuite à la Saison 0."/>
+<meta name="theme-color" content="#07070A"/>
 <link rel="canonical" href="https://www.koltz.fr/"/>
 <meta name="robots" content="index,follow"/>
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg"/>
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png"/>
+<link rel="preload" href="/assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/assets/css/koltz.css"/>
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="KOLTZ"/>
 <meta property="og:locale" content="fr_FR"/>
 <meta property="og:url" content="https://www.koltz.fr/"/>
-<meta property="og:title" content="KOLTZ — La 5G sans limites"/>
-<meta property="og:description" content="L'opérateur mobile 5G sans engagement arrive bientôt. Forfaits dès 6,99€/mois : pré-inscris-toi gratuitement."/>
+<meta property="og:title" content="KOLTZ — Joue collectif."/>
+<meta property="og:description" content="Le forfait mobile qui level up avec ta squad. Sans engagement. Pré-inscription gratuite à la Saison 0."/>
 <meta property="og:image" content="https://www.koltz.fr/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="KOLTZ — La 5G sans limites. Sans engagement, dès 6,99€/mois, lancement bientôt."/>
+<meta property="og:image:alt" content="KOLTZ — Joue collectif. Le forfait mobile qui level up avec ta squad."/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="KOLTZ — La 5G sans limites"/>
-<meta name="twitter:description" content="L'opérateur mobile 5G sans engagement arrive bientôt. Forfaits dès 6,99€/mois : pré-inscris-toi gratuitement."/>
+<meta name="twitter:title" content="KOLTZ — Joue collectif."/>
+<meta name="twitter:description" content="Le forfait mobile qui level up avec ta squad. Sans engagement. Pré-inscription gratuite à la Saison 0."/>
 <meta name="twitter:image" content="https://www.koltz.fr/og-image.png"/>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='8' y='8' width='16' height='16' rx='2' fill='%23FF5C1A' transform='rotate(45 16 16)'/%3E%3C/svg%3E"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
-<style>
-/* ── TOKENS ── */
-:root{
-  --lime:#FF5C1A;
-  --lime-br:#FF7A40;
-  --lime-dark:#CC4400;
-  --lime-glow:rgba(255,92,26,.38);
-  --black:#050507;
-  --card:rgba(255,255,255,.05);
-  --card2:rgba(255,255,255,.08);
-  --bd:rgba(255,255,255,.1);
-  --bd2:rgba(255,255,255,.16);
-  --txt:#FFF;
-  --txt2:rgba(255,255,255,.6);
-  --txt3:rgba(255,255,255,.35);
-  --green:#22C55E;
-  --sans:'Inter',system-ui,sans-serif;
-  --blk:'Archivo Black',sans-serif;
-  --mono:'JetBrains Mono',monospace;
-  --gut:clamp(18px,5vw,64px);
-  --max:1320px;
-  --r:16px;
-}
-
-/* ── RESET ── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{background:var(--black);color:var(--txt);-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
-body{font-family:var(--sans);font-weight:400;line-height:1.5;overflow-x:hidden;letter-spacing:-.01em;}
-a{color:inherit;text-decoration:none;}
-button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;}
-input,select,textarea{font:inherit;}
-::selection{background:var(--lime);color:#000;}
-:focus-visible{outline:2px solid var(--lime);outline-offset:2px;}
-.fld input:focus-visible,.fld select:focus-visible{outline:2px solid var(--lime);outline-offset:1px;}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}}
-
-/* ── UTILS ── */
-.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut);}
-.bl{color:var(--lime);}
-.mono{font-family:var(--mono);}
-.hidden{display:none!important;}
-
-/* ── REVEAL ── */
-.rv{opacity:0;transform:translateY(16px);transition:opacity .8s cubic-bezier(.16,.84,.24,1),transform .8s cubic-bezier(.16,.84,.24,1);}
-.rv.in{opacity:1;transform:none;}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important;}}
-
-/* ══════════ NAV ══════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:64px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--gut);gap:12px;
-  background:rgba(5,5,7,0);
-  border-bottom:1px solid transparent;
-  transition:background .3s,border-color .3s;
-}
-.nav.solid{background:rgba(5,5,7,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--bd);}
-.nav__brand{display:flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0;}
-.nav__gem{width:20px;height:20px;background:var(--lime);border-radius:3px;transform:rotate(45deg);box-shadow:0 0 14px var(--lime-glow);flex-shrink:0;}
-.nav__name{font-family:var(--blk);font-size:18px;letter-spacing:.05em;}
-.nav__links{display:flex;align-items:center;gap:2px;}
-.nav__link{padding:7px 13px;font-size:14px;font-weight:500;color:var(--txt2);transition:color .2s;cursor:pointer;position:relative;}
-.nav__link:hover,.nav__link.on{color:var(--txt);}
-.nav__link.on{color:var(--lime);}
-.nav__link.on::after{content:"";position:absolute;bottom:0;left:13px;right:13px;height:2px;background:var(--lime);border-radius:9px;}
-.nav__right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.nav__profil{
-  display:flex;align-items:center;gap:7px;
-  border:1.5px solid var(--bd2);border-radius:999px;
-  padding:8px 16px;font-size:14px;font-weight:600;
-  cursor:pointer;transition:.2s;
-}
-.nav__profil:hover{border-color:var(--lime);background:rgba(255,92,26,.08);color:var(--lime);}
-.burger{display:none;width:36px;height:36px;border:1.5px solid var(--bd);border-radius:8px;flex-direction:column;gap:5px;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
-.burger span{width:16px;height:1.5px;background:#fff;border-radius:9px;transition:.3s;}
-.burger.x span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
-.burger.x span:nth-child(2){opacity:0;}
-.burger.x span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-@media(max-width:860px){.nav__links{display:none;}.burger{display:flex;}.nav__profil span{display:none;}.nav__profil{padding:8px 12px;}}
-
-/* Mobile menu */
-.mob{position:fixed;inset:64px 0 0;z-index:190;background:rgba(5,5,7,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:24px var(--gut);transform:translateX(100%);transition:transform .4s cubic-bezier(.16,.84,.24,1);}
-.mob.open{transform:translateX(0);}
-.mob{visibility:hidden;transition:transform .4s cubic-bezier(.16,.84,.24,1),visibility 0s linear .4s;}
-.mob.open{visibility:visible;transition:transform .4s cubic-bezier(.16,.84,.24,1);}
-.mob__link{font-family:var(--blk);font-size:clamp(28px,7vw,44px);padding:14px 0;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-transform:uppercase;}
-.mob__link:hover{color:var(--lime);}
-.mob__link .ar{font-family:var(--sans);font-size:16px;opacity:.4;}
-.mob__cta{margin-top:24px;}
-@media(min-width:861px){.mob{display:none!important;}}
-
-/* ══════════ VIEWS ══════════ */
-.view{display:none;padding-top:64px;min-height:100vh;}
-.view.on{display:block;animation:vin .4s ease;}
-@keyframes vin{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-
-/* ══════════════════════════════════
-   HOME — HERO
-══════════════════════════════════ */
-.hero{
-  position:relative;
-  min-height:clamp(480px,85vh,780px);
-  display:flex;align-items:center;
-  overflow:hidden;
-  background:var(--black);
-}
-.hero__inner{position:relative;z-index:1;padding:clamp(48px,8vh,96px) 0;width:100%;}
-
-/* Waitlist badge */
-.hero__badge{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid rgba(255,92,26,.35);
-  background:rgba(255,92,26,.08);
-  border-radius:999px;padding:6px 14px;
-  font-family:var(--mono);font-size:11px;font-weight:500;
-  letter-spacing:.08em;text-transform:uppercase;
-  color:var(--lime);margin-bottom:20px;
-}
-.hero__badge .dot{width:6px;height:6px;background:var(--lime);border-radius:50%;box-shadow:0 0 8px var(--lime);animation:pulse 2s ease infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-
-.hero__h1{
-  font-family:var(--blk);
-  font-size:clamp(52px,9.5vw,140px);
-  line-height:.85;letter-spacing:-.025em;
-  text-transform:uppercase;margin-bottom:20px;
-}
-.hero__h1 .l1{display:block;color:var(--txt);}
-.hero__h1 .l2{display:block;color:var(--lime);}
-
-.hero__sub{
-  font-size:clamp(15px,1.2vw,18px);font-weight:400;
-  color:var(--txt2);line-height:1.6;
-  max-width:38ch;margin-bottom:32px;
-}
-
-.hero__btns{display:flex;gap:12px;flex-wrap:wrap;}
-
-.btn-orange{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--lime);color:#000;
-  padding:16px 32px;font-family:var(--blk);
-  font-size:clamp(13px,1.1vw,15px);text-transform:uppercase;
-  letter-spacing:.04em;border-radius:999px;
-  box-shadow:0 10px 32px rgba(255,92,26,.38);
-  transition:transform .22s,box-shadow .22s,background .2s;
-  position:relative;overflow:hidden;
-}
-.btn-orange::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent);pointer-events:none;}
-.btn-orange:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(255,92,26,.5);background:var(--lime-br);}
-
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:10px;
-  background:transparent;color:var(--txt);
-  padding:15px 28px;font-family:var(--blk);
-  font-size:clamp(13px,1.1vw,15px);text-transform:uppercase;
-  letter-spacing:.04em;border-radius:999px;
-  border:1.5px solid rgba(255,255,255,.25);
-  transition:.22s;
-}
-.btn-ghost:hover{border-color:var(--txt);background:rgba(255,255,255,.05);}
-
-/* ══════════════════════════════════
-   HOME — FORFAITS (section principale)
-══════════════════════════════════ */
-.plans-sec{
-  padding:clamp(64px,10vh,120px) 0;
-  border-top:1px solid var(--bd);
-}
-.plans-sec__head{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  flex-wrap:wrap;gap:16px;margin-bottom:clamp(32px,5vh,56px);
-}
-.plans-sec__title{
-  font-family:var(--blk);font-size:clamp(34px,5.5vw,68px);
-  text-transform:uppercase;line-height:.88;letter-spacing:-.025em;
-}
-.plans-sec__sub{
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--txt2);
-  text-align:right;max-width:200px;line-height:1.6;
-}
-@media(max-width:600px){.plans-sec__sub{text-align:left;max-width:100%;}}
-
-/* Grille des 4 plans */
-.plans-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-@media(max-width:1100px){.plans-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:580px){.plans-grid{grid-template-columns:1fr;gap:10px;}}
-
-/* Carte plan */
-.plan-card{
-  background:rgba(255,255,255,.04);
-  border:1.5px solid rgba(255,255,255,.09);
-  border-radius:24px;
-  padding:28px 24px;
-  display:flex;flex-direction:column;
-  gap:0;
-  cursor:pointer;
-  transition:border-color .25s,background .25s,transform .25s;
-  position:relative;overflow:hidden;
-}
-.plan-card::before{
-  content:"";position:absolute;top:0;left:15%;right:15%;
-  height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
-}
-.plan-card:hover{
-  border-color:rgba(255,92,26,.35);
-  background:rgba(255,92,26,.05);
-  transform:translateY(-3px);
-}
-.plan-card.hot{
-  background:rgba(255,92,26,.07);
-  border-color:rgba(255,92,26,.4);
-  border-width:2px;
-}
-
-/* Badge populaire */
-.plan-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--blk);font-size:10px;text-transform:uppercase;
-  letter-spacing:.1em;background:var(--lime);color:#000;
-  padding:4px 12px;border-radius:999px;
-  margin-bottom:16px;align-self:flex-start;
-}
-
-/* Index 001/002 */
-.plan-idx{
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--txt3);margin-bottom:12px;
-}
-
-/* DATA — le plus gros élément */
-.plan-data{
-  font-family:var(--blk);
-  font-size:clamp(56px,6.5vw,80px);
-  line-height:.82;letter-spacing:-.03em;
-  color:var(--lime);margin-bottom:4px;
-}
-.plan-data .unit{
-  font-family:var(--sans);font-size:.3em;
-  color:rgba(255,255,255,.5);font-weight:600;
-  vertical-align:baseline;
-}
-
-/* PRIX */
-.plan-price{
-  font-family:var(--blk);font-size:clamp(22px,2.5vw,28px);
-  letter-spacing:-.02em;color:var(--txt);margin-bottom:6px;
-}
-.plan-price .per{
-  font-family:var(--mono);font-size:.45em;
-  color:var(--txt3);font-weight:400;letter-spacing:.06em;
-}
-
-/* Ancrage "économie" */
-.plan-anchor{
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
-  color:var(--green);text-transform:uppercase;margin-bottom:20px;
-}
-
-/* Divider */
-.plan-div{
-  height:1px;background:rgba(255,255,255,.07);
-  margin-bottom:18px;
-}
-
-/* Features */
-.plan-feats{
-  list-style:none;display:flex;flex-direction:column;
-  gap:9px;margin-bottom:24px;flex:1;
-}
-.plan-feats li{
-  font-size:13px;color:var(--txt2);
-  display:flex;align-items:center;gap:8px;
-}
-.plan-feats li::before{
-  content:"⚡";font-size:11px;flex-shrink:0;
-}
-
-/* Bouton choisir */
-.plan-btn{
-  width:100%;padding:14px;
-  font-family:var(--blk);font-size:13px;
-  text-transform:uppercase;letter-spacing:.05em;
-  border-radius:12px;text-align:center;
-  transition:.22s;
-}
-.plan-btn.solid{
-  background:var(--lime);color:#000;
-  box-shadow:0 8px 24px rgba(255,92,26,.35);
-}
-.plan-btn.solid:hover{background:var(--lime-br);transform:translateY(-1px);}
-.plan-btn.ghost{
-  border:1.5px solid rgba(255,255,255,.2);color:var(--txt);
-}
-.plan-btn.ghost:hover{border-color:var(--lime);color:var(--lime);background:rgba(255,92,26,.06);}
-
-/* Promesse sous la grille */
-.plans-promise{
-  display:flex;justify-content:center;flex-wrap:wrap;
-  gap:10px 28px;margin-top:24px;
-}
-.plans-promise span{
-  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--txt2);
-  display:flex;align-items:center;gap:6px;
-}
-.plans-promise span::before{content:"✅";font-size:10px;}
-
-/* ══════════════════════════════════
-   MARQUEE
-══════════════════════════════════ */
-.mq{
-  border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);
-  overflow:hidden;background:rgba(255,255,255,.02);
-}
-.mq__row{display:inline-flex;white-space:nowrap;padding:14px 0;animation:mqa 26s linear infinite;}
-.mq__it{
-  font-family:var(--blk);font-size:clamp(16px,2vw,26px);
-  text-transform:uppercase;padding:0 24px;
-  display:inline-flex;align-items:center;gap:20px;letter-spacing:-.01em;
-}
-.mq__it .s{width:6px;height:6px;background:var(--lime);border-radius:50%;flex-shrink:0;box-shadow:0 0 8px var(--lime);}
-.mq__it.dim{color:var(--txt3);}
-@keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* ══════════════════════════════════
-   SOCIAL PROOF
-══════════════════════════════════ */
-.proof-sec{
-  padding:clamp(48px,8vh,96px) 0;
-  border-top:1px solid var(--bd);
-}
-.proof-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1px;background:var(--bd);
-  border:1px solid var(--bd);border-radius:20px;overflow:hidden;
-}
-@media(max-width:640px){.proof-grid{grid-template-columns:1fr;}}
-.proof-item{
-  background:rgba(255,255,255,.03);
-  padding:clamp(28px,4vw,44px) clamp(22px,3vw,36px);
-  text-align:center;
-}
-.proof-item__n{
-  font-family:var(--blk);font-size:clamp(40px,5.5vw,68px);
-  line-height:.85;letter-spacing:-.025em;color:var(--lime);
-  margin-bottom:8px;
-}
-.proof-item__l{
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--txt2);line-height:1.5;
-}
-
-/* ══════════════════════════════════
-   PARRAINAGE TEASER
-══════════════════════════════════ */
-.ref-teaser{
-  padding:clamp(48px,8vh,96px) 0;
-  border-top:1px solid var(--bd);
-}
-.ref-teaser__inner{
-  display:grid;grid-template-columns:1fr auto;
-  gap:clamp(20px,4vw,48px);align-items:center;
-  background:rgba(255,92,26,.06);
-  border:1.5px solid rgba(255,92,26,.25);
-  border-radius:24px;padding:clamp(28px,4vw,48px);
-  position:relative;overflow:hidden;
-}
-.ref-teaser__inner::before{
-  content:"";position:absolute;top:-50%;right:-10%;
-  width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,92,26,.12),transparent 70%);
-  pointer-events:none;
-}
-@media(max-width:600px){.ref-teaser__inner{grid-template-columns:1fr;gap:20px;}}
-.ref-teaser__eyebrow{
-  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--lime);margin-bottom:10px;
-}
-.ref-teaser__h{
-  font-family:var(--blk);font-size:clamp(24px,3.5vw,42px);
-  text-transform:uppercase;line-height:.9;letter-spacing:-.02em;
-  margin-bottom:10px;
-}
-.ref-teaser__p{font-size:14px;color:var(--txt2);line-height:1.6;max-width:40ch;}
-
-/* ══════════════════════════════════
-   FAQ
-══════════════════════════════════ */
-.faq-sec{padding:clamp(48px,8vh,96px) 0;border-top:1px solid var(--bd);}
-.faq-sec__title{
-  font-family:var(--blk);font-size:clamp(32px,5vw,64px);
-  text-transform:uppercase;line-height:.88;letter-spacing:-.025em;
-  margin-bottom:clamp(28px,4vh,48px);
-}
-.qa{background:rgba(255,255,255,.03);border-radius:14px;margin-bottom:8px;overflow:hidden;}
-.qa__q{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;padding:20px 22px;cursor:pointer;
-  font-size:clamp(14px,1.1vw,16px);font-weight:600;
-  width:100%;text-align:left;
-}
-.qa__ic{font-size:20px;color:var(--lime);transition:transform .35s;flex-shrink:0;}
-.qa.open .qa__ic{transform:rotate(45deg);}
-.qa__a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.2,1);}
-.qa__a p{padding:0 22px 20px;font-size:14px;line-height:1.75;color:var(--txt2);}
-.qa.open .qa__a{max-height:280px;}
-
-/* ══════════════════════════════════
-   CTA BAND
-══════════════════════════════════ */
-.band{
-  padding:clamp(64px,12vh,160px) 0;
-  text-align:center;border-top:1px solid var(--bd);
-  position:relative;overflow:hidden;
-}
-.band__glow{
-  position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
-  width:60vw;height:60vw;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,92,26,.16),transparent 60%);
-  filter:blur(40px);pointer-events:none;
-}
-.band__inner{position:relative;}
-.band__eyebrow{
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--lime);margin-bottom:16px;display:block;
-}
-.band__h{
-  font-family:var(--blk);font-size:clamp(44px,9vw,130px);
-  text-transform:uppercase;line-height:.82;letter-spacing:-.03em;margin-bottom:20px;
-}
-.band__sub{
-  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--txt2);margin-bottom:32px;
-}
-
-/* ══════════════════════════════════
-   FOOTER
-══════════════════════════════════ */
-footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
-.foot{padding:clamp(40px,7vh,72px) 0 24px;}
-.foot__top{
-  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
-  gap:28px;margin-bottom:32px;
-}
-@media(max-width:700px){.foot__top{grid-template-columns:1fr 1fr;gap:20px;}}
-.foot__brand{display:flex;flex-direction:column;gap:12px;}
-.foot__brand-logo{display:flex;align-items:center;gap:8px;font-family:var(--blk);font-size:18px;letter-spacing:.04em;}
-.foot__brand-gem{width:16px;height:16px;background:var(--lime);border-radius:2px;transform:rotate(45deg);flex-shrink:0;}
-.foot__brand-desc{font-size:13px;color:var(--txt2);line-height:1.6;max-width:26ch;}
-.foot__col h5{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--txt3);margin-bottom:12px;}
-.foot__col a,.foot__col button{display:block;text-align:left;font-size:13px;color:var(--txt2);padding:4px 0;cursor:pointer;transition:color .2s;}
-.foot__col a:hover,.foot__col button:hover{color:var(--lime);}
-.foot__bot{
-  display:flex;justify-content:space-between;flex-wrap:wrap;
-  gap:10px;padding-top:20px;border-top:1px solid var(--bd);
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--txt3);
-}
-
-/* ══════════════════════════════════
-   PAGE FORFAITS
-══════════════════════════════════ */
-.page-head{
-  padding:clamp(40px,7vh,80px) 0 clamp(32px,5vh,56px);
-}
-.page-head__eyebrow{
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--lime);margin-bottom:14px;display:block;
-}
-.page-head__h{
-  font-family:var(--blk);font-size:clamp(40px,7vw,88px);
-  text-transform:uppercase;line-height:.86;letter-spacing:-.025em;margin-bottom:12px;
-}
-.page-head__p{font-size:15px;color:var(--txt2);line-height:1.65;max-width:48ch;}
-
-/* Tableau comparatif forfaits */
-.compare-table{margin-top:clamp(36px,5vh,56px);}
-.compare-head{
-  display:grid;grid-template-columns:180px repeat(4,1fr);
-  gap:0;background:rgba(255,255,255,.04);
-  border:1px solid var(--bd);border-radius:14px 14px 0 0;overflow:hidden;
-}
-@media(max-width:720px){.compare-head,.compare-row{grid-template-columns:120px repeat(4,1fr);}}
-.compare-head__cell{
-  padding:14px 12px;text-align:center;font-family:var(--blk);
-  font-size:13px;text-transform:uppercase;letter-spacing:.04em;
-  border-right:1px solid var(--bd);
-}
-.compare-head__cell:first-child{text-align:left;}
-.compare-head__cell:last-child{border-right:0;}
-.compare-head__cell.hot{color:var(--lime);}
-.compare-row{
-  display:grid;grid-template-columns:180px repeat(4,1fr);
-  gap:0;border:1px solid var(--bd);border-top:0;
-}
-.compare-row:last-child{border-radius:0 0 14px 14px;overflow:hidden;}
-.compare-cell{
-  padding:14px 12px;text-align:center;font-size:13px;
-  color:var(--txt2);border-right:1px solid var(--bd);
-}
-.compare-cell:first-child{text-align:left;font-weight:600;color:var(--txt);}
-.compare-cell:last-child{border-right:0;}
-.compare-cell.hot{color:var(--lime);font-weight:700;}
-.check{color:var(--green);}
-.cross{color:rgba(255,255,255,.25);}
-
-/* ══════════════════════════════════
-   PARRAINAGE PAGE
-══════════════════════════════════ */
-.ref-page{padding:clamp(40px,7vh,80px) 0;}
-.ref-hero-h{
-  font-family:var(--blk);font-size:clamp(44px,8vw,110px);
-  text-transform:uppercase;line-height:.84;letter-spacing:-.025em;margin-bottom:16px;
-}
-.ref-hero-p{font-size:16px;color:var(--txt2);line-height:1.6;max-width:48ch;margin-bottom:36px;}
-.code-box{
-  background:rgba(255,92,26,.06);border:1.5px solid rgba(255,92,26,.3);
-  border-radius:20px;padding:32px;text-align:center;
-  max-width:480px;margin:0 auto 40px;position:relative;overflow:hidden;
-}
-.code-box::before{content:"";position:absolute;top:0;left:20%;right:20%;height:1px;background:var(--lime);box-shadow:0 0 18px rgba(255,92,26,.5);}
-.code-box__lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt2);margin-bottom:12px;}
-.code-box__code{font-family:var(--blk);font-size:clamp(32px,6vw,52px);letter-spacing:.06em;color:var(--lime);margin-bottom:18px;}
-.code-box__note{font-size:13px;color:var(--txt2);margin:-6px auto 18px;max-width:42ch;line-height:1.5;}
-.code-box__btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.btn-sm{background:var(--lime);color:#000;padding:12px 20px;font-family:var(--blk);font-size:13px;text-transform:uppercase;border-radius:999px;transition:.2s;}
-.btn-sm:hover{background:var(--lime-br);transform:translateY(-1px);}
-.btn-sm-o{border:1.5px solid var(--bd2);color:var(--txt2);padding:11px 18px;font-family:var(--blk);font-size:13px;text-transform:uppercase;border-radius:999px;transition:.2s;}
-.btn-sm-o:hover{border-color:var(--txt);color:var(--txt);}
-.ref-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:700px;margin:0 auto 40px;}
-@media(max-width:540px){.ref-stats{grid-template-columns:1fr;}}
-.ref-stat{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:22px;text-align:center;}
-.ref-stat__n{font-family:var(--blk);font-size:clamp(32px,5vw,48px);line-height:.85;margin-bottom:7px;}
-.ref-stat__l{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt2);}
-.ref-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:900px;margin:0 auto;}
-@media(max-width:640px){.ref-cards{grid-template-columns:1fr;}}
-.ref-card{background:var(--card);border:1px solid var(--bd);border-radius:20px;overflow:hidden;}
-.ref-card__head{padding:16px 20px;border-bottom:1px solid var(--bd);font-family:var(--blk);font-size:16px;text-transform:uppercase;letter-spacing:.02em;}
-.tier{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--bd);}
-.tier:last-child{border-bottom:0;}
-.tier__i{font-family:var(--blk);font-size:18px;color:var(--lime);}
-.tier__n{font-size:14px;font-weight:700;}
-.tier__s{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--txt2);margin-top:2px;}
-.tier__r{text-align:right;}
-.tier__e{font-family:var(--blk);font-size:18px;color:var(--lime);}
-.tier__p{font-family:var(--mono);font-size:10px;color:var(--txt2);}
-.step{display:flex;gap:12px;padding:16px 20px;border-bottom:1px solid var(--bd);}
-.step:last-child{border-bottom:0;}
-.step__n{font-family:var(--blk);font-size:26px;color:var(--lime);line-height:1;width:32px;flex-shrink:0;}
-.step__h{font-size:14px;font-weight:700;margin-bottom:4px;}
-.step__p{font-size:13px;color:var(--txt2);line-height:1.5;}
-.chips{display:flex;gap:8px;padding:14px 20px;flex-wrap:wrap;}
-.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--bd2);padding:9px 14px;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:.2s;}
-.chip:hover{border-color:var(--lime);background:rgba(255,92,26,.06);}
-
-/* ══════════════════════════════════
-   CHECKOUT
-══════════════════════════════════ */
-.co-page{padding:clamp(32px,6vh,64px) 0 80px;}
-.co-head h1{font-family:var(--blk);font-size:clamp(36px,6vw,72px);text-transform:uppercase;line-height:.88;letter-spacing:-.025em;margin-bottom:8px;}
-.co-head p{font-size:14px;color:var(--txt2);margin-bottom:28px;}
-.co-steps{display:flex;border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:28px;}
-.co-st{flex:1;padding:12px 8px;text-align:center;border-right:1px solid var(--bd);transition:background .25s;}
-.co-st:last-child{border-right:0;}
-.co-st__no{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--txt3);margin-bottom:3px;}
-.co-st__l{font-size:11px;font-weight:600;color:var(--txt2);}
-.co-st.on{background:rgba(255,92,26,.07);}
-.co-st.on .co-st__no{color:var(--lime);}
-.co-st.on .co-st__l{color:var(--txt);}
-.co-st.done .co-st__no{color:var(--green);}
-.co-layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;}
-@media(max-width:800px){.co-layout{grid-template-columns:1fr;}}
-.scr{display:none;flex-direction:column;gap:12px;}
-.scr.on{display:flex;}
-.co-box{background:rgba(255,255,255,.04);border:1.5px solid var(--bd);border-radius:18px;overflow:hidden;}
-.co-box__h{padding:14px 18px;border-bottom:1px solid var(--bd);font-family:var(--blk);font-size:14px;text-transform:uppercase;letter-spacing:.02em;}
-.co-box__b{padding:18px;}
-.opt{display:grid;grid-template-columns:18px 1fr auto;gap:12px;align-items:center;padding:14px;border:1.5px solid var(--bd);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.2s;}
-.opt:last-child{margin-bottom:0;}
-.opt:hover{border-color:rgba(255,92,26,.3);}
-.opt.on{border-color:var(--lime);background:rgba(255,92,26,.06);}
-.opt__r{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--bd2);transition:.2s;flex-shrink:0;}
-.opt.on .opt__r{border-color:var(--lime);background:var(--lime);}
-.opt.on .opt__r::after{content:"";display:block;width:6px;height:6px;background:#000;border-radius:50%;margin:4px auto 0;}
-.opt__n{font-family:var(--blk);font-size:15px;text-transform:uppercase;}
-.opt__d{font-size:12px;color:var(--txt2);margin-top:2px;}
-.opt__p{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--lime);text-align:right;white-space:nowrap;}
-.opt__p small{display:block;font-size:10px;color:var(--txt3);font-weight:400;}
-.sim-row{display:flex;gap:8px;}
-.sim-btn{flex:1;padding:12px;text-align:center;border:1.5px solid var(--bd);border-radius:10px;font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;transition:.2s;}
-.sim-btn.on{border-color:var(--lime);background:rgba(255,92,26,.07);color:var(--txt);}
-.sim-btn small{display:block;font-family:var(--mono);font-size:10px;color:var(--txt2);margin-top:2px;font-weight:400;}
-.co-chk{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--txt2);padding:12px 0;border-top:1px solid var(--bd);margin-top:12px;cursor:pointer;}
-.co-chk input{width:15px;height:15px;accent-color:var(--lime);}
-.co-hint{font-family:var(--mono);font-size:11px;color:var(--green);margin-top:8px;letter-spacing:.04em;}
-.co-note{font-size:13px;color:var(--txt2);line-height:1.6;margin-top:4px;}
-.co-err{border:1.5px solid #EF4444;background:rgba(239,68,68,.08);color:#FCA5A5;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;}
-.co-err[hidden]{display:none;}
-.plans-launch{margin-top:18px;font-size:14px;color:var(--txt2);line-height:1.6;max-width:70ch;}
-.fld{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
-.fld:last-child{margin-bottom:0;}
-.fld label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt2);}
-.fld input,.fld select{background:rgba(255,255,255,.04);border:1.5px solid var(--bd);padding:12px 14px;color:var(--txt);font-size:14px;outline:none;transition:.2s;border-radius:10px;width:100%;appearance:none;}
-.fld input:focus,.fld select:focus{border-color:var(--lime);background:rgba(255,92,26,.04);}
-.fld input::placeholder{color:var(--txt3);}
-.fld input.bad{border-color:#EF4444;}
-.fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 12px) center;background-size:12px;padding-right:36px;background-color:rgba(255,255,255,.04);}
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.r3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;}
-@media(max-width:480px){.r2,.r3{grid-template-columns:1fr;}}
-.pay-tabs{display:flex;gap:8px;margin-bottom:14px;}
-.pay-tab{flex:1;padding:12px 8px;text-align:center;border:1.5px solid var(--bd);border-radius:10px;font-size:12px;color:var(--txt2);cursor:pointer;transition:.2s;display:flex;flex-direction:column;align-items:center;gap:4px;}
-.pay-tab.on{border-color:var(--lime);background:rgba(255,92,26,.07);color:var(--txt);}
-.pay-tab .pt-ic{font-size:18px;}
-.alt-block{padding:22px;text-align:center;border:1px solid var(--bd);border-radius:10px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt2);}
-.secure-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--bd);border-radius:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt2);margin-top:10px;}
-.co-side{position:sticky;top:84px;display:flex;flex-direction:column;gap:12px;}
-.order-card{background:rgba(255,92,26,.06);border:1.5px solid rgba(255,92,26,.25);border-radius:18px;padding:22px;}
-.order-card__plan{font-family:var(--blk);font-size:20px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:4px;}
-.order-card__price{font-family:var(--mono);font-size:13px;color:var(--lime);}
-.order-card__edit{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);text-decoration:underline;margin-top:10px;display:block;cursor:pointer;}
-.order-lines{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);}
-.order-line{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--txt2);}
-.order-line .v{font-family:var(--mono);color:var(--txt);}
-.order-total{display:flex;justify-content:space-between;font-family:var(--blk);font-size:20px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);}
-.order-total .v{color:var(--lime);}
-.order-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt2);margin-top:10px;}
-.trust-card{background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:18px;padding:18px;}
-.trust-card h4{font-family:var(--blk);font-size:14px;text-transform:uppercase;margin-bottom:12px;}
-.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--txt2);padding:6px 0;}
-.co-nav{display:flex;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap;}
-.co-bk{border:1.5px solid var(--bd2);color:var(--txt2);padding:13px 22px;font-family:var(--blk);font-size:14px;text-transform:uppercase;border-radius:999px;transition:.2s;cursor:pointer;}
-.co-bk:hover{border-color:var(--txt);color:var(--txt);}
-.co-nx{background:var(--lime);color:#000;padding:14px 28px;font-family:var(--blk);font-size:15px;text-transform:uppercase;border-radius:999px;box-shadow:0 8px 24px rgba(255,92,26,.38);transition:.2s;cursor:pointer;}
-.co-nx:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(255,92,26,.48);background:var(--lime-br);}
-.co-nx:disabled{opacity:.6;cursor:not-allowed;}
-
-/* Done */
-.done{text-align:center;padding:44px 0;}
-.done__gem{width:84px;height:84px;margin:0 auto 24px;position:relative;}
-.done__gem::before{content:"";position:absolute;inset:0;background:var(--lime);border-radius:16px;transform:rotate(45deg);box-shadow:0 0 50px rgba(255,92,26,.5);animation:dp 2s ease-out infinite;}
-.done__gem span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:36px;z-index:1;}
-@keyframes dp{0%,100%{box-shadow:0 0 0 0 rgba(255,92,26,.4)}50%{box-shadow:0 0 0 18px transparent}}
-.done__h{font-family:var(--blk);font-size:clamp(42px,6vw,78px);text-transform:uppercase;line-height:.84;letter-spacing:-.025em;margin-bottom:14px;}
-.done__sub{font-size:15px;color:var(--txt2);max-width:42ch;margin:0 auto 22px;line-height:1.6;}
-.done__ref{display:inline-block;font-family:var(--mono);font-size:13px;padding:12px 22px;border:1px solid var(--bd2);border-radius:8px;margin-bottom:28px;color:var(--txt2);}
-.done__ref b{color:var(--lime);}
-
-/* ══════════════════════════════════
-   PROFIL
-══════════════════════════════════ */
-.prof-page{padding:clamp(32px,6vh,64px) 0 80px;}
-.prof-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--bd);}
-.prof-id{display:flex;align-items:center;gap:14px;}
-.prof-av{width:56px;height:56px;border-radius:14px;background:linear-gradient(140deg,var(--lime-dark),var(--lime));display:flex;align-items:center;justify-content:center;font-family:var(--blk);font-size:22px;color:#000;flex-shrink:0;box-shadow:0 0 22px rgba(255,92,26,.28);}
-.prof-id__name{font-family:var(--blk);font-size:clamp(22px,4vw,36px);text-transform:uppercase;letter-spacing:-.01em;line-height:1;}
-.prof-id__meta{font-family:var(--mono);font-size:11px;color:var(--txt2);margin-top:4px;}
-.prof-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--lime);background:rgba(255,92,26,.08);padding:8px 16px;border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);}
-.prof-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;}
-@media(max-width:800px){.prof-grid{grid-template-columns:1fr;}}
-.p-card{background:rgba(255,255,255,.04);border:1.5px solid var(--bd);border-radius:18px;padding:clamp(20px,3vw,28px);}
-.p-card__hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;}
-.p-card__t{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt2);}
-.p-card__a{font-family:var(--mono);font-size:11px;color:var(--lime);cursor:pointer;}
-.p-card__tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);border:1px solid var(--bd2);border-radius:999px;padding:2px 8px;}
-.demo-note{border:1.5px dashed rgba(255,92,26,.45);background:rgba(255,92,26,.05);border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:var(--txt2);line-height:1.6;}
-.demo-note b{color:var(--txt);}
-.demo-note__cta{color:var(--lime);font-weight:600;text-decoration:underline;margin-left:4px;}
-.boost-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none;}
-.data-card{background:linear-gradient(135deg,rgba(255,92,26,.07),transparent 60%),rgba(255,255,255,.04)!important;}
-.ring-wrap{display:flex;align-items:center;gap:clamp(16px,3vw,32px);flex-wrap:wrap;}
-.ring{position:relative;width:148px;height:148px;flex-shrink:0;}
-.ring svg{transform:rotate(-90deg);}
-.ring__t{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10;}
-.ring__f{fill:none;stroke:var(--lime);stroke-width:10;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,92,26,.4));transition:stroke-dashoffset 1.5s cubic-bezier(.2,.7,.2,1);}
-.ring__c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.ring__n{font-family:var(--blk);font-size:40px;line-height:.85;letter-spacing:-.02em;}
-.ring__u{font-family:var(--mono);font-size:10px;color:var(--txt2);letter-spacing:.1em;margin-top:4px;}
-.ring-info{flex:1;min-width:150px;}
-.ring-info__b{font-family:var(--blk);font-size:clamp(20px,2.5vw,30px);text-transform:uppercase;margin-bottom:5px;}
-.ring-info__s{font-size:13px;color:var(--txt2);margin-bottom:14px;}
-.ring-stat{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--bd);font-size:12px;}
-.ring-stat .k{color:var(--txt2);}
-.ring-stat .v{font-family:var(--mono);}
-.ring-stat .v.g{color:var(--green);}
-.boost-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--lime);color:#000;padding:13px 18px;font-family:var(--blk);font-size:14px;text-transform:uppercase;border-radius:12px;box-shadow:0 6px 20px rgba(255,92,26,.28);transition:.2s;margin-top:14px;}
-.boost-btn:hover{transform:translateY(-1px);background:var(--lime-br);}
-.bill-amount{font-family:var(--blk);font-size:clamp(40px,5vw,60px);line-height:.85;margin-bottom:6px;}
-.bill-date{font-family:var(--mono);font-size:11px;color:var(--txt2);letter-spacing:.04em;margin-bottom:16px;}
-.bill-line{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--bd);font-size:13px;}
-.bill-line .k{color:var(--txt2);}
-.bill-line .v{font-family:var(--mono);}
-.bill-line .v.free{color:var(--green);}
-.score-card{grid-column:1/-1;}
-.score-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;}
-@media(max-width:540px){.score-row{grid-template-columns:1fr;}}
-.score-n{font-family:var(--blk);font-size:clamp(50px,7vw,80px);line-height:.85;letter-spacing:-.025em;}
-.score-level{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bd2);padding:8px 16px;border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-top:12px;}
-.score-level .s{color:var(--lime);}
-.score-bar{height:5px;background:rgba(255,255,255,.07);overflow:hidden;border-radius:999px;margin-top:18px;}
-.score-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--lime-dark),var(--lime));box-shadow:0 0 10px rgba(255,92,26,.5);transition:width 1.3s cubic-bezier(.2,.7,.2,1);border-radius:999px;}
-.score-nxt{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--txt2);margin-top:7px;letter-spacing:.04em;}
-.rewards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;}
-@media(max-width:540px){.rewards-grid{grid-template-columns:1fr;}}
-.reward{background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:10px;padding:15px;}
-.reward__c{font-family:var(--mono);font-size:10px;color:var(--lime);margin-bottom:6px;letter-spacing:.06em;}
-.reward__n{font-size:14px;font-weight:700;margin-bottom:10px;}
-.reward__b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--txt2);border:1px solid var(--bd2);border-radius:6px;padding:8px 14px;width:100%;transition:.2s;cursor:pointer;}
-.reward__b:hover{border-color:var(--lime);color:var(--lime);}
-.reward__b:disabled{opacity:.4;cursor:not-allowed;}
-.hist-card{grid-column:1/-1;}
-.hbars{display:flex;align-items:flex-end;gap:clamp(4px,1.2vw,10px);height:130px;margin-top:8px;}
-.hbar{flex:1;background:rgba(255,255,255,.05);border-top:2px solid var(--lime);position:relative;transition:height 1s cubic-bezier(.2,.7,.2,1);min-height:4px;border-radius:3px 3px 0 0;}
-.hbar:hover{background:rgba(255,92,26,.12);}
-.hbar__v{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--txt2);white-space:nowrap;opacity:0;transition:.2s;}
-.hbar:hover .hbar__v{opacity:1;}
-.hlabels{display:flex;gap:clamp(4px,1.2vw,10px);margin-top:8px;}
-.hlabels span{flex:1;text-align:center;font-family:var(--mono);font-size:9px;color:var(--txt2);}
-.qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;grid-column:1/-1;}
-@media(max-width:640px){.qa-grid{grid-template-columns:1fr 1fr;}}
-.qa-item{background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:16px;padding:18px;cursor:pointer;transition:.25s;display:flex;flex-direction:column;gap:10px;}
-.qa-item:hover{border-color:var(--lime);background:rgba(255,92,26,.05);transform:translateY(-2px);}
-.qa-item__ic{font-size:22px;}
-.qa-item__t{font-size:14px;font-weight:700;}
-.qa-item__s{font-size:12px;color:var(--txt2);}
-
-/* ══════════════════════════════════
-   MODAL LÉGALE
-══════════════════════════════════ */
-.lmodal{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px;}
-.lmodal.open{display:flex;animation:vin .25s ease;}
-.lmodal__box{background:rgba(20,20,24,1);border:1px solid var(--bd2);border-radius:20px;max-width:600px;width:100%;max-height:80vh;display:flex;flex-direction:column;}
-.lmodal__head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bd);}
-.lmodal__title{font-family:var(--blk);font-size:15px;text-transform:uppercase;}
-.lmodal__x{width:30px;height:30px;border:1px solid var(--bd2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--txt2);cursor:pointer;transition:.2s;}
-.lmodal__x:hover{border-color:var(--lime);color:var(--lime);}
-.lmodal__body{padding:20px;overflow-y:auto;font-size:14px;line-height:1.7;color:var(--txt2);}
-.lmodal__body h4{color:var(--txt);font-size:14px;margin:15px 0 7px;font-weight:700;}
-.lmodal__body h4:first-child{margin-top:0;}
-
-/* Toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 24px;border-radius:999px;opacity:0;transition:.3s;pointer-events:none;z-index:999;box-shadow:0 8px 30px rgba(255,92,26,.4);}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:sp .7s linear infinite;}
-@keyframes sp{to{transform:rotate(360deg)}}
-</style>
-
-<!-- Supabase JS (version figée + SRI ; pour mettre à jour : nouvelle version + nouveau hash sha384) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js" integrity="sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok" crossorigin="anonymous"></script>
+<script src="/assets/js/plans.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js" integrity="sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok" crossorigin="anonymous" defer></script>
+<script src="/assets/js/koltz.js" defer></script>
 </head>
 <body>
+<svg class="sr-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="koltz-wordmark" viewBox="0 -770 4084 790"><g fill="currentColor"><g transform="scale(1 -1)"><path transform="translate(0 0)" d="M60 0V750H316V201L251 256L624 750H894L294 0ZM420 345 610 494 904 0H612Z"/><path transform="translate(865 0)" d="M488 -18Q351 -18 248.5 31.0Q146 80 89.0 168.5Q32 257 32 375Q32 493 89.0 581.5Q146 670 248.5 719.0Q351 768 488 768Q625 768 727.5 719.0Q830 670 887.0 581.5Q944 493 944 375Q944 257 887.0 168.5Q830 80 727.5 31.0Q625 -18 488 -18ZM488 212Q549 212 593.0 231.5Q637 251 660.5 287.5Q684 324 684 375Q684 426 660.5 462.5Q637 499 593.0 518.5Q549 538 488 538Q427 538 383.0 518.5Q339 499 315.5 462.5Q292 426 292 375Q292 324 315.5 287.5Q339 251 383.0 231.5Q427 212 488 212Z"/><path transform="translate(1811 0)" d="M318 750V114L202 230H760V0H60V750Z"/><path transform="translate(2562 0)" d="M291 639H549V0H291ZM21 750H819V520H21Z"/></g><polygon points="3392,-750 4084,-750 4084,-555 3807,-375 3904,-375 3641,-195 4084,-195 4084,0 3392,0 3392,-195 3669,-375 3572,-375 3835,-555 3392,-555"/></g></symbol>
+    <symbol id="z-bolt" viewBox="0 0 100 100"><polygon fill="currentColor" points="0,0 100,0 100,26 60,50 74,50 36,74 100,74 100,100 0,100 0,74 40,50 26,50 64,26 0,26"/></symbol>
+  </defs>
+</svg>
+<a class="skip" href="#main">Aller au contenu</a>
 
-<!-- NAV -->
-<nav class="nav" id="nav" aria-label="Navigation principale">
-  <a class="nav__brand" href="#home" aria-label="KOLTZ, accueil">
-    <span class="nav__gem" aria-hidden="true"></span>
-    <span class="nav__name">KOLTZ</span>
-  </a>
-  <div class="nav__links">
-    <a class="nav__link on" href="#home" data-nav="home">Accueil</a>
-    <a class="nav__link" href="#forfaits" data-nav="forfaits">Forfaits</a>
-    <a class="nav__link" href="#parrainage" data-nav="parrainage">Avantages</a>
-    <button type="button" class="nav__link" onclick="toast('Couverture — bientôt')">Couverture</button>
-    <button type="button" class="nav__link" onclick="toast('Aide — bientôt')">Aide</button>
+<header class="top" id="top">
+  <!-- 0. Bandeau pré-lancement -->
+  <div class="prelaunch">
+    <p><span class="prelaunch__dot" aria-hidden="true"></span><strong>KOLTZ arrive bientôt.</strong> <span class="prelaunch__more">Les premières squads entrent en Saison 0.</span> <a href="#rejoindre" data-squad="creer">Réserver ma place</a></p>
   </div>
-  <div class="nav__right">
-    <button type="button" class="nav__profil" onclick="nav('profil')" aria-label="Mon espace Koltz">👤 <span>Mon Koltz</span></button>
-    <button type="button" class="burger" id="burger" onclick="mob()" aria-label="Menu" aria-controls="mobmenu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- MOBILE MENU -->
-<nav class="mob" id="mobmenu" aria-label="Menu mobile">
-  <a class="mob__link" href="#home">Accueil <span class="ar" aria-hidden="true">→</span></a>
-  <a class="mob__link" href="#forfaits">Forfaits <span class="ar" aria-hidden="true">→</span></a>
-  <a class="mob__link" href="#parrainage">Avantages <span class="ar" aria-hidden="true">→</span></a>
-  <a class="mob__link" href="#profil">Mon Koltz <span class="ar" aria-hidden="true">→</span></a>
-  <div class="mob__cta" style="margin-top:24px">
-    <button class="btn-orange" onclick="nav('forfaits');mob()" style="width:100%;justify-content:center">Voir les forfaits ↓</button>
-  </div>
-</nav>
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="nav__brand" href="#main" aria-label="KOLTZ, haut de page"><svg class="wordmark" viewBox="0 0 4084 790" aria-hidden="true"><use href="#koltz-wordmark"/></svg></a>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#comment">Le concept</a></li>
+      <li><a href="#prix-squad">Prix squad</a></li>
+      <li><a href="#forfaits">Forfaits</a></li>
+      <li><a href="#xp">XP &amp; rangs</a></li>
+      <li><a href="#createurs">Créateurs</a></li>
+      <li><a href="#regles">Règles du jeu</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn--sm nav__cta" href="#rejoindre" data-squad="creer">Créer ma squad</a>
+    <button type="button" class="burger" id="burger" aria-label="Menu" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+</header>
 
 <main id="main">
-<!-- ════════ HOME ════════ -->
-<div class="view on" id="v-home">
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="wrap hero__inner">
-      <div class="hero__badge rv hidden" id="waitlist-badge">
-        <span class="dot"></span>
-        <span id="waitlist-count"></span> sur la waitlist
+<!-- 1. Hero -->
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="label"><span class="tag tag--plasma">Saison 0</span> Pré-lancement · Sans engagement</p>
+      <h1 id="hero-h" class="h1">Joue <span class="o">collectif.</span></h1>
+      <div class="segbar segbar--volt hero__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <p class="lead">Le forfait mobile qui level up avec ta squad. Plus vous êtes, moins vous payez. Plus tu restes, plus tu gagnes.</p>
+      <div class="hero__ctas">
+        <a class="btn" href="#rejoindre" data-squad="creer">Créer ma squad <span aria-hidden="true">⚡</span></a>
+        <a class="btn btn--ghost" href="#forfaits">Voir les forfaits</a>
       </div>
-      <h1 class="hero__h1 rv">
-        <span class="l1">La 5G</span>
-        <span class="l2">Sans limites.</span>
-      </h1>
-      <p class="hero__sub rv">
-        L'opérateur mobile pour ceux qui ne ralentissent jamais.<br/>
-        Lancement bientôt : eSIM, zéro engagement, zéro arnaque.
-      </p>
-      <div class="hero__btns rv">
-        <button class="btn-orange" onclick="document.getElementById('plans-anchor').scrollIntoView({behavior:'smooth'})">Voir les forfaits ↓</button>
-        <button class="btn-ghost" onclick="openCo()">Me pré-inscrire →</button>
-      </div>
+      <p class="hero__count" id="waitlist-proof" hidden><b id="waitlist-count"></b> personnes déjà inscrites à la Saison 0</p>
     </div>
-  </section>
 
-  <!-- FORFAITS -->
-  <section class="plans-sec" id="plans-anchor">
-    <div class="wrap">
-      <div class="plans-sec__head">
-        <h2 class="plans-sec__title rv">Ton forfait.<br/><span class="bl">Ton prix.</span></h2>
-        <div class="plans-sec__sub rv">Sans engagement<br/>Prix garanti à vie</div>
+    <div class="hud" role="img" aria-label="Aperçu illustratif de l'app KOLTZ : une squad de 3 membres sur 5 et un rang Or à 6 400 XP sur 10 000. Données fictives.">
+      <div class="hud__card">
+        <div class="hud__head"><span class="label">Ma squad · Saison 0</span><span class="tag tag--plasma">3/5</span></div>
+        <p class="hud__title">Les Clutchers</p>
+        <ul class="slots">
+          <li class="slot slot--on">R</li><li class="slot slot--on">S</li><li class="slot slot--on">M</li><li class="slot">+</li><li class="slot">+</li>
+        </ul>
+        <div class="segbar segbar--plasma"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <div class="hud__row"><span class="label">Remise squad</span><b class="hud__tbd">À annoncer au lancement</b></div>
       </div>
-      <div class="plans-grid rv">
-
-        <!-- MINI -->
-        <div class="plan-card" onclick="openCo('mini')">
-          <div class="plan-idx">001 / MINI</div>
-          <div class="plan-data">30<span class="unit"> Go</span></div>
-          <div class="plan-price">6,99€<span class="per"> /mois</span></div>
-          <div class="plan-anchor">Économise vs Orange</div>
-          <div class="plan-div"></div>
-          <ul class="plan-feats">
-            <li>30 Go en 5G</li>
-            <li>Appels & SMS illimités</li>
-            <li>5 Go en Europe</li>
-            <li>eSIM instantanée</li>
-          </ul>
-          <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Mini">Choisir →</button>
-        </div>
-
-        <!-- MAX (hot) -->
-        <div class="plan-card hot" onclick="openCo('max')">
-          <div class="plan-badge">⚡ Populaire</div>
-          <div class="plan-idx">002 / MAX</div>
-          <div class="plan-data">100<span class="unit"> Go</span></div>
-          <div class="plan-price">11,99€<span class="per"> /mois</span></div>
-          <div class="plan-anchor">−13€/mois vs Orange 100Go</div>
-          <div class="plan-div"></div>
-          <ul class="plan-feats">
-            <li>100 Go en 5G</li>
-            <li>Appels & SMS illimités</li>
-            <li>20 Go en Europe</li>
-            <li>eSIM instantanée</li>
-            <li>Support IA 8 sec</li>
-          </ul>
-          <button type="button" class="plan-btn solid" aria-label="Choisir le forfait Max">Choisir →</button>
-        </div>
-
-        <!-- ULTRA -->
-        <div class="plan-card" onclick="openCo('ultra')">
-          <div class="plan-idx">003 / ULTRA</div>
-          <div class="plan-data">200<span class="unit"> Go</span></div>
-          <div class="plan-price">14,99€<span class="per"> /mois</span></div>
-          <div class="plan-anchor">Économise vs concurrents</div>
-          <div class="plan-div"></div>
-          <ul class="plan-feats">
-            <li>200 Go en 5G</li>
-            <li>Appels & SMS illimités</li>
-            <li>40 Go Europe & DOM</li>
-            <li>Discord Nitro offert</li>
-            <li>QoS gaming prioritaire</li>
-          </ul>
-          <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Ultra">Choisir →</button>
-        </div>
-
-        <!-- INFINITY -->
-        <div class="plan-card" onclick="openCo('infinity')">
-          <div class="plan-idx">004 / INFINITY</div>
-          <div class="plan-data">300<span class="unit"> Go</span></div>
-          <div class="plan-price">19,99€<span class="per"> /mois</span></div>
-          <div class="plan-anchor">Netflix ou Spotify inclus</div>
-          <div class="plan-div"></div>
-          <ul class="plan-feats">
-            <li>300 Go 5G Boost</li>
-            <li>100 Go dans 75 pays</li>
-            <li>Appels 30 destinations</li>
-            <li>Netflix <em>ou</em> Spotify inclus</li>
-            <li>Support prioritaire 24/7</li>
-          </ul>
-          <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Infinity">Choisir →</button>
-        </div>
-
+      <div class="hud__card">
+        <div class="hud__head"><span class="label">Progression</span><span class="label">6 400 / 10 000 XP</span></div>
+        <p class="hud__title">Rang Or</p>
+        <div class="segbar segbar--volt segbar--10"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <p class="xp-toast"><b>+470 XP</b> 47 Go pas utilisés ce mois-ci. GG.</p>
       </div>
-
-      <!-- Promesses -->
-      <div class="plans-promise rv">
-        <span>Sans engagement</span>
-        <span>eSIM gratuite</span>
-        <span>Prix fixe à vie</span>
-        <span>Recharge en espèces</span>
-        <span>Résiliation en 1 clic</span>
-      </div>
-      <p class="plans-launch rv">Koltz n'est pas encore disponible. Choisis ton forfait pour te pré-inscrire gratuitement : on te prévient au lancement, sans paiement ni engagement.</p>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="mq" aria-hidden="true">
-    <div class="mq__row">
-      <span class="mq__it">Pas de blabla <span class="s"></span></span>
-      <span class="mq__it dim">5G partout</span>
-      <span class="mq__it">Sans engagement <span class="s"></span></span>
-      <span class="mq__it dim">eSIM au lancement</span>
-      <span class="mq__it">Dès 6,99€ <span class="s"></span></span>
-      <span class="mq__it dim">#VibeSansLimite</span>
-      <span class="mq__it">Support 8 sec <span class="s"></span></span>
-      <span class="mq__it dim">Recharge cash</span>
-      <span class="mq__it">Pas de blabla <span class="s"></span></span>
-      <span class="mq__it dim">5G partout</span>
-      <span class="mq__it">Sans engagement <span class="s"></span></span>
-      <span class="mq__it dim">eSIM au lancement</span>
-      <span class="mq__it">Dès 6,99€ <span class="s"></span></span>
-      <span class="mq__it dim">#VibeSansLimite</span>
-      <span class="mq__it">Support 8 sec <span class="s"></span></span>
-      <span class="mq__it dim">Recharge cash</span>
+      <p class="hud__note">Aperçu illustratif · données fictives</p>
     </div>
   </div>
+</section>
 
-  <!-- SOCIAL PROOF -->
-  <section class="proof-sec">
-    <div class="wrap">
-      <div class="proof-grid rv">
-        <div class="proof-item hidden" id="proof-wait">
-          <div class="proof-item__n" id="cnt-wait"></div>
-          <div class="proof-item__l">Sur la waitlist<br/>et ça grandit</div>
-        </div>
-        <div class="proof-item">
-          <div class="proof-item__n">0€</div>
-          <div class="proof-item__l">À payer pour<br/>te pré-inscrire</div>
-        </div>
-        <div class="proof-item">
-          <div class="proof-item__n">0</div>
-          <div class="proof-item__l">Engagement<br/>résiliable quand tu veux</div>
-        </div>
-      </div>
+<!-- 2. Le constat -->
+<section class="sec" id="constat" aria-labelledby="constat-h">
+  <div class="wrap split">
+    <div>
+      <p class="label label--o">01 · Le constat</p>
+      <h2 id="constat-h" class="h2">Ton forfait te traite comme un ticket de caisse.</h2>
+      <p class="body">Tu joues en squad, tu suis tes streamers, tu fais partie d'une commu. Ton opérateur, lui, te connaît comme un numéro.</p>
     </div>
-  </section>
-
-  <!-- PARRAINAGE TEASER -->
-  <section class="ref-teaser">
-    <div class="wrap">
-      <div class="ref-teaser__inner rv">
-        <div>
-          <div class="ref-teaser__eyebrow">Programme parrainage</div>
-          <div class="ref-teaser__h">Parraine.<br/>Gagne. <span class="bl">Répète.</span></div>
-          <p class="ref-teaser__p">Au lancement : 15€ de réduction par filleul actif. Le 1er à 100 parrainages gagne 1 000€. Sans limite.</p>
-        </div>
-        <button class="btn-orange" onclick="nav('parrainage')">Voir →</button>
-      </div>
+    <div class="stats">
+      <figure class="stat">
+        <p class="stat__n">32 %</p>
+        <figcaption>des abonnés ont un forfait de plus de 100 Go… pour une consommation moyenne de <b>16,5 Go par mois</b>. Chez KOLTZ, les Go que tu n'utilises pas deviennent de l'XP.
+          <cite>Baromètre du numérique 2025, Crédoc pour l'Arcep</cite></figcaption>
+      </figure>
+      <figure class="stat">
+        <p class="stat__n stat__n--plasma">86 %</p>
+        <figcaption>des joueurs en ligne jouent avec leurs amis. Le jeu se vit à plusieurs. Ton forfait aussi devrait.
+          <cite>Médiamétrie / SELL, « Les Français et le jeu vidéo » 2025</cite></figcaption>
+      </figure>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FAQ -->
-  <section class="faq-sec">
-    <div class="wrap">
-      <h2 class="faq-sec__title rv">On répond<br/>à <span class="bl">tout.</span></h2>
-      <div class="rv">
-        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Quand Koltz sera disponible ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>On finalise notre lancement. Pré-inscris-toi gratuitement : on te prévient par email dès l'ouverture, sans engagement ni paiement.</p></div></div>
-        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Comment activer mon eSIM ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>Au lancement, tu recevras ton QR code par email après ta commande. Il suffira de le scanner dans Réglages → Données mobiles.</p></div></div>
-        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Mon téléphone est-il compatible ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>iPhone 12+, Samsung S20+, Pixel 4+ et la majorité des flagships depuis 2020. SIM physique disponible si nécessaire.</p></div></div>
-        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Puis-je garder mon numéro ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>Oui, la portabilité sera gratuite au lancement. Tu entreras ton RIO (appelle le 3179) au moment de la commande, on s'occupera du reste.</p></div></div>
-        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Comment recharger en espèces ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>C'est prévu au lancement, via des points de vente partenaires (tabacs, taxiphones, épiceries) : tu paies cash, tu reçois un code, tu crédites ton compte.</p></div></div>
-        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Le prix peut-il augmenter ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>Non. Ton prix est garanti. Si on change nos tarifs, on te prévient 30 jours avant avec possibilité de partir sans frais.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <section class="band">
-    <div class="band__glow"></div>
-    <div class="wrap band__inner">
-      <span class="band__eyebrow">Bientôt</span>
-      <h2 class="band__h rv">On arrive.<br/><span class="bl">Et toi ?</span></h2>
-      <p class="band__sub">Pré-inscription gratuite · Sans engagement · Aucun paiement aujourd'hui</p>
-      <button class="btn-orange" onclick="openCo()" style="margin:0 auto">Me pré-inscrire ⚡</button>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="wrap foot">
-      <div class="foot__top">
-        <div class="foot__brand">
-          <div class="foot__brand-logo"><span class="foot__brand-gem" aria-hidden="true"></span>KOLTZ</div>
-          <p class="foot__brand-desc">Opérateur mobile 5G nouvelle génération. Lancement bientôt. Made in France.</p>
-        </div>
-        <div class="foot__col">
-          <h5>Produit</h5>
-          <a href="#forfaits">Forfaits</a>
-          <button type="button" onclick="toast('eSIM — bientôt')">eSIM</button>
-          <button type="button" onclick="toast('Couverture — bientôt')">Couverture</button>
-          <a href="#parrainage">Parrainage</a>
-        </div>
-        <div class="foot__col">
-          <h5>Compte</h5>
-          <a href="#profil">Mon Koltz</a>
-          <a href="mailto:contact@koltz.fr">Contact</a>
-          <button type="button" onclick="toast('App — bientôt iOS & Android')">App mobile</button>
-        </div>
-        <div class="foot__col">
-          <h5>Légal</h5>
-          <button type="button" onclick="legal('mentions')">Mentions légales</button>
-          <button type="button" onclick="legal('cgv')">CGV</button>
-          <button type="button" onclick="legal('privacy')">Confidentialité</button>
-          <button type="button" onclick="legal('cookies')">Cookies</button>
-        </div>
-      </div>
-      <div class="foot__bot">
-        <span>© 2026 KOLTZ MOBILE SAS</span>
-        <span>#VibeSansLimite ⚡</span>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<!-- ════════ FORFAITS ════════ -->
-<div class="view" id="v-forfaits">
+<!-- 3. Comment ça marche -->
+<section class="sec" id="comment" aria-labelledby="comment-h">
   <div class="wrap">
-    <div class="page-head">
-      <span class="page-head__eyebrow">Catalogue de lancement</span>
-      <h1 class="page-head__h">Simple.<br/><span class="bl">Transparent.</span><br/>Ton prix.</h1>
-      <p class="page-head__p">Prix prévus au lancement, TVA incluse. Prix garanti. Résiliation en un clic. Zéro frais caché. Pré-inscription gratuite, sans paiement.</p>
-    </div>
-    <div class="plans-grid" style="margin-bottom:clamp(32px,5vh,56px)">
-      <div class="plan-card" onclick="openCo('mini')">
-        <div class="plan-idx">001 / MINI</div>
-        <div class="plan-data">30<span class="unit"> Go</span></div>
-        <div class="plan-price">6,99€<span class="per"> /mois</span></div>
-        <div class="plan-anchor">Dès le lancement</div>
-        <div class="plan-div"></div>
-        <ul class="plan-feats">
-          <li>30 Go en 5G</li><li>Appels & SMS illimités</li><li>5 Go en Europe</li><li>eSIM instantanée</li><li>Data Boost 2€/10Go</li>
-        </ul>
-        <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Mini">Choisir →</button>
-      </div>
-      <div class="plan-card hot" onclick="openCo('max')">
-        <div class="plan-badge">⚡ Populaire</div>
-        <div class="plan-idx">002 / MAX</div>
-        <div class="plan-data">100<span class="unit"> Go</span></div>
-        <div class="plan-price">11,99€<span class="per"> /mois</span></div>
-        <div class="plan-anchor">−13€/mois vs Orange</div>
-        <div class="plan-div"></div>
-        <ul class="plan-feats">
-          <li>100 Go en 5G</li><li>Appels & SMS illimités</li><li>20 Go en Europe</li><li>eSIM instantanée</li><li>Support IA 8 sec</li>
-        </ul>
-        <button type="button" class="plan-btn solid" aria-label="Choisir le forfait Max">Choisir →</button>
-      </div>
-      <div class="plan-card" onclick="openCo('ultra')">
-        <div class="plan-idx">003 / ULTRA</div>
-        <div class="plan-data">200<span class="unit"> Go</span></div>
-        <div class="plan-price">14,99€<span class="per"> /mois</span></div>
-        <div class="plan-anchor">Gaming & streaming</div>
-        <div class="plan-div"></div>
-        <ul class="plan-feats">
-          <li>200 Go en 5G</li><li>Appels & SMS illimités</li><li>40 Go Europe & DOM</li><li>Discord Nitro offert</li><li>QoS gaming prioritaire</li>
-        </ul>
-        <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Ultra">Choisir →</button>
-      </div>
-      <div class="plan-card" onclick="openCo('infinity')">
-        <div class="plan-idx">004 / INFINITY</div>
-        <div class="plan-data">300<span class="unit"> Go</span></div>
-        <div class="plan-price">19,99€<span class="per"> /mois</span></div>
-        <div class="plan-anchor">Netflix ou Spotify inclus</div>
-        <div class="plan-div"></div>
-        <ul class="plan-feats">
-          <li>300 Go 5G Boost</li><li>100 Go dans 75 pays</li><li>Appels 30 destinations</li><li>Netflix ou Spotify inclus</li><li>Support prioritaire 24/7</li>
-        </ul>
-        <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Infinity">Choisir →</button>
-      </div>
-    </div>
-    <!-- Comparatif -->
-    <div class="compare-table" style="overflow-x:auto">
-      <div class="compare-head">
-        <div class="compare-head__cell"></div>
-        <div class="compare-head__cell">Mini</div>
-        <div class="compare-head__cell hot">Max ⭐</div>
-        <div class="compare-head__cell">Ultra</div>
-        <div class="compare-head__cell">Infinity</div>
-      </div>
-      <div class="compare-row"><div class="compare-cell">Prix/mois</div><div class="compare-cell">6,99€</div><div class="compare-cell hot">11,99€</div><div class="compare-cell">14,99€</div><div class="compare-cell">19,99€</div></div>
-      <div class="compare-row"><div class="compare-cell">Data France</div><div class="compare-cell">30 Go</div><div class="compare-cell hot">100 Go</div><div class="compare-cell">200 Go</div><div class="compare-cell">300 Go</div></div>
-      <div class="compare-row"><div class="compare-cell">Europe</div><div class="compare-cell">5 Go</div><div class="compare-cell hot">20 Go</div><div class="compare-cell">40 Go</div><div class="compare-cell">100 Go</div></div>
-      <div class="compare-row"><div class="compare-cell">Sans engagement</div><div class="compare-cell"><span class="check">✓</span></div><div class="compare-cell hot"><span class="check">✓</span></div><div class="compare-cell"><span class="check">✓</span></div><div class="compare-cell"><span class="check">✓</span></div></div>
-      <div class="compare-row"><div class="compare-cell">Support IA</div><div class="compare-cell"><span class="cross">—</span></div><div class="compare-cell hot"><span class="check">✓</span></div><div class="compare-cell"><span class="check">✓</span></div><div class="compare-cell"><span class="check">✓</span></div></div>
-      <div class="compare-row"><div class="compare-cell">Streaming inclus</div><div class="compare-cell"><span class="cross">—</span></div><div class="compare-cell hot"><span class="cross">—</span></div><div class="compare-cell"><span class="cross">—</span></div><div class="compare-cell"><span class="check">✓</span></div></div>
-    </div>
-    <div class="plans-promise" style="margin-top:24px;margin-bottom:60px">
-      <span>Sans engagement</span><span>eSIM gratuite</span><span>Prix fixe à vie</span><span>Recharge en espèces</span>
-    </div>
+    <p class="label label--o">02 · Comment ça marche</p>
+    <h2 id="comment-h" class="h2">Trois règles. Zéro prise de tête.</h2>
+    <ol class="steps">
+      <li class="step"><span class="step__n">01</span><h3 class="h3">Monte ta squad.</h3><p>Jusqu'à 5 potes, pas besoin d'habiter ensemble.</p></li>
+      <li class="step"><span class="step__n">02</span><h3 class="h3">Gagne de l'XP.</h3><p>Ancienneté, parrainage, entraide, Go non utilisés : tout compte.</p></li>
+      <li class="step"><span class="step__n">03</span><h3 class="h3">Débloque le loot.</h3><p>Go bonus, mois offerts, merch, events. À chaque saison.</p></li>
+    </ol>
   </div>
-</div>
+</section>
 
-<!-- ════════ PARRAINAGE ════════ -->
-<div class="view" id="v-parrainage">
-  <div class="wrap ref-page">
-    <h1 class="ref-hero-h">Parraine.<br/>Gagne. <span class="bl">Répète.</span></h1>
-    <p class="ref-hero-p">Au lancement, chaque ami qui reste 3 mois = 500 pts + 15€ de réduction. Le 1er à 100 parrainages gagne 1 000€. Aucune limite.</p>
-    <div class="code-box">
-      <div class="code-box__lbl">Ton code personnel</div>
-      <div class="code-box__code" aria-label="Code généré au lancement">KOLTZ-••••</div>
-      <p class="code-box__note">Ton code unique sera généré au lancement. En attendant, partage le lien du site.</p>
-      <div class="code-box__btns">
-        <button class="btn-sm" onclick="copyCode()">📋 Copier le lien</button>
-        <button class="btn-sm-o" onclick="shareNative()">🔗 Partager</button>
-      </div>
+<!-- 4. Le prix squad -->
+<section class="sec sec--panel" id="prix-squad" aria-labelledby="prix-h">
+  <div class="wrap split">
+    <div>
+      <p class="label label--o">03 · Le prix squad</p>
+      <h2 id="prix-h" class="h2">Plus on est, moins on paie.</h2>
+      <p class="body">Chaque membre actif de ta squad fait baisser le prix de tout le monde. Les montants seront fixés avec notre contrat de gros : on ne promet pas ce qu'on n'a pas signé.</p>
+      <p class="fine">Montants et conditions annoncés au lancement, écrits noir sur blanc dans les CGV.</p>
     </div>
-    <div class="ref-stats">
-      <div class="ref-stat"><div class="ref-stat__n">0</div><div class="ref-stat__l">Filleuls actifs</div></div>
-      <div class="ref-stat"><div class="ref-stat__n">0€</div><div class="ref-stat__l">Économisé</div></div>
-      <div class="ref-stat"><div class="ref-stat__n bl">0</div><div class="ref-stat__l">Points Koltz</div></div>
-    </div>
-    <div class="ref-cards">
-      <div class="ref-card">
-        <div class="ref-card__head">🏆 Paliers</div>
-        <div class="tier"><div class="tier__i">I</div><div><div class="tier__n">1 filleul</div><div class="tier__s">Premier parrainage</div></div><div class="tier__r"><div class="tier__e">−15€</div><div class="tier__p">500 pts</div></div></div>
-        <div class="tier"><div class="tier__i">V</div><div><div class="tier__n">5 filleuls</div><div class="tier__s">Cumulé</div></div><div class="tier__r"><div class="tier__e">−75€</div><div class="tier__p">2 500 pts</div></div></div>
-        <div class="tier"><div class="tier__i">XX</div><div><div class="tier__n">20 filleuls</div><div class="tier__s">Ambassadeur</div></div><div class="tier__r"><div class="tier__e">−300€</div><div class="tier__p">10 000 pts</div></div></div>
-        <div class="tier"><div class="tier__i">💯</div><div><div class="tier__n">100 filleuls</div><div class="tier__s">Légende Koltz</div></div><div class="tier__r"><div class="tier__e">1 000€</div><div class="tier__p">Gagné !</div></div></div>
+    <div class="squadcalc card" id="squadcalc">
+      <label class="label" for="squad-size">Taille de ta squad</label>
+      <div class="squadcalc__top">
+        <output class="squadcalc__n" id="squad-out" for="squad-size">3</output><span class="squadcalc__of">/ 5 membres</span>
       </div>
-      <div class="ref-card">
-        <div class="ref-card__head">Comment ça marche</div>
-        <div class="step"><div class="step__n">1</div><div><div class="step__h">Tu partages</div><div class="step__p">Au lancement, ton ami commande avec ton code. Son 1er mois est offert.</div></div></div>
-        <div class="step"><div class="step__n">2</div><div><div class="step__h">Il reste 3 mois</div><div class="step__p">Après 3 mois actifs, ta récompense est créditée.</div></div></div>
-        <div class="step"><div class="step__n">3</div><div><div class="step__h">Tu gagnes</div><div class="step__p">500 pts + 15€ de réduction. À l'infini.</div></div></div>
-        <div class="chips">
-          <button type="button" class="chip" onclick="shareWA()">💬 WhatsApp</button>
-          <button type="button" class="chip" onclick="shareTT()">🎵 TikTok</button>
-          <button type="button" class="chip" onclick="shareSMS()">📱 SMS</button>
-        </div>
-      </div>
+      <input type="range" id="squad-size" min="1" max="5" step="1" value="3" aria-describedby="squad-msg"/>
+      <div class="segbar segbar--plasma segbar--lg" id="squad-bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      <p class="squadcalc__msg" id="squad-msg" aria-live="polite">Squad à 3/5. Encore 2 potes pour la compléter.</p>
+      <table class="ptable">
+        <caption class="sr-only">Prix par membre selon la taille de la squad</caption>
+        <thead><tr><th scope="col">Forfait</th><th scope="col">Solo</th><th scope="col">Avec ta squad</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" data-plan="mini" data-field="name">Mini</th><td data-plan="mini" data-field="price">6,99 €</td><td class="tbd">À annoncer</td></tr>
+          <tr><th scope="row" data-plan="max" data-field="name">Max</th><td data-plan="max" data-field="price">11,99 €</td><td class="tbd">À annoncer</td></tr>
+          <tr><th scope="row" data-plan="ultra" data-field="name">Ultra</th><td data-plan="ultra" data-field="price">14,99 €</td><td class="tbd">À annoncer</td></tr>
+          <tr><th scope="row" data-plan="infinity" data-field="name">Infinity</th><td data-plan="infinity" data-field="price">19,99 €</td><td class="tbd">À annoncer</td></tr>
+        </tbody>
+      </table>
+      <p class="fine">Prix TTC par mois. Remise squad : à annoncer au lancement.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ════════ PRÉ-INSCRIPTION (ex-checkout) ════════ -->
-<div class="view" id="v-checkout">
-  <div class="wrap co-page">
-    <div class="co-head">
-      <h1>Me <span class="bl">pré-inscrire.</span></h1>
-      <p>Gratuit · Aucun paiement · On te prévient au lancement</p>
+<!-- 5. Les forfaits -->
+<section class="sec" id="forfaits" aria-labelledby="forfaits-h">
+  <div class="wrap">
+    <p class="label label--o">04 · Les forfaits</p>
+    <h2 id="forfaits-h" class="h2">Choisis ton niveau.</h2>
+    <p class="body">Tous les forfaits : appels &amp; SMS illimités en France, eSIM ou carte SIM, sans engagement, et tes Go non utilisés transformés en XP.</p>
+    <div class="plans">
+      <article class="plan" data-plan-card="mini">
+        <p class="plan__idx label">001</p>
+        <h3 class="plan__name" data-plan="mini" data-field="name">Mini</h3>
+        <p class="plan__data"><span data-plan="mini" data-field="data">30 Go</span> <small>4G/5G</small></p>
+        <div class="plan__prices">
+          <div class="plan__solo"><span class="label">Prix solo</span><b data-plan="mini" data-field="price">6,99 €</b><small>/mois</small></div>
+          <div class="plan__squad"><span class="label">Prix squad ×5</span><b>À annoncer</b></div>
+        </div>
+        <ul class="plan__feats"><li>Appels &amp; SMS illimités</li><li data-plan="mini" data-field="europe">5 Go en Europe</li><li>eSIM · sans engagement</li><li>Go non utilisés → XP</li></ul>
+        <a class="btn btn--ghost btn--block" href="#rejoindre" data-pick="mini">Réserver <span class="sr-only">le forfait <span data-plan="mini" data-field="name">Mini</span></span></a>
+      </article>
+      <article class="plan plan--featured" data-plan-card="max">
+        <p class="plan__badge">Recommandé</p>
+        <p class="plan__idx label">002</p>
+        <h3 class="plan__name" data-plan="max" data-field="name">Max</h3>
+        <p class="plan__data"><span data-plan="max" data-field="data">100 Go</span> <small>4G/5G</small></p>
+        <div class="plan__prices">
+          <div class="plan__solo"><span class="label">Prix solo</span><b data-plan="max" data-field="price">11,99 €</b><small>/mois</small></div>
+          <div class="plan__squad"><span class="label">Prix squad ×5</span><b>À annoncer</b></div>
+        </div>
+        <ul class="plan__feats"><li>Appels &amp; SMS illimités</li><li data-plan="max" data-field="europe">20 Go en Europe</li><li>eSIM · sans engagement</li><li>Go non utilisés → XP</li></ul>
+        <a class="btn btn--block" href="#rejoindre" data-pick="max">Réserver <span class="sr-only">le forfait <span data-plan="max" data-field="name">Max</span></span></a>
+      </article>
+      <article class="plan" data-plan-card="ultra">
+        <p class="plan__idx label">003</p>
+        <h3 class="plan__name" data-plan="ultra" data-field="name">Ultra</h3>
+        <p class="plan__data"><span data-plan="ultra" data-field="data">200 Go</span> <small>4G/5G</small></p>
+        <div class="plan__prices">
+          <div class="plan__solo"><span class="label">Prix solo</span><b data-plan="ultra" data-field="price">14,99 €</b><small>/mois</small></div>
+          <div class="plan__squad"><span class="label">Prix squad ×5</span><b>À annoncer</b></div>
+        </div>
+        <ul class="plan__feats"><li>Appels &amp; SMS illimités</li><li data-plan="ultra" data-field="europe">40 Go Europe &amp; DOM</li><li>eSIM · sans engagement</li><li>Go non utilisés → XP</li></ul>
+        <a class="btn btn--ghost btn--block" href="#rejoindre" data-pick="ultra">Réserver <span class="sr-only">le forfait <span data-plan="ultra" data-field="name">Ultra</span></span></a>
+      </article>
+      <article class="plan" data-plan-card="infinity">
+        <p class="plan__idx label">004</p>
+        <h3 class="plan__name" data-plan="infinity" data-field="name">Infinity</h3>
+        <p class="plan__data"><span data-plan="infinity" data-field="data">300 Go</span> <small>4G/5G</small></p>
+        <div class="plan__prices">
+          <div class="plan__solo"><span class="label">Prix solo</span><b data-plan="infinity" data-field="price">19,99 €</b><small>/mois</small></div>
+          <div class="plan__squad"><span class="label">Prix squad ×5</span><b>À annoncer</b></div>
+        </div>
+        <ul class="plan__feats"><li>Appels &amp; SMS illimités</li><li data-plan="infinity" data-field="europe">100 Go dans 75 pays</li><li>eSIM · sans engagement</li><li>Go non utilisés → XP</li></ul>
+        <a class="btn btn--ghost btn--block" href="#rejoindre" data-pick="infinity">Réserver <span class="sr-only">le forfait <span data-plan="infinity" data-field="name">Infinity</span></span></a>
+      </article>
     </div>
-    <div class="co-steps">
-      <div class="co-st on" data-s="1"><div class="co-st__no">01</div><div class="co-st__l">Forfait</div></div>
-      <div class="co-st" data-s="2"><div class="co-st__no">02</div><div class="co-st__l">Infos</div></div>
-      <div class="co-st" data-s="3"><div class="co-st__no">03</div><div class="co-st__l">Confirmé</div></div>
-    </div>
-    <div class="co-layout">
-      <div>
-        <!-- Step 1 -->
-        <div class="scr on" id="s-1">
-          <div class="co-box">
-            <div class="co-box__h" id="co-plan-h">Quel forfait t'intéresse ?</div>
-            <div class="co-box__b" role="radiogroup" aria-labelledby="co-plan-h">
-              <div class="opt on" role="radio" aria-checked="true" data-p="max" onclick="pickP('max')"><div class="opt__r"></div><div><div class="opt__n">Koltz Max ⭐</div><div class="opt__d">100 Go 5G · Appels illimités · 20 Go EU</div></div><div class="opt__p">11,99€<small>/mois</small></div></div>
-              <div class="opt" role="radio" aria-checked="false" data-p="mini" onclick="pickP('mini')"><div class="opt__r"></div><div><div class="opt__n">Koltz Mini</div><div class="opt__d">30 Go 5G · Appels illimités · 5 Go EU</div></div><div class="opt__p">6,99€<small>/mois</small></div></div>
-              <div class="opt" role="radio" aria-checked="false" data-p="ultra" onclick="pickP('ultra')"><div class="opt__r"></div><div><div class="opt__n">Koltz Ultra</div><div class="opt__d">200 Go 5G · Discord Nitro · 40 Go EU</div></div><div class="opt__p">14,99€<small>/mois</small></div></div>
-              <div class="opt" role="radio" aria-checked="false" data-p="infinity" onclick="pickP('infinity')"><div class="opt__r"></div><div><div class="opt__n">Koltz Infinity</div><div class="opt__d">300 Go · 75 pays · Netflix ou Spotify</div></div><div class="opt__p">19,99€<small>/mois</small></div></div>
-            </div>
-          </div>
-          <p class="co-note">Koltz n'est pas encore disponible. Ta pré-inscription est gratuite et sans engagement : on te prévient au lancement.</p>
-        </div>
-        <!-- Step 2 -->
-        <div class="scr" id="s-2">
-          <div class="co-box">
-            <div class="co-box__h">Où te prévenir ?</div>
-            <div class="co-box__b">
-              <div class="fld"><label for="f-pre">Prénom *</label><input id="f-pre" placeholder="Léna" autocomplete="given-name" aria-required="true"/></div>
-              <div class="fld"><label for="f-em">Email *</label><input id="f-em" type="email" placeholder="lena@exemple.fr" autocomplete="email" aria-required="true"/></div>
-              <p class="co-note">On t'écrit uniquement pour te prévenir du lancement de Koltz.</p>
-            </div>
-          </div>
-          <div class="co-err" id="co-err" role="alert" hidden></div>
-        </div>
-        <!-- Step 3 -->
-        <div class="scr" id="s-3">
-          <div class="done">
-            <div class="done__gem"><span>⚡</span></div>
-            <div class="done__h">Tu es sur <span class="bl">la liste.</span></div>
-            <p class="done__sub" id="d-msg">On te prévient au lancement sur <b id="d-em"></b>. Forfait choisi : <b id="d-plan"></b>. Aucun paiement n'a été effectué.</p>
-            <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
-              <button class="btn-orange" onclick="nav('home')">Retour à l'accueil</button>
-              <button onclick="nav('forfaits')" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);cursor:pointer;padding:8px">Revoir les forfaits</button>
-            </div>
-          </div>
-        </div>
-        <div class="co-nav" id="co-nav">
-          <button class="co-bk" id="co-bk" onclick="coP()" style="display:none">← Retour</button>
-          <div style="flex:1"></div>
-          <button class="co-nx" id="co-nx" onclick="coN()">Continuer →</button>
-        </div>
-      </div>
-      <!-- Sidebar -->
-      <div class="co-side">
-        <div class="order-card">
-          <div class="order-card__plan" id="oc-plan">Koltz Max</div>
-          <div class="order-card__price" id="oc-price">11,99€/mois</div>
-          <button type="button" class="order-card__edit" onclick="coGo(1)">Modifier</button>
-          <div class="order-lines">
-            <div class="order-line"><span>Paiement aujourd'hui</span><span class="v" style="color:var(--green)">0€</span></div>
-            <div class="order-line"><span>Engagement</span><span class="v">Aucun</span></div>
-          </div>
-          <div class="order-total"><span>Prix/mois au lancement</span><span class="v" id="oc-total">11,99€</span></div>
-          <div class="order-note">TVA incluse · Prix prévus au lancement</div>
-        </div>
-        <div class="trust-card">
-          <h4>Pourquoi se pré-inscrire ?</h4>
-          <div class="trust-item">🔔 Prévenu·e en premier au lancement</div>
-          <div class="trust-item">💸 Aucun paiement aujourd'hui</div>
-          <div class="trust-item">⚡ Sans engagement</div>
-          <div class="trust-item">💰 Prix garanti à vie</div>
-        </div>
-      </div>
-    </div>
+    <p class="fine">Prix TTC par mois, sans engagement. Contenu des forfaits prévisionnel : il sera confirmé au lancement avec notre opérateur hôte. Aucun paiement aujourd'hui.</p>
   </div>
-</div>
+</section>
 
-<!-- ════════ PROFIL ════════ -->
-<div class="view" id="v-profil">
-  <div class="wrap prof-page">
-    <div class="prof-head">
-      <div class="prof-id">
-        <div class="prof-av" id="prof-av" aria-hidden="true">?</div>
-        <div>
-          <div class="prof-id__name" id="prof-name">Mon espace Koltz</div>
-          <div class="prof-id__meta" id="prof-meta">Non connecté · espace client disponible au lancement</div>
-        </div>
+<!-- 6. XP, rangs & saisons -->
+<section class="sec sec--panel" id="xp" aria-labelledby="xp-h">
+  <div class="wrap">
+    <p class="label label--o">05 · XP, rangs &amp; saisons</p>
+    <h2 id="xp-h" class="h2">Chaque mois compte. Chaque Go aussi.</h2>
+    <ol class="ladder" aria-label="Rangs KOLTZ, du premier au plus haut">
+      <li class="rank"><span class="rank__ic">I</span><span class="rank__n">Bronze</span></li>
+      <li class="rank"><span class="rank__ic">II</span><span class="rank__n">Argent</span></li>
+      <li class="rank rank--on"><span class="rank__ic">III</span><span class="rank__n">Or</span></li>
+      <li class="rank"><span class="rank__ic">IV</span><span class="rank__n">Platine</span></li>
+      <li class="rank"><span class="rank__ic">V</span><span class="rank__n">Diamant</span></li>
+    </ol>
+    <p class="fine">Loot de chaque rang (Go bonus, mois offerts, merch, events) annoncé au lancement.</p>
+    <div class="xpgrid">
+      <div class="card xpsrc"><h3 class="h3">D'où vient l'XP</h3>
+        <ul class="ticks"><li>Chaque mois fidèle</li><li>Chaque pote parrainé</li><li>L'entraide sur le Discord</li><li>Tes Go non utilisés</li></ul>
       </div>
-      <div class="prof-badge">Aperçu démo</div>
-    </div>
-    <div class="demo-note" role="note"><b>Aperçu de démonstration.</b> Les chiffres ci-dessous sont fictifs et ne correspondent à aucun compte. Ton espace client ouvrira au lancement. <button class="demo-note__cta" onclick="openCo()">Me pré-inscrire →</button></div>
-    <div class="prof-grid" aria-label="Exemple d'espace client (données fictives)">
-      <div class="p-card data-card">
-        <div class="p-card__hd"><span class="p-card__t">Conso — exemple</span><span class="p-card__tag">Démo</span></div>
-        <div class="ring-wrap">
-          <div class="ring"><svg width="148" height="148" viewBox="0 0 148 148" aria-hidden="true"><circle class="ring__t" cx="74" cy="74" r="64"/><circle class="ring__f" id="ringf" cx="74" cy="74" r="64" stroke-dasharray="402" stroke-dashoffset="402"/></svg><div class="ring__c"><div class="ring__n">67</div><div class="ring__u">Go utilisés</div></div></div>
-          <div class="ring-info">
-            <div class="ring-info__b">100 Go total</div>
-            <div class="ring-info__s">33 Go restants</div>
-            <div class="ring-stat"><span class="k">Vitesse</span><span class="v">142 Mbps</span></div>
-            <div class="ring-stat"><span class="k">Réseau</span><span class="v g">⚡ 5G</span></div>
-            <div class="ring-stat"><span class="k">Roaming EU</span><span class="v">14/20 Go</span></div>
-            <div class="ring-stat"><span class="k">Jours rest.</span><span class="v">14</span></div>
-          </div>
-        </div>
-        <button class="boost-btn" disabled>Data Boost +10 Go pour 2€ · au lancement</button>
+      <div class="card xpex"><p class="label">Exemple illustratif</p>
+        <p class="xp-toast xp-toast--lg"><b>+470 XP</b> 47 Go pas utilisés ce mois-ci. GG.</p>
+        <p class="fine">Barème d'XP publié avant le lancement.</p>
       </div>
-      <div class="p-card">
-        <div class="p-card__hd"><span class="p-card__t">Facture — exemple</span><span class="p-card__tag">Démo</span></div>
-        <div class="bill-amount">11,99€</div>
-        <div class="bill-date">Exemple · prélèvement mensuel</div>
-        <div class="bill-line"><span class="k">Forfait Max</span><span class="v">11,99€</span></div>
-        <div class="bill-line"><span class="k">Data Boost</span><span class="v">0,00€</span></div>
-        <div class="bill-line"><span class="k">Parrainage</span><span class="v free">−0,00€</span></div>
-        <div class="bill-line" style="font-weight:700"><span style="color:var(--txt)">Total</span><span class="v" style="color:var(--lime)">11,99€</span></div>
-      </div>
-      <div class="p-card score-card">
-        <div class="p-card__hd"><span class="p-card__t">Koltz Score — exemple</span><span class="p-card__tag">Démo</span></div>
-        <div class="score-row">
-          <div>
-            <div class="score-n bl">1 500<span style="font-family:var(--mono);font-size:.2em;color:var(--txt2);letter-spacing:.1em"> PTS</span></div>
-            <div class="score-level"><span class="s">⚡</span>Niveau Éclair</div>
-          </div>
-          <div style="min-width:180px;flex:1">
-            <div class="score-bar"><i id="scbar" style="width:0"></i></div>
-            <div class="score-nxt"><span>1 500 pts</span><span>2 500 → Foudre</span></div>
-          </div>
-        </div>
-        <div class="rewards-grid">
-          <div class="reward"><div class="reward__c">500 pts</div><div class="reward__n">+1 Go offert</div><button class="reward__b" disabled>Au lancement</button></div>
-          <div class="reward"><div class="reward__c">1 000 pts</div><div class="reward__n">−1€ facture</div><button class="reward__b" disabled>Au lancement</button></div>
-          <div class="reward"><div class="reward__c">5 000 pts</div><div class="reward__n">1 mois gratuit</div><button class="reward__b" disabled>Au lancement</button></div>
-        </div>
-      </div>
-      <div class="p-card hist-card">
-        <div class="p-card__hd"><span class="p-card__t">Conso 7 jours — exemple</span><span class="p-card__tag">Go/jour</span></div>
-        <div class="hbars" id="hbars"></div>
-        <div class="hlabels"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
-      </div>
-      <div class="qa-grid">
-        <div class="qa-item" onclick="nav('forfaits')"><div class="qa-item__ic">⬆</div><div class="qa-item__t">Forfaits</div><div class="qa-item__s">Voir le catalogue</div></div>
-        <div class="qa-item" onclick="nav('parrainage')"><div class="qa-item__ic">⚡</div><div class="qa-item__t">Parrainer</div><div class="qa-item__s">Partager Koltz</div></div>
-        <a class="qa-item" href="mailto:contact@koltz.fr"><div class="qa-item__ic">💬</div><div class="qa-item__t">Contact</div><div class="qa-item__s">contact@koltz.fr</div></a>
-        <div class="qa-item" onclick="openCo()"><div class="qa-item__ic">🔔</div><div class="qa-item__t">Pré-inscription</div><div class="qa-item__s">Être prévenu·e au lancement</div></div>
+      <div class="card season"><p class="label"><span class="tag tag--plasma">Saison 0</span></p>
+        <h3 class="h3">La saison des Founders.</h3>
+        <p>La Saison 0, c'est maintenant, pendant le pré-lancement. Les inscrits démarrent avec un bonus d'XP « Founder » (montant annoncé au lancement).</p>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- 7. Code créateur -->
+<section class="sec" id="createurs" aria-labelledby="crea-h">
+  <div class="wrap split">
+    <div>
+      <p class="label label--plasma">06 · Code créateur</p>
+      <h2 id="crea-h" class="h2">T'as une commu ? Elle mérite son forfait.</h2>
+      <p class="body">Streamer, créateur, capitaine de team esport : obtiens ton code KOLTZ. Ta commu profite d'un avantage à l'inscription, toi tu touches une commission tous les mois, tant qu'elle reste. Conditions et montants annoncés au lancement.</p>
+      <a class="btn btn--plasma" href="mailto:contact@koltz.fr?subject=Candidature%20cr%C3%A9ateur%20KOLTZ">Devenir créateur KOLTZ</a>
+      <p class="fine">Les créateurs partenaires affichent la mention « collaboration commerciale » (loi n° 2023-451 du 9 juin 2023).</p>
+    </div>
+    <div class="card creator">
+      <p class="label">Code créateur</p>
+      <p class="creator__code">TONPSEUDO</p>
+      <div class="segbar segbar--plasma"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      <p class="fine">Exemple. Ta commu le saisit à l'inscription, il est vérifié au lancement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Support -->
+<section class="sec" id="support" aria-labelledby="support-h">
+  <div class="wrap"><div class="card band">
+    <div>
+      <p class="label label--plasma">07 · Support</p>
+      <h2 id="support-h" class="h2">Une question ? Ta squad répond. On est juste derrière.</h2>
+      <p class="body">Le Discord KOLTZ : entraide récompensée en XP, staff KOLTZ visible, et un humain pour tout ce qui touche à ton compte.</p>
+    </div>
+    <div class="band__cta">
+      <p class="tag tag--plasma">Discord : ouverture avec la Saison 0</p>
+      <a class="btn btn--ghost" href="#rejoindre">Être prévenu·e</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- 9. Les règles du jeu -->
+<section class="sec sec--panel" id="regles" aria-labelledby="regles-h">
+  <div class="wrap">
+    <p class="label label--o">08 · Transparence</p>
+    <h2 id="regles-h" class="h2">Les règles du jeu, en clair.</h2>
+    <ul class="rules">
+      <li class="rule"><h3 class="h3">Sans engagement</h3><p>Tu restes parce que tu veux, pas parce qu'un contrat t'y oblige.</p></li>
+      <li class="rule"><h3 class="h3">eSIM ou carte SIM</h3><p>Activation par QR code, sans passer en boutique. Carte SIM physique proposée aussi.</p></li>
+      <li class="rule"><h3 class="h3">Garde ton numéro</h3><p>Portabilité avec ton code RIO (appelle le 3179).</p></li>
+      <li class="rule"><h3 class="h3">Recharge en espèces</h3><p>Dans des points de vente partenaires, quand le partenariat sera signé.</p></li>
+      <li class="rule"><h3 class="h3">Si le prix change</h3><p>On te prévient 30 jours avant, et tu pars sans frais si tu veux.</p></li>
+      <li class="rule"><h3 class="h3">Résiliation simple</h3><p>Depuis l'app, sans tunnel de rétention.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10. Gaming-ready -->
+<section class="sec" id="gaming" aria-labelledby="gaming-h">
+  <div class="wrap split">
+    <div>
+      <p class="label label--o">09 · Gaming-ready</p>
+      <h2 id="gaming-h" class="h2">Pensé pour jouer. Sans bullshit réseau.</h2>
+      <p class="body">Réseau 4G/5G de notre opérateur hôte, partage de connexion pour ta Switch ou ton Deck, eSIM. On ne te promettra pas de ping magique : on te dira exactement sur quel réseau tu es.</p>
+    </div>
+    <dl class="facts card">
+      <div><dt class="label">Réseau</dt><dd>Opérateur hôte annoncé avant le lancement</dd></div>
+      <div><dt class="label">Technos</dt><dd>4G/5G selon la couverture de l'hôte</dd></div>
+      <div><dt class="label">Partage</dt><dd>Partage de connexion prévu sur tous les forfaits</dd></div>
+      <div><dt class="label">Ping</dt><dd>Aucune promesse magique. Des chiffres sourcés, ou rien.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 11. Parrainage -->
+<section class="sec" id="parrainage" aria-labelledby="parr-h">
+  <div class="wrap split">
+    <div>
+      <p class="label label--volt">10 · Parrainage</p>
+      <h2 id="parr-h" class="h2">Parraine. Level up. Répète.</h2>
+      <p class="body">Chaque pote que tu fais entrer te rapporte de l'XP, et compte pour ta squad. Ton code de parrainage arrive avec ton compte. En attendant, fais tourner le lien.</p>
+      <div class="share">
+        <button type="button" class="btn btn--ghost btn--sm" data-share="copy">Copier le lien</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-share="native">Partager</button>
+        <a class="btn btn--ghost btn--sm" data-share="wa" href="https://wa.me/?text=KOLTZ%20arrive%20bient%C3%B4t%20%E2%80%94%20le%20forfait%20mobile%20qui%20se%20joue%20en%20squad.%20R%C3%A9serve%20ta%20place%20%3A%20https%3A%2F%2Fwww.koltz.fr%2F" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn--ghost btn--sm" data-share="sms" href="sms:?body=KOLTZ%20arrive%20bient%C3%B4t%2C%20le%20forfait%20qui%20se%20joue%20en%20squad%20%3A%20https%3A%2F%2Fwww.koltz.fr%2F">SMS</a>
+      </div>
+    </div>
+    <ol class="tiers card" aria-label="Paliers de parrainage">
+      <li><span class="tier__n">1</span><span><b>Premier pote</b><small>XP de parrainage</small></span></li>
+      <li><span class="tier__n">5</span><span><b>Squad leader</b><small>XP + loot</small></span></li>
+      <li><span class="tier__n">20</span><span><b>Ambassadeur</b><small>XP + loot rare</small></span></li>
+      <li><span class="tier__n">100</span><span><b>Hall of Fame</b><small>Concours encadré par un règlement</small></span></li>
+      <li class="fine">Barème et récompenses annoncés au lancement.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 12. FAQ -->
+<section class="sec sec--panel" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faqwrap">
+    <div>
+      <p class="label label--o">11 · FAQ</p>
+      <h2 id="faq-h" class="h2">On répond à tout.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>C'est quoi une squad ?</summary><p>Un groupe de 2 à 5 personnes chez KOLTZ, pas besoin d'habiter ensemble. Plus la squad compte de membres actifs, plus chacun paie moins. Les montants seront annoncés au lancement.</p></details>
+      <details><summary>Que se passe-t-il si un membre part ?</summary><p>La remise s'ajuste au nombre de membres actifs, sans pénalité pour ceux qui restent. Les règles exactes seront écrites dans les CGV au lancement.</p></details>
+      <details><summary>L'XP expire-t-elle ?</summary><p>Les règles de l'XP (saisons, conservation, loot) seront publiées avant le lancement. Notre principe : ce que tu gagnes en restant ne disparaît pas en silence.</p></details>
+      <details><summary>Sur quel réseau est KOLTZ ?</summary><p>On finalise notre contrat avec un opérateur hôte. On te dira exactement lequel avant le lancement, chiffres sourcés à l'appui.</p></details>
+      <details><summary>Quand KOLTZ lance ?</summary><p>On finalise notre lancement. Pré-inscris-toi gratuitement : on te prévient par email dès l'ouverture, sans engagement ni paiement.</p></details>
+      <details><summary>Pourquoi le prix squad n'est pas affiché ?</summary><p>Parce qu'on ne promet pas ce qu'on n'a pas signé. Les montants seront fixés avec notre contrat de gros et annoncés avant le lancement.</p></details>
+      <details><summary>Comment activer mon eSIM ?</summary><p>Au lancement, tu recevras ton QR code par email après ta commande. Il suffira de le scanner dans Réglages → Données mobiles.</p></details>
+      <details><summary>Mon téléphone est-il compatible ?</summary><p>iPhone 12+, Samsung S20+, Pixel 4+ et la majorité des flagships depuis 2020 gèrent l'eSIM. Une carte SIM physique sera aussi proposée.</p></details>
+      <details><summary>Puis-je garder mon numéro ?</summary><p>Oui, la portabilité sera gratuite au lancement. Tu entreras ton RIO (appelle le 3179) au moment de la commande, on s'occupera du reste.</p></details>
+      <details><summary>Comment recharger en espèces ?</summary><p>C'est prévu au lancement, via des points de vente partenaires (tabacs, taxiphones, épiceries) : tu paies cash, tu reçois un code, tu crédites ton compte.</p></details>
+      <details><summary>Le prix peut-il augmenter ?</summary><p>Si un prix change, on te prévient au moins 30 jours avant, et tu peux partir sans frais.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 13. CTA final + pré-inscription -->
+<section class="sec join" id="rejoindre" aria-labelledby="join-h">
+  <div class="wrap join__grid">
+    <div class="join__intro">
+      <p class="label label--o">12 · Saison 0</p>
+      <h2 id="join-h" class="h2 h2--xl">Ta squad t'attend.</h2>
+      <p class="lead">Réserve ta place pour la Saison 0. Sans engagement, sans paiement aujourd'hui.</p>
+      <ul class="ticks"><li>Pré-inscription gratuite</li><li>Aucun paiement</li><li>On te prévient au lancement</li></ul>
+    </div>
+
+    <form class="card joinform" id="join-form" novalidate aria-labelledby="join-h">
+      <ol class="jsteps" aria-label="Étapes">
+        <li class="jstep on" data-s="1"><span>01</span> Niveau</li>
+        <li class="jstep" data-s="2"><span>02</span> Toi &amp; ta squad</li>
+        <li class="jstep" data-s="3"><span>03</span> Confirmé</li>
+      </ol>
+
+      <!-- Étape 1 -->
+      <fieldset class="scr on" id="s-1">
+        <legend class="h3">Quel forfait t'intéresse ?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="forfait" value="mini"/><span class="opt__n" data-plan="mini" data-field="name">Mini</span><span class="opt__d" data-plan="mini" data-field="data">30 Go</span><span class="opt__p" data-plan="mini" data-field="price">6,99 €</span></label>
+          <label class="opt"><input type="radio" name="forfait" value="max" checked/><span class="opt__n" data-plan="max" data-field="name">Max</span><span class="opt__d" data-plan="max" data-field="data">100 Go</span><span class="opt__p" data-plan="max" data-field="price">11,99 €</span></label>
+          <label class="opt"><input type="radio" name="forfait" value="ultra"/><span class="opt__n" data-plan="ultra" data-field="name">Ultra</span><span class="opt__d" data-plan="ultra" data-field="data">200 Go</span><span class="opt__p" data-plan="ultra" data-field="price">14,99 €</span></label>
+          <label class="opt"><input type="radio" name="forfait" value="infinity"/><span class="opt__n" data-plan="infinity" data-field="name">Infinity</span><span class="opt__d" data-plan="infinity" data-field="data">300 Go</span><span class="opt__p" data-plan="infinity" data-field="price">19,99 €</span></label>
+        </div>
+        <p class="fine">Prix solo TTC par mois, prévus au lancement. Tu pourras changer d'avis.</p>
+      </fieldset>
+
+      <!-- Étape 2 -->
+      <fieldset class="scr" id="s-2">
+        <legend class="h3">Toi &amp; ta squad</legend>
+        <div class="fld"><label for="f-pre">Prénom ou pseudo *</label><input id="f-pre" name="prenom" autocomplete="given-name" maxlength="40" aria-required="true" aria-describedby="f-pre-err"/><p class="fld__err" id="f-pre-err" hidden>Indique ton prénom ou ton pseudo.</p></div>
+        <div class="fld"><label for="f-em">Email *</label><input id="f-em" name="email" type="email" autocomplete="email" maxlength="120" aria-required="true" aria-describedby="f-em-err"/><p class="fld__err" id="f-em-err" hidden>Indique une adresse email valide.</p></div>
+
+        <fieldset class="squadpick">
+          <legend class="label">Ta squad (optionnel)</legend>
+          <div class="seg3">
+            <label><input type="radio" name="squad" value="solo" checked/><span>Solo pour l'instant</span></label>
+            <label><input type="radio" name="squad" value="creer"/><span>Créer une squad</span></label>
+            <label><input type="radio" name="squad" value="rejoindre"/><span>Rejoindre une squad</span></label>
+          </div>
+          <div class="fld" id="fld-squad-nom" hidden><label for="f-squad-nom">Nom de ta squad (optionnel)</label><input id="f-squad-nom" name="squad_nom" maxlength="24" autocomplete="off"/></div>
+          <div class="fld" id="fld-squad-code" hidden><label for="f-squad-code">Code de la squad *</label><input id="f-squad-code" name="squad_code" maxlength="10" autocomplete="off" spellcheck="false" aria-describedby="f-squad-code-hint f-squad-code-err"/><p class="fld__hint" id="f-squad-code-hint">Format SQD-XXXXXX, donné par ton pote.</p><p class="fld__err" id="f-squad-code-err" hidden>Code au format SQD-XXXXXX.</p></div>
+        </fieldset>
+
+        <div class="fld"><label for="f-crea">Code créateur (optionnel)</label><input id="f-crea" name="code_createur" maxlength="20" autocomplete="off" spellcheck="false" aria-describedby="f-crea-hint f-crea-err"/><p class="fld__hint" id="f-crea-hint">Le code de ton streamer ou créateur. Vérifié au lancement.</p><p class="fld__err" id="f-crea-err" hidden>Lettres, chiffres et tirets uniquement (3 à 20).</p></div>
+        <p class="fine">On t'écrit uniquement pour te prévenir du lancement de KOLTZ. <button type="button" class="linkbtn" data-legal="privacy">Confidentialité</button></p>
+        <div class="err" id="join-err" role="alert" hidden></div>
+      </fieldset>
+
+      <!-- Étape 3 -->
+      <div class="scr done" id="s-3" tabindex="-1">
+        <div class="segbar segbar--volt segbar--lg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <p class="h2 done__h">T'es dans la <span class="o">Saison 0.</span></p>
+        <p class="done__sub">Tu es sur la liste, on te prévient au lancement sur <b id="d-em"></b>. Niveau choisi : <b id="d-plan"></b>. Aucun paiement n'a été effectué.</p>
+        <div class="done__squad" id="d-squad" hidden></div>
+        <div class="share" id="d-share" hidden>
+          <button type="button" class="btn btn--sm" data-share="squad">Copier l'invitation</button>
+          <button type="button" class="btn btn--ghost btn--sm" data-share="native-squad">Partager</button>
+        </div>
+        <p class="fine" id="d-note" hidden></p>
+      </div>
+
+      <div class="jnav" id="jnav">
+        <button type="button" class="btn btn--ghost" id="j-back" hidden>Retour</button>
+        <button type="submit" class="btn" id="j-next">Continuer</button>
+      </div>
+    </form>
+  </div>
+</section>
 
 </main>
 
-<!-- MODAL LÉGALE -->
-<div class="lmodal" id="lmodal" role="dialog" aria-modal="true" aria-labelledby="lm-title">
-  <div class="lmodal__box">
-    <div class="lmodal__head"><span class="lmodal__title" id="lm-title"></span><button class="lmodal__x" onclick="legalClose()" aria-label="Fermer">✕</button></div>
-    <div class="lmodal__body" id="lm-body"></div>
+<!-- 14. Footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <svg class="wordmark wordmark--foot" viewBox="0 0 4084 790" role="img" aria-label="KOLTZ"><use href="#koltz-wordmark"/></svg>
+        <div class="segbar segbar--volt foot__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <p>Le forfait mobile qui level up avec ta squad. Lancement bientôt.</p>
+      </div>
+      <nav class="foot__col" aria-label="Le produit">
+        <p class="label">Produit</p>
+        <a href="#comment">Le concept</a><a href="#forfaits">Forfaits</a><a href="#xp">XP &amp; rangs</a><a href="#createurs">Créateurs</a><a href="#regles">Règles du jeu</a>
+      </nav>
+      <nav class="foot__col" aria-label="Contact">
+        <p class="label">Contact</p>
+        <a href="mailto:contact@koltz.fr">contact@koltz.fr</a><a href="#rejoindre">Pré-inscription</a>
+        <p class="fine">Discord, TikTok, Twitch : bientôt.</p>
+      </nav>
+      <nav class="foot__col" aria-label="Informations légales">
+        <p class="label">Légal</p>
+        <button type="button" data-legal="mentions">Mentions légales</button>
+        <button type="button" data-legal="cgv">CGV</button>
+        <button type="button" data-legal="privacy">Confidentialité</button>
+        <button type="button" data-legal="cookies">Cookies</button>
+      </nav>
+    </div>
+    <div class="foot__bot">
+      <span>© 2026 KOLTZ MOBILE SAS</span>
+      <span class="foot__sig">#VibeSansLimite</span>
+    </div>
   </div>
-</div>
+</footer>
+
+<dialog class="lmodal" id="lmodal" aria-labelledby="lm-title">
+  <div class="lmodal__head"><h2 class="lmodal__title" id="lm-title"></h2><button type="button" class="lmodal__x" id="lm-close" aria-label="Fermer">✕</button></div>
+  <div class="lmodal__body" id="lm-body"></div>
+</dialog>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-
-<script>
-// ══ SUPABASE INIT ══
-const SUPA_URL  = "https://qzjqmksizkzkhvgrejvx.supabase.co";
-const SUPA_KEY  = "sb_publishable_dAR0Oogw_2ja2R_fQTJDCg_D9K3k3cZ";
-
-const supa   = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA_URL, SUPA_KEY) : null;
-
-// ── USER SESSION ──
-let koltzUser = null;
-try { const s = localStorage.getItem('koltz_user'); if(s) koltzUser=JSON.parse(s); } catch(e){}
-
-function setUser(u) {
-  koltzUser = u;
-  try { localStorage.setItem('koltz_user', JSON.stringify(u)); } catch(e){}
-  updateNavUser();
-}
-
-function updateNavUser() {
-  const btn = document.querySelector('.nav__profil');
-  if (!btn) return;
-  btn.textContent = '👤 ';
-  const sp = document.createElement('span'); sp.textContent = (koltzUser && koltzUser.prenom) || 'Mon Koltz';
-  btn.appendChild(sp);
-}
-
-// ── WAITLIST ──
-async function saveWaitlist(email, source) {
-  if (!supa || !email || !email.includes('@')) return false;
-  try {
-    // ignoreDuplicates : ON CONFLICT DO NOTHING (une ré-inscription n'écrase rien)
-    const { error } = await supa.from('waitlist').upsert([{ email, source: source||'site' }], {onConflict:'email', ignoreDuplicates:true});
-    if (error) console.warn('waitlist:', error.message);
-    return !error;
-  } catch(e) { console.warn('waitlist:', e && e.message); return false; }
-}
-
-// ── ABONNÉS ──
-async function saveAbonne(data) {
-  if (!supa) return false;
-  try {
-    // pas de .select() : l'insert fonctionne avec une RLS « insert only » pour anon
-    const { error } = await supa.from('abonnes').insert([{
-      email: data.email, nom: data.nom, prenom: data.prenom,
-      forfait: data.forfait, statut: 'pending',
-      code_parrain: data.codeParrain||null, points: 0
-    }]);
-    if(error) throw error;
-    return true;
-  } catch(e) { console.warn('abonnes:', e && e.message); return false; }
-}
-
-// ── COMPTEUR WAITLIST ──
-async function loadWaitlistCount() {
-  if (!supa) return;
-  try {
-    const { count } = await supa.from('waitlist').select('*', {count:'exact',head:true});
-    if (count && count > 0) {
-      ['waitlist-badge','proof-wait'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('hidden');});
-      document.querySelectorAll('#waitlist-count, #cnt-wait').forEach(el => {
-        let cur=0; const step=Math.max(1,Math.ceil(count/40));
-        const t=setInterval(()=>{ cur=Math.min(cur+step,count); el.textContent=cur; if(cur>=count)clearInterval(t); },28);
-      });
-    }
-  } catch(e) {}
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  loadWaitlistCount();
-  updateNavUser();
-});
-</script>
-
-<script>
-
-
-// ── Theme (fixé en dark) ──
-function toggleTheme(){}
-function updateBolts(){}
-
-let cur='home';
-const PAGES=['home','forfaits','parrainage','checkout','profil'];
-function nav(p,skipHash){if(!PAGES.includes(p))p='home';document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById('v-'+p);if(v)v.classList.add('on');document.querySelectorAll('.nav__link[data-nav]').forEach(i=>i.classList.toggle('on',i.dataset.nav===p));scrollTo({top:0,behavior:'smooth'});cur=p;if(!skipHash){try{history.replaceState(null,'','#'+p);}catch(e){}}if(p==='home'){lit();rev();}if(p==='profil')prof();document.body.style.overflow='';}
-// Liens internes <a href="#page"> : navigation SPA (et fermeture du menu mobile)
-document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const p=a.getAttribute('href').slice(1);if(!PAGES.includes(p))return;e.preventDefault();nav(p);const mm=document.getElementById('mobmenu');if(mm&&mm.classList.contains('open'))mob();});
-// Éléments cliquables non natifs (cartes, options) : focusables + Entrée/Espace
-function a11yClickables(){document.querySelectorAll('[onclick]:not(a):not(button):not(input):not(select):not(label):not(.plan-card)').forEach(el=>{if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');if(!el.hasAttribute('role'))el.setAttribute('role','button');if(el.dataset.kb)return;el.dataset.kb=1;el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});});}
-addEventListener('DOMContentLoaded',a11yClickables);
-window.addEventListener('hashchange',()=>{const p=location.hash.replace('#','');if(p&&PAGES.includes(p))nav(p,true);});
-function openCo(plan){nav('checkout');coGo(1);if(plan)pickP(plan);}
-addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>40),{passive:true});
-addEventListener('resize',()=>{if(innerWidth>860){document.getElementById('mobmenu').classList.remove('open');document.getElementById('burger').classList.remove('x');document.body.style.overflow='';}});
-function mob(){const b=document.getElementById('burger'),m=document.getElementById('mobmenu');b.classList.toggle('x');m.classList.toggle('open');const o=m.classList.contains('open');b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';}
-function lit(){requestAnimationFrame(()=>document.getElementById('hero').classList.add('lit'));}
-function faq(el){const q=el.closest('.qa'),o=q.classList.contains('open');document.querySelectorAll('.qa.open').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.qa__q').forEach(x=>x.setAttribute('aria-expanded','false'));if(!o){q.classList.add('open');el.setAttribute('aria-expanded','true');}}
-const P={mini:{n:'Koltz Mini',p:'6,99 €'},max:{n:'Koltz Max',p:'11,99 €'},ultra:{n:'Koltz Ultra',p:'14,99 €'},infinity:{n:'Koltz Infinity',p:'19,99 €'}};
-let st=1,pl='max';
-function setT(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
-function showEl(id,on,d){const e=document.getElementById(id);if(e)e.style.display=on?(d||'block'):'none';}
-function pickP(p){if(!P[p])return;pl=p;document.querySelectorAll('.opt').forEach(o=>{const on=o.dataset.p===p;o.classList.toggle('on',on);o.setAttribute('aria-checked',on);});su();}
-function su(){const x=P[pl]||P.max;setT('oc-plan',x.n);setT('oc-price',x.p+'/mois');setT('oc-total',x.p);}
-function coGo(n){st=n;document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+n).classList.add('on');document.querySelectorAll('.co-st').forEach(s=>{const sn=+s.dataset.s;s.classList.toggle('on',sn===n);s.classList.toggle('done',sn<n);});showEl('co-bk',n===2,'inline-flex');showEl('co-nav',n!==3,'flex');setT('co-nx',n===2?'Me pré-inscrire ⚡':'Continuer →');const er=document.getElementById('co-err');if(er)er.hidden=true;}
-function coN(){if(st===1){su();coGo(2);}else if(st===2){if(vco())proc();}}
-function coP(){if(st>1)coGo(st-1);}
-function vco(){const C=[['f-pre',v=>v.trim()],['f-em',v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())]];let ok=1;C.forEach(([id,t])=>{const e=document.getElementById(id);if(!e)return;const v=!!t(e.value);e.classList.toggle('bad',!v);e.setAttribute('aria-invalid',!v);if(!v&&ok){e.focus();ok=0;}e.addEventListener('input',()=>e.classList.remove('bad'),{once:1});});return ok;}
-let busy=false;
-async function proc(){
-  if(busy)return;busy=true;
-  const b=document.getElementById('co-nx'),er=document.getElementById('co-err');
-  const email=(document.getElementById('f-em').value||'').trim();
-  const prenom=(document.getElementById('f-pre').value||'').trim();
-  if(er)er.hidden=true;
-  b.innerHTML='<span class="spin"></span>';b.disabled=true;
-  let ok=false;
-  try{
-    // Enregistrement réel : succès seulement si Supabase confirme au moins une écriture
-    const [w,a]=await Promise.all([saveWaitlist(email,'preinscription'),saveAbonne({email,prenom,nom:null,forfait:pl,codeParrain:null})]);
-    ok=!!(w||a);
-  }catch(e){console.warn('pré-inscription:',e&&e.message);}
-  b.disabled=false;busy=false;
-  if(!ok){
-    b.textContent='Réessayer ⚡';
-    if(er){er.textContent="Oups, ta pré-inscription n'a pas pu être enregistrée. Vérifie ta connexion et réessaie, ou écris-nous à contact@koltz.fr.";er.hidden=false;}
-    return;
-  }
-  setUser({email,prenom,forfait:pl});
-  setT('d-em',email);setT('d-plan',(P[pl]||{n:pl}).n);
-  coGo(3);
-}
-const LINK='https://www.koltz.fr/';
-function clip(text){
-  if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(text);}
-  return new Promise((res,rej)=>{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(e){rej(e);}document.body.removeChild(ta);});
-}
-function copyCode(){clip(LINK).then(()=>toast('Lien copié ⚡')).catch(()=>toast(LINK));}
-function shareNative(){if(navigator.share)navigator.share({title:'KOLTZ',text:'Koltz, la 5G sans engagement, arrive bientôt. Pré-inscris-toi :',url:LINK});else clip(LINK).then(()=>toast('Lien copié'));}
-function shareWA(){open('https://wa.me/?text='+encodeURIComponent(`⚡ Koltz, la 5G sans engagement, arrive bientôt. Pré-inscris-toi : ${LINK}`),'_blank');}
-function shareTT(){clip(`⚡ Koltz arrive bientôt — la 5G sans limites. Pré-inscription : ${LINK} #Koltz #5G`).then(()=>toast('Caption copiée'));}
-function shareSMS(){location.href='sms:?body='+encodeURIComponent(`Koltz, la 5G sans engagement, arrive bientôt ⚡ ${LINK}`);}
-let pd=0;
-function prof(){
-  if(koltzUser&&koltzUser.prenom){setT('prof-name','Salut, '+koltzUser.prenom);setT('prof-av',koltzUser.prenom.trim().charAt(0).toUpperCase()||'?');setT('prof-meta','Pré-inscrit·e'+(P[koltzUser.forfait]?' · '+P[koltzUser.forfait].n:'')+' · on te prévient au lancement');}
-  const r=document.getElementById('ringf');
-  const RC=402;if(r){r.setAttribute('stroke-dashoffset',RC);r.style.strokeDashoffset=RC;setTimeout(()=>{const off=String(RC*(1-.67));r.setAttribute('stroke-dashoffset',off);r.style.strokeDashoffset=off;},120);}
-  const s=document.getElementById('scbar');
-  if(s){s.style.width='0';setTimeout(()=>{s.style.width=(getComputedStyle(s).getPropertyValue('--w').trim()||'60%');},120);}
-  const h=document.getElementById('hbars');
-  if(h&&!pd){const d=[4.2,6.8,3.1,8.4,5.6,9.2,7.1],mx=Math.max(...d);h.innerHTML=d.map(x=>`<div class="hbar" style="height:0%" data-h="${(x/mx)*100}"><span class="hbar__v">${x} Go</span></div>`).join('');pd=1;setTimeout(()=>{h.querySelectorAll('.hbar').forEach(b=>b.style.height=b.dataset.h+'%');},120);}
-}
-
-// ── Modal légale ──
-const LEGAL={
- mentions:{t:'Mentions légales',b:'<h4>Éditeur</h4><p>KOLTZ MOBILE SAS — Société par actions simplifiée<br/>RCS Paris 988 421 770<br/>Siège social : Paris, France<br/>Directeur de la publication : Ryadh N.</p><h4>Hébergement</h4><p>Vercel Inc. — 440 N Barranca Ave #4133, Covina, CA 91723, USA</p><h4>Contact</h4><p>contact@koltz.fr</p>'},
- cgv:{t:'Conditions générales de vente',b:'<h4>Objet</h4><p>Les présentes CGV régissent la souscription aux forfaits mobiles Koltz, sans engagement de durée.</p><h4>Tarifs</h4><p>Prix TTC, garantis 12 mois. Toute évolution tarifaire est notifiée 30 jours à l\'avance avec faculté de résiliation sans frais.</p><h4>Résiliation</h4><p>Résiliation à tout moment depuis l\'espace client, effective en fin de période payée. Aucun frais de résiliation.</p><h4>Droit de rétractation</h4><p>14 jours à compter de la souscription, conformément au Code de la consommation.</p>'},
- privacy:{t:'Politique de confidentialité',b:'<h4>Données collectées</h4><p>Identité, coordonnées, données de facturation et de consommation, strictement nécessaires à la fourniture du service.</p><h4>Utilisation</h4><p>Gestion du compte, facturation, support, obligations légales (conservation des données de connexion).</p><h4>Vos droits</h4><p>Accès, rectification, suppression, portabilité — via privacy@koltz.fr. Réclamation possible auprès de la CNIL.</p><h4>Conservation</h4><p>Données supprimées ou anonymisées à la clôture du compte, hors obligations légales.</p>'},
- cookies:{t:'Cookies',b:'<h4>Cookies utilisés</h4><p>Ce site utilise uniquement des cookies techniques nécessaires au fonctionnement (session, préférences). Aucun cookie publicitaire ni traceur tiers.</p><h4>Gestion</h4><p>Vous pouvez configurer votre navigateur pour bloquer les cookies ; certaines fonctionnalités peuvent être affectées.</p>'}
-};
-let lmPrev=null;
-function legal(k){const d=LEGAL[k];if(!d)return;lmPrev=document.activeElement;document.getElementById('lm-title').textContent=d.t;document.getElementById('lm-body').innerHTML=d.b;document.getElementById('lmodal').classList.add('open');document.body.style.overflow='hidden';const x=document.querySelector('.lmodal__x');if(x)x.focus();}
-function legalClose(){const m=document.getElementById('lmodal');const was=m.classList.contains('open');m.classList.remove('open');document.body.style.overflow='';if(was&&lmPrev&&lmPrev.focus){lmPrev.focus();}lmPrev=null;}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){legalClose();const mm=document.getElementById('mobmenu');if(mm.classList.contains('open'))mob();}});
-document.getElementById('lmodal').addEventListener('click',e=>{if(e.target.id==='lmodal')legalClose();});
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
-function rev(){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.sb__bar i').forEach(b=>b.style.width=getComputedStyle(b).getPropertyValue('--w'));io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -5% 0px'});document.querySelectorAll('#v-home .rv:not(.in)').forEach(el=>io.observe(el));}
-addEventListener('DOMContentLoaded',()=>{const hp=location.hash.replace('#','');try{su();}catch(e){console.warn(e);}if(hp&&PAGES.includes(hp)&&hp!=='home')nav(hp,true);else{lit();rev();}});
-
-</script>
+<noscript><p class="noscript">Active JavaScript pour te pré-inscrire, ou écris-nous à contact@koltz.fr.</p></noscript>
 </body>
 </html>
