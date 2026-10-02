@@ -1425,27 +1425,29 @@ let cur='home';
 const PAGES=['home','forfaits','parrainage','checkout','profil'];
 function nav(p,skipHash){if(!PAGES.includes(p))p='home';document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById('v-'+p);if(v)v.classList.add('on');document.querySelectorAll('.nav__item').forEach(i=>i.classList.toggle('on',i.dataset.nav===p));scrollTo({top:0,behavior:'smooth'});cur=p;if(!skipHash){try{history.replaceState(null,'','#'+p);}catch(e){}}if(p==='home'){lit();rev();}if(p==='profil')prof();document.body.style.overflow='';}
 window.addEventListener('hashchange',()=>{const p=location.hash.replace('#','');if(p&&PAGES.includes(p))nav(p,true);});
-function openCo(plan){nav('checkout');if(plan)pickP(plan);}
+function openCo(plan){nav('checkout');coGo(1);if(plan)pickP(plan);}
 addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>40),{passive:true});
 addEventListener('resize',()=>{if(innerWidth>860){document.getElementById('mobmenu').classList.remove('open');document.getElementById('burger').classList.remove('x');document.body.style.overflow='';}});
 function mob(){const b=document.getElementById('burger'),m=document.getElementById('mobmenu');b.classList.toggle('x');m.classList.toggle('open');const o=m.classList.contains('open');b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';}
 function lit(){requestAnimationFrame(()=>document.getElementById('hero').classList.add('lit'));}
 function faq(el){const q=el.closest('.qa'),o=q.classList.contains('open');document.querySelectorAll('.qa.open').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}
 function seg(v){document.getElementById('seg-cards').style.display=v==='cards'?'block':'none';document.getElementById('seg-table').style.display=v==='table'?'block':'none';document.querySelectorAll('.seg button').forEach((b,i)=>b.classList.toggle('on',(i===0&&v==='cards')||(i===1&&v==='table')));}
-const P={social:{n:'Koltz Mini',p:'6,99 €'},max:{n:'Koltz Max',p:'11,99 €'},ultra:{n:'Koltz Ultra',p:'14,99 €'},infinity:{n:'Koltz Infinity',p:'19,99 €'}};
-let st=1,pl='gamer',sm='esim',py='card';
-function pickP(p){pl=p;document.querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.dataset.p===p));su();}
-function pickS(s){sm=s;document.getElementById('t-esim').classList.toggle('on',s==='esim');document.getElementById('t-phys').classList.toggle('on',s==='phys');document.getElementById('su-sim').textContent=s==='esim'?'eSIM':'Carte physique';document.getElementById('su-port-row').style.display=s==='phys'?'flex':'none';}
+const P={mini:{n:'Koltz Mini',p:'6,99 €'},max:{n:'Koltz Max',p:'11,99 €'},ultra:{n:'Koltz Ultra',p:'14,99 €'},infinity:{n:'Koltz Infinity',p:'19,99 €'}};
+let st=1,pl='max',sm='esim',py='card';
+function setT(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
+function showEl(id,on,d){const e=document.getElementById(id);if(e)e.style.display=on?(d||'block'):'none';}
+function pickP(p){if(!P[p])return;pl=p;document.querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.dataset.p===p));su();}
+function pickS(s){sm=s;document.getElementById('t-esim').classList.toggle('on',s==='esim');document.getElementById('t-phys').classList.toggle('on',s==='phys');setT('oc-sim',s==='esim'?'eSIM':'Carte physique');showEl('oc-port-row',s==='phys','flex');}
 function tPorto(){document.getElementById('porto-f').style.display=document.getElementById('porto').checked?'block':'none';}
-function pickPay(m){py=m;['card','pp','ap'].forEach(x=>document.getElementById('pb-'+x).classList.toggle('on',x===m));document.getElementById('cardf').style.display=m==='card'?'block':'none';document.getElementById('altf').style.display=m!=='card'?'block':'none';if(m!=='card')document.getElementById('alt-n').textContent=m==='pp'?'PayPal':'Apple Pay';}
-function parrCheck(v){document.getElementById('su-parr-row').style.display=v.trim().length>=6?'flex':'none';}
-function su(){const x=P[pl];document.getElementById('su-plan').textContent=x.n;document.getElementById('su-price').textContent=x.p+'/mois';document.getElementById('su-total').textContent=x.p;document.getElementById('d-plan').textContent=x.n;}
-function coGo(n){st=n;document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+n).classList.add('on');document.querySelectorAll('.cost__s').forEach(s=>{const sn=+s.dataset.s;s.classList.toggle('on',sn===n);s.classList.toggle('done',sn<n);});document.getElementById('cobk').style.display=(n>1&&n<4)?'inline-flex':'none';document.getElementById('conav').style.display=n===4?'none':'flex';document.getElementById('conx').textContent=n===3?'Confirmer ⚡':'Continuer →';}
+function pickPay(m){py=m;['card','pp','ap'].forEach(x=>document.getElementById('pb-'+x).classList.toggle('on',x===m));showEl('card-section',m==='card');showEl('alt-section',m!=='card');if(m!=='card')setT('alt-name',m==='pp'?'PayPal':'Apple Pay');}
+function parrCheck(v){showEl('oc-parr-row',v.trim().length>=6,'flex');}
+function su(){const x=P[pl]||P.max;setT('oc-plan',x.n);setT('oc-price',x.p+'/mois');setT('oc-total',x.p);}
+function coGo(n){st=n;document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+n).classList.add('on');document.querySelectorAll('.co-st').forEach(s=>{const sn=+s.dataset.s;s.classList.toggle('on',sn===n);s.classList.toggle('done',sn<n);});showEl('co-bk',n>1&&n<4,'inline-flex');showEl('co-nav',n!==4,'flex');setT('co-nx',n===3?'Confirmer ⚡':'Continuer →');}
 function coN(){if(st===1){su();coGo(2);}else if(st===2){if(vco())coGo(3);}else if(st===3){proc();}}
 function coP(){if(st>1)coGo(st-1);}
 function vco(){const C=[['f-pre',v=>v.trim()],['f-nom',v=>v.trim()],['f-em',v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)],['f-dob',v=>!!v],['f-adr',v=>v.trim().length>3],['f-cp',v=>/^\d{5}$/.test(v)],['f-vil',v=>v.trim()]];let ok=1;C.forEach(([id,t])=>{const e=document.getElementById(id);if(!e)return;const v=!!t(e.value);e.classList.toggle('bad',!v);if(!v&&ok){e.focus();ok=0;}e.addEventListener('input',()=>e.classList.remove('bad'),{once:1});});return ok;}
 async function proc(){
-  const b=document.getElementById('conx');
+  const b=document.getElementById('co-nx');
   b.innerHTML='<span class="spin"></span>';b.disabled=1;
   const email  = (document.getElementById('f-em')||{}).value||'';
   const prenom = (document.getElementById('f-pre')||{}).value||'';
@@ -1464,7 +1466,7 @@ async function proc(){
     document.getElementById('d-ref').textContent=r;
     document.getElementById('d-em').textContent=email||'ton email';
     const dm=document.getElementById('d-msg');
-    if(sm==='phys'&&dm){dm.innerHTML='Ton forfait <b>'+(plans[pl]||{n:pl}).n+'</b> est activé. Ta carte SIM arrive demain chez toi.';}
+    if(sm==='phys'&&dm){dm.innerHTML='Ton forfait <b>'+(P[pl]||{n:pl}).n+'</b> est activé. Ta carte SIM arrive demain chez toi.';}
     coGo(4);b.innerHTML='Continuer →';b.disabled=0;
   },2000);
 }
