@@ -60,6 +60,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;}
 input,select,textarea{font:inherit;}
 ::selection{background:var(--lime);color:#000;}
 :focus-visible{outline:2px solid var(--lime);outline-offset:2px;}
+.fld input:focus-visible,.fld select:focus-visible{outline:2px solid var(--lime);outline-offset:1px;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}}
 
 /* ── UTILS ── */
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut);}
@@ -108,6 +110,8 @@ input,select,textarea{font:inherit;}
 /* Mobile menu */
 .mob{position:fixed;inset:64px 0 0;z-index:190;background:rgba(5,5,7,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:24px var(--gut);transform:translateX(100%);transition:transform .4s cubic-bezier(.16,.84,.24,1);}
 .mob.open{transform:translateX(0);}
+.mob{visibility:hidden;transition:transform .4s cubic-bezier(.16,.84,.24,1),visibility 0s linear .4s;}
+.mob.open{visibility:visible;transition:transform .4s cubic-bezier(.16,.84,.24,1);}
 .mob__link{font-family:var(--blk);font-size:clamp(28px,7vw,44px);padding:14px 0;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-transform:uppercase;}
 .mob__link:hover{color:var(--lime);}
 .mob__link .ar{font-family:var(--sans);font-size:16px;opacity:.4;}
@@ -428,6 +432,7 @@ input,select,textarea{font:inherit;}
   display:flex;justify-content:space-between;align-items:center;
   gap:16px;padding:20px 22px;cursor:pointer;
   font-size:clamp(14px,1.1vw,16px);font-weight:600;
+  width:100%;text-align:left;
 }
 .qa__ic{font-size:20px;color:var(--lime);transition:transform .35s;flex-shrink:0;}
 .qa.open .qa__ic{transform:rotate(45deg);}
@@ -478,8 +483,8 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 .foot__brand-gem{width:16px;height:16px;background:var(--lime);border-radius:2px;transform:rotate(45deg);flex-shrink:0;}
 .foot__brand-desc{font-size:13px;color:var(--txt2);line-height:1.6;max-width:26ch;}
 .foot__col h5{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--txt3);margin-bottom:12px;}
-.foot__col a{display:block;font-size:13px;color:var(--txt2);padding:4px 0;cursor:pointer;transition:color .2s;}
-.foot__col a:hover{color:var(--lime);}
+.foot__col a,.foot__col button{display:block;text-align:left;font-size:13px;color:var(--txt2);padding:4px 0;cursor:pointer;transition:color .2s;}
+.foot__col a:hover,.foot__col button:hover{color:var(--lime);}
 .foot__bot{
   display:flex;justify-content:space-between;flex-wrap:wrap;
   gap:10px;padding-top:20px;border-top:1px solid var(--bd);
@@ -780,37 +785,38 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 <body>
 
 <!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav__brand" onclick="nav('home')">
-    <span class="nav__gem"></span>
+<nav class="nav" id="nav" aria-label="Navigation principale">
+  <a class="nav__brand" href="#home" aria-label="KOLTZ, accueil">
+    <span class="nav__gem" aria-hidden="true"></span>
     <span class="nav__name">KOLTZ</span>
-  </div>
+  </a>
   <div class="nav__links">
-    <span class="nav__link on" data-nav="home" onclick="nav('home')">Accueil</span>
-    <span class="nav__link" data-nav="forfaits" onclick="nav('forfaits')">Forfaits</span>
-    <span class="nav__link" data-nav="parrainage" onclick="nav('parrainage')">Avantages</span>
-    <span class="nav__link" onclick="toast('Couverture — bientôt')">Couverture</span>
-    <span class="nav__link" onclick="toast('Aide — bientôt')">Aide</span>
+    <a class="nav__link on" href="#home" data-nav="home">Accueil</a>
+    <a class="nav__link" href="#forfaits" data-nav="forfaits">Forfaits</a>
+    <a class="nav__link" href="#parrainage" data-nav="parrainage">Avantages</a>
+    <button type="button" class="nav__link" onclick="toast('Couverture — bientôt')">Couverture</button>
+    <button type="button" class="nav__link" onclick="toast('Aide — bientôt')">Aide</button>
   </div>
   <div class="nav__right">
-    <button class="nav__profil" onclick="nav('profil')">👤 <span>Mon Koltz</span></button>
-    <button class="burger" id="burger" onclick="mob()" aria-label="Menu" aria-expanded="false">
+    <button type="button" class="nav__profil" onclick="nav('profil')" aria-label="Mon espace Koltz">👤 <span>Mon Koltz</span></button>
+    <button type="button" class="burger" id="burger" onclick="mob()" aria-label="Menu" aria-controls="mobmenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mob" id="mobmenu">
-  <div class="mob__link" onclick="nav('home');mob()">Accueil <span class="ar">→</span></div>
-  <div class="mob__link" onclick="nav('forfaits');mob()">Forfaits <span class="ar">→</span></div>
-  <div class="mob__link" onclick="nav('parrainage');mob()">Avantages <span class="ar">→</span></div>
-  <div class="mob__link" onclick="nav('profil');mob()">Mon Koltz <span class="ar">→</span></div>
+<nav class="mob" id="mobmenu" aria-label="Menu mobile">
+  <a class="mob__link" href="#home">Accueil <span class="ar" aria-hidden="true">→</span></a>
+  <a class="mob__link" href="#forfaits">Forfaits <span class="ar" aria-hidden="true">→</span></a>
+  <a class="mob__link" href="#parrainage">Avantages <span class="ar" aria-hidden="true">→</span></a>
+  <a class="mob__link" href="#profil">Mon Koltz <span class="ar" aria-hidden="true">→</span></a>
   <div class="mob__cta" style="margin-top:24px">
     <button class="btn-orange" onclick="nav('forfaits');mob()" style="width:100%;justify-content:center">Voir les forfaits ↓</button>
   </div>
-</div>
+</nav>
 
+<main id="main">
 <!-- ════════ HOME ════════ -->
 <div class="view on" id="v-home">
 
@@ -858,7 +864,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
             <li>5 Go en Europe</li>
             <li>eSIM instantanée</li>
           </ul>
-          <button class="plan-btn ghost">Choisir →</button>
+          <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Mini">Choisir →</button>
         </div>
 
         <!-- MAX (hot) -->
@@ -876,7 +882,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
             <li>eSIM instantanée</li>
             <li>Support IA 8 sec</li>
           </ul>
-          <button class="plan-btn solid">Choisir →</button>
+          <button type="button" class="plan-btn solid" aria-label="Choisir le forfait Max">Choisir →</button>
         </div>
 
         <!-- ULTRA -->
@@ -893,7 +899,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
             <li>Discord Nitro offert</li>
             <li>QoS gaming prioritaire</li>
           </ul>
-          <button class="plan-btn ghost">Choisir →</button>
+          <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Ultra">Choisir →</button>
         </div>
 
         <!-- INFINITY -->
@@ -910,7 +916,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
             <li>Netflix <em>ou</em> Spotify inclus</li>
             <li>Support prioritaire 24/7</li>
           </ul>
-          <button class="plan-btn ghost">Choisir →</button>
+          <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Infinity">Choisir →</button>
         </div>
 
       </div>
@@ -988,12 +994,12 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
     <div class="wrap">
       <h2 class="faq-sec__title rv">On répond<br/>à <span class="bl">tout.</span></h2>
       <div class="rv">
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Quand Koltz sera disponible ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>On finalise notre lancement. Pré-inscris-toi gratuitement : on te prévient par email dès l'ouverture, sans engagement ni paiement.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Comment activer mon eSIM ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Au lancement, tu recevras ton QR code par email après ta commande. Il suffira de le scanner dans Réglages → Données mobiles.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Mon téléphone est-il compatible ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>iPhone 12+, Samsung S20+, Pixel 4+ et la majorité des flagships depuis 2020. SIM physique disponible si nécessaire.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Puis-je garder mon numéro ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Oui, la portabilité sera gratuite au lancement. Tu entreras ton RIO (appelle le 3179) au moment de la commande, on s'occupera du reste.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Comment recharger en espèces ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>C'est prévu au lancement, via des points de vente partenaires (tabacs, taxiphones, épiceries) : tu paies cash, tu reçois un code, tu crédites ton compte.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Le prix peut-il augmenter ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Non. Ton prix est garanti. Si on change nos tarifs, on te prévient 30 jours avant avec possibilité de partir sans frais.</p></div></div>
+        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Quand Koltz sera disponible ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>On finalise notre lancement. Pré-inscris-toi gratuitement : on te prévient par email dès l'ouverture, sans engagement ni paiement.</p></div></div>
+        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Comment activer mon eSIM ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>Au lancement, tu recevras ton QR code par email après ta commande. Il suffira de le scanner dans Réglages → Données mobiles.</p></div></div>
+        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Mon téléphone est-il compatible ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>iPhone 12+, Samsung S20+, Pixel 4+ et la majorité des flagships depuis 2020. SIM physique disponible si nécessaire.</p></div></div>
+        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Puis-je garder mon numéro ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>Oui, la portabilité sera gratuite au lancement. Tu entreras ton RIO (appelle le 3179) au moment de la commande, on s'occupera du reste.</p></div></div>
+        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Comment recharger en espèces ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>C'est prévu au lancement, via des points de vente partenaires (tabacs, taxiphones, épiceries) : tu paies cash, tu reçois un code, tu crédites ton compte.</p></div></div>
+        <div class="qa"><button type="button" class="qa__q" aria-expanded="false" onclick="faq(this)"><span>Le prix peut-il augmenter ?</span><span class="qa__ic" aria-hidden="true">+</span></button><div class="qa__a"><p>Non. Ton prix est garanti. Si on change nos tarifs, on te prévient 30 jours avant avec possibilité de partir sans frais.</p></div></div>
       </div>
     </div>
   </section>
@@ -1014,28 +1020,28 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
     <div class="wrap foot">
       <div class="foot__top">
         <div class="foot__brand">
-          <div class="foot__brand-logo"><span class="foot__brand-gem"></span>KOLTZ</div>
+          <div class="foot__brand-logo"><span class="foot__brand-gem" aria-hidden="true"></span>KOLTZ</div>
           <p class="foot__brand-desc">Opérateur mobile 5G nouvelle génération. Lancement bientôt. Made in France.</p>
         </div>
         <div class="foot__col">
           <h5>Produit</h5>
-          <a onclick="nav('forfaits')">Forfaits</a>
-          <a onclick="toast('eSIM — bientôt')">eSIM</a>
-          <a onclick="toast('Couverture — bientôt')">Couverture</a>
-          <a onclick="nav('parrainage')">Parrainage</a>
+          <a href="#forfaits">Forfaits</a>
+          <button type="button" onclick="toast('eSIM — bientôt')">eSIM</button>
+          <button type="button" onclick="toast('Couverture — bientôt')">Couverture</button>
+          <a href="#parrainage">Parrainage</a>
         </div>
         <div class="foot__col">
           <h5>Compte</h5>
-          <a onclick="nav('profil')">Mon Koltz</a>
+          <a href="#profil">Mon Koltz</a>
           <a href="mailto:contact@koltz.fr">Contact</a>
-          <a onclick="toast('App — bientôt iOS & Android')">App mobile</a>
+          <button type="button" onclick="toast('App — bientôt iOS & Android')">App mobile</button>
         </div>
         <div class="foot__col">
           <h5>Légal</h5>
-          <a onclick="legal('mentions')">Mentions légales</a>
-          <a onclick="legal('cgv')">CGV</a>
-          <a onclick="legal('privacy')">Confidentialité</a>
-          <a onclick="legal('cookies')">Cookies</a>
+          <button type="button" onclick="legal('mentions')">Mentions légales</button>
+          <button type="button" onclick="legal('cgv')">CGV</button>
+          <button type="button" onclick="legal('privacy')">Confidentialité</button>
+          <button type="button" onclick="legal('cookies')">Cookies</button>
         </div>
       </div>
       <div class="foot__bot">
@@ -1064,7 +1070,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <ul class="plan-feats">
           <li>30 Go en 5G</li><li>Appels & SMS illimités</li><li>5 Go en Europe</li><li>eSIM instantanée</li><li>Data Boost 2€/10Go</li>
         </ul>
-        <button class="plan-btn ghost">Choisir →</button>
+        <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Mini">Choisir →</button>
       </div>
       <div class="plan-card hot" onclick="openCo('max')">
         <div class="plan-badge">⚡ Populaire</div>
@@ -1076,7 +1082,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <ul class="plan-feats">
           <li>100 Go en 5G</li><li>Appels & SMS illimités</li><li>20 Go en Europe</li><li>eSIM instantanée</li><li>Support IA 8 sec</li>
         </ul>
-        <button class="plan-btn solid">Choisir →</button>
+        <button type="button" class="plan-btn solid" aria-label="Choisir le forfait Max">Choisir →</button>
       </div>
       <div class="plan-card" onclick="openCo('ultra')">
         <div class="plan-idx">003 / ULTRA</div>
@@ -1087,7 +1093,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <ul class="plan-feats">
           <li>200 Go en 5G</li><li>Appels & SMS illimités</li><li>40 Go Europe & DOM</li><li>Discord Nitro offert</li><li>QoS gaming prioritaire</li>
         </ul>
-        <button class="plan-btn ghost">Choisir →</button>
+        <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Ultra">Choisir →</button>
       </div>
       <div class="plan-card" onclick="openCo('infinity')">
         <div class="plan-idx">004 / INFINITY</div>
@@ -1098,7 +1104,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <ul class="plan-feats">
           <li>300 Go 5G Boost</li><li>100 Go dans 75 pays</li><li>Appels 30 destinations</li><li>Netflix ou Spotify inclus</li><li>Support prioritaire 24/7</li>
         </ul>
-        <button class="plan-btn ghost">Choisir →</button>
+        <button type="button" class="plan-btn ghost" aria-label="Choisir le forfait Infinity">Choisir →</button>
       </div>
     </div>
     <!-- Comparatif -->
@@ -1156,9 +1162,9 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <div class="step"><div class="step__n">2</div><div><div class="step__h">Il reste 3 mois</div><div class="step__p">Après 3 mois actifs, ta récompense est créditée.</div></div></div>
         <div class="step"><div class="step__n">3</div><div><div class="step__h">Tu gagnes</div><div class="step__p">500 pts + 15€ de réduction. À l'infini.</div></div></div>
         <div class="chips">
-          <span class="chip" onclick="shareWA()">💬 WhatsApp</span>
-          <span class="chip" onclick="shareTT()">🎵 TikTok</span>
-          <span class="chip" onclick="shareSMS()">📱 SMS</span>
+          <button type="button" class="chip" onclick="shareWA()">💬 WhatsApp</button>
+          <button type="button" class="chip" onclick="shareTT()">🎵 TikTok</button>
+          <button type="button" class="chip" onclick="shareSMS()">📱 SMS</button>
         </div>
       </div>
     </div>
@@ -1182,12 +1188,12 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <!-- Step 1 -->
         <div class="scr on" id="s-1">
           <div class="co-box">
-            <div class="co-box__h">Quel forfait t'intéresse ?</div>
-            <div class="co-box__b">
-              <div class="opt on" data-p="max" onclick="pickP('max')"><div class="opt__r"></div><div><div class="opt__n">Koltz Max ⭐</div><div class="opt__d">100 Go 5G · Appels illimités · 20 Go EU</div></div><div class="opt__p">11,99€<small>/mois</small></div></div>
-              <div class="opt" data-p="mini" onclick="pickP('mini')"><div class="opt__r"></div><div><div class="opt__n">Koltz Mini</div><div class="opt__d">30 Go 5G · Appels illimités · 5 Go EU</div></div><div class="opt__p">6,99€<small>/mois</small></div></div>
-              <div class="opt" data-p="ultra" onclick="pickP('ultra')"><div class="opt__r"></div><div><div class="opt__n">Koltz Ultra</div><div class="opt__d">200 Go 5G · Discord Nitro · 40 Go EU</div></div><div class="opt__p">14,99€<small>/mois</small></div></div>
-              <div class="opt" data-p="infinity" onclick="pickP('infinity')"><div class="opt__r"></div><div><div class="opt__n">Koltz Infinity</div><div class="opt__d">300 Go · 75 pays · Netflix ou Spotify</div></div><div class="opt__p">19,99€<small>/mois</small></div></div>
+            <div class="co-box__h" id="co-plan-h">Quel forfait t'intéresse ?</div>
+            <div class="co-box__b" role="radiogroup" aria-labelledby="co-plan-h">
+              <div class="opt on" role="radio" aria-checked="true" data-p="max" onclick="pickP('max')"><div class="opt__r"></div><div><div class="opt__n">Koltz Max ⭐</div><div class="opt__d">100 Go 5G · Appels illimités · 20 Go EU</div></div><div class="opt__p">11,99€<small>/mois</small></div></div>
+              <div class="opt" role="radio" aria-checked="false" data-p="mini" onclick="pickP('mini')"><div class="opt__r"></div><div><div class="opt__n">Koltz Mini</div><div class="opt__d">30 Go 5G · Appels illimités · 5 Go EU</div></div><div class="opt__p">6,99€<small>/mois</small></div></div>
+              <div class="opt" role="radio" aria-checked="false" data-p="ultra" onclick="pickP('ultra')"><div class="opt__r"></div><div><div class="opt__n">Koltz Ultra</div><div class="opt__d">200 Go 5G · Discord Nitro · 40 Go EU</div></div><div class="opt__p">14,99€<small>/mois</small></div></div>
+              <div class="opt" role="radio" aria-checked="false" data-p="infinity" onclick="pickP('infinity')"><div class="opt__r"></div><div><div class="opt__n">Koltz Infinity</div><div class="opt__d">300 Go · 75 pays · Netflix ou Spotify</div></div><div class="opt__p">19,99€<small>/mois</small></div></div>
             </div>
           </div>
           <p class="co-note">Koltz n'est pas encore disponible. Ta pré-inscription est gratuite et sans engagement : on te prévient au lancement.</p>
@@ -1227,7 +1233,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <div class="order-card">
           <div class="order-card__plan" id="oc-plan">Koltz Max</div>
           <div class="order-card__price" id="oc-price">11,99€/mois</div>
-          <span class="order-card__edit" onclick="coGo(1)">Modifier</span>
+          <button type="button" class="order-card__edit" onclick="coGo(1)">Modifier</button>
           <div class="order-lines">
             <div class="order-line"><span>Paiement aujourd'hui</span><span class="v" style="color:var(--green)">0€</span></div>
             <div class="order-line"><span>Engagement</span><span class="v">Aucun</span></div>
@@ -1319,15 +1325,17 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
   </div>
 </div>
 
+</main>
+
 <!-- MODAL LÉGALE -->
-<div class="lmodal" id="lmodal" role="dialog" aria-modal="true">
+<div class="lmodal" id="lmodal" role="dialog" aria-modal="true" aria-labelledby="lm-title">
   <div class="lmodal__box">
     <div class="lmodal__head"><span class="lmodal__title" id="lm-title"></span><button class="lmodal__x" onclick="legalClose()" aria-label="Fermer">✕</button></div>
     <div class="lmodal__body" id="lm-body"></div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 
 <script>
@@ -1412,23 +1420,28 @@ function updateBolts(){}
 let cur='home';
 const PAGES=['home','forfaits','parrainage','checkout','profil'];
 function nav(p,skipHash){if(!PAGES.includes(p))p='home';document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById('v-'+p);if(v)v.classList.add('on');document.querySelectorAll('.nav__link[data-nav]').forEach(i=>i.classList.toggle('on',i.dataset.nav===p));scrollTo({top:0,behavior:'smooth'});cur=p;if(!skipHash){try{history.replaceState(null,'','#'+p);}catch(e){}}if(p==='home'){lit();rev();}if(p==='profil')prof();document.body.style.overflow='';}
+// Liens internes <a href="#page"> : navigation SPA (et fermeture du menu mobile)
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const p=a.getAttribute('href').slice(1);if(!PAGES.includes(p))return;e.preventDefault();nav(p);const mm=document.getElementById('mobmenu');if(mm&&mm.classList.contains('open'))mob();});
+// Éléments cliquables non natifs (cartes, options) : focusables + Entrée/Espace
+function a11yClickables(){document.querySelectorAll('[onclick]:not(a):not(button):not(input):not(select):not(label):not(.plan-card)').forEach(el=>{if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');if(!el.hasAttribute('role'))el.setAttribute('role','button');if(el.dataset.kb)return;el.dataset.kb=1;el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});});}
+addEventListener('DOMContentLoaded',a11yClickables);
 window.addEventListener('hashchange',()=>{const p=location.hash.replace('#','');if(p&&PAGES.includes(p))nav(p,true);});
 function openCo(plan){nav('checkout');coGo(1);if(plan)pickP(plan);}
 addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>40),{passive:true});
 addEventListener('resize',()=>{if(innerWidth>860){document.getElementById('mobmenu').classList.remove('open');document.getElementById('burger').classList.remove('x');document.body.style.overflow='';}});
 function mob(){const b=document.getElementById('burger'),m=document.getElementById('mobmenu');b.classList.toggle('x');m.classList.toggle('open');const o=m.classList.contains('open');b.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';}
 function lit(){requestAnimationFrame(()=>document.getElementById('hero').classList.add('lit'));}
-function faq(el){const q=el.closest('.qa'),o=q.classList.contains('open');document.querySelectorAll('.qa.open').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}
+function faq(el){const q=el.closest('.qa'),o=q.classList.contains('open');document.querySelectorAll('.qa.open').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.qa__q').forEach(x=>x.setAttribute('aria-expanded','false'));if(!o){q.classList.add('open');el.setAttribute('aria-expanded','true');}}
 const P={mini:{n:'Koltz Mini',p:'6,99 €'},max:{n:'Koltz Max',p:'11,99 €'},ultra:{n:'Koltz Ultra',p:'14,99 €'},infinity:{n:'Koltz Infinity',p:'19,99 €'}};
 let st=1,pl='max';
 function setT(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
 function showEl(id,on,d){const e=document.getElementById(id);if(e)e.style.display=on?(d||'block'):'none';}
-function pickP(p){if(!P[p])return;pl=p;document.querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.dataset.p===p));su();}
+function pickP(p){if(!P[p])return;pl=p;document.querySelectorAll('.opt').forEach(o=>{const on=o.dataset.p===p;o.classList.toggle('on',on);o.setAttribute('aria-checked',on);});su();}
 function su(){const x=P[pl]||P.max;setT('oc-plan',x.n);setT('oc-price',x.p+'/mois');setT('oc-total',x.p);}
 function coGo(n){st=n;document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+n).classList.add('on');document.querySelectorAll('.co-st').forEach(s=>{const sn=+s.dataset.s;s.classList.toggle('on',sn===n);s.classList.toggle('done',sn<n);});showEl('co-bk',n===2,'inline-flex');showEl('co-nav',n!==3,'flex');setT('co-nx',n===2?'Me pré-inscrire ⚡':'Continuer →');const er=document.getElementById('co-err');if(er)er.hidden=true;}
 function coN(){if(st===1){su();coGo(2);}else if(st===2){if(vco())proc();}}
 function coP(){if(st>1)coGo(st-1);}
-function vco(){const C=[['f-pre',v=>v.trim()],['f-em',v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())]];let ok=1;C.forEach(([id,t])=>{const e=document.getElementById(id);if(!e)return;const v=!!t(e.value);e.classList.toggle('bad',!v);if(!v&&ok){e.focus();ok=0;}e.addEventListener('input',()=>e.classList.remove('bad'),{once:1});});return ok;}
+function vco(){const C=[['f-pre',v=>v.trim()],['f-em',v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())]];let ok=1;C.forEach(([id,t])=>{const e=document.getElementById(id);if(!e)return;const v=!!t(e.value);e.classList.toggle('bad',!v);e.setAttribute('aria-invalid',!v);if(!v&&ok){e.focus();ok=0;}e.addEventListener('input',()=>e.classList.remove('bad'),{once:1});});return ok;}
 let busy=false;
 async function proc(){
   if(busy)return;busy=true;
@@ -1481,8 +1494,9 @@ const LEGAL={
  privacy:{t:'Politique de confidentialité',b:'<h4>Données collectées</h4><p>Identité, coordonnées, données de facturation et de consommation, strictement nécessaires à la fourniture du service.</p><h4>Utilisation</h4><p>Gestion du compte, facturation, support, obligations légales (conservation des données de connexion).</p><h4>Vos droits</h4><p>Accès, rectification, suppression, portabilité — via privacy@koltz.fr. Réclamation possible auprès de la CNIL.</p><h4>Conservation</h4><p>Données supprimées ou anonymisées à la clôture du compte, hors obligations légales.</p>'},
  cookies:{t:'Cookies',b:'<h4>Cookies utilisés</h4><p>Ce site utilise uniquement des cookies techniques nécessaires au fonctionnement (session, préférences). Aucun cookie publicitaire ni traceur tiers.</p><h4>Gestion</h4><p>Vous pouvez configurer votre navigateur pour bloquer les cookies ; certaines fonctionnalités peuvent être affectées.</p>'}
 };
-function legal(k){const d=LEGAL[k];if(!d)return;document.getElementById('lm-title').textContent=d.t;document.getElementById('lm-body').innerHTML=d.b;document.getElementById('lmodal').classList.add('open');document.body.style.overflow='hidden';}
-function legalClose(){document.getElementById('lmodal').classList.remove('open');document.body.style.overflow='';}
+let lmPrev=null;
+function legal(k){const d=LEGAL[k];if(!d)return;lmPrev=document.activeElement;document.getElementById('lm-title').textContent=d.t;document.getElementById('lm-body').innerHTML=d.b;document.getElementById('lmodal').classList.add('open');document.body.style.overflow='hidden';const x=document.querySelector('.lmodal__x');if(x)x.focus();}
+function legalClose(){const m=document.getElementById('lmodal');const was=m.classList.contains('open');m.classList.remove('open');document.body.style.overflow='';if(was&&lmPrev&&lmPrev.focus){lmPrev.focus();}lmPrev=null;}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){legalClose();const mm=document.getElementById('mobmenu');if(mm.classList.contains('open'))mob();}});
 document.getElementById('lmodal').addEventListener('click',e=>{if(e.target.id==='lmodal')legalClose();});
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
