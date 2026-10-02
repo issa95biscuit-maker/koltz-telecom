@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>KOLTZ — La 5G sans limites</title>
-<meta name="description" content="Forfait mobile 5G sans engagement dès 6,99€/mois. eSIM en 90 secondes, zéro engagement."/>
+<meta name="description" content="KOLTZ, l'opérateur mobile 5G sans engagement, arrive bientôt. Forfaits dès 6,99€/mois : pré-inscris-toi gratuitement, on te prévient au lancement."/>
 <meta name="theme-color" content="#FF5C1A"/>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='8' y='8' width='16' height='16' rx='2' fill='%23FF5C1A' transform='rotate(45 16 16)'/%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -604,6 +604,10 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 .co-chk{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--txt2);padding:12px 0;border-top:1px solid var(--bd);margin-top:12px;cursor:pointer;}
 .co-chk input{width:15px;height:15px;accent-color:var(--lime);}
 .co-hint{font-family:var(--mono);font-size:11px;color:var(--green);margin-top:8px;letter-spacing:.04em;}
+.co-note{font-size:13px;color:var(--txt2);line-height:1.6;margin-top:4px;}
+.co-err{border:1.5px solid #EF4444;background:rgba(239,68,68,.08);color:#FCA5A5;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.5;}
+.co-err[hidden]{display:none;}
+.plans-launch{margin-top:18px;font-size:14px;color:var(--txt2);line-height:1.6;max-width:70ch;}
 .fld{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
 .fld:last-child{margin-bottom:0;}
 .fld label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt2);}
@@ -749,8 +753,6 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 
 <!-- Supabase JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- Stripe JS -->
-<script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -802,11 +804,11 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
       </h1>
       <p class="hero__sub rv">
         L'opérateur mobile pour ceux qui ne ralentissent jamais.<br/>
-        eSIM en 90 secondes, zéro engagement, zéro arnaque.
+        Lancement bientôt : eSIM, zéro engagement, zéro arnaque.
       </p>
       <div class="hero__btns rv">
         <button class="btn-orange" onclick="document.getElementById('plans-anchor').scrollIntoView({behavior:'smooth'})">Voir les forfaits ↓</button>
-        <button class="btn-ghost" onclick="nav('parrainage')">Parrainer →</button>
+        <button class="btn-ghost" onclick="openCo()">Me pré-inscrire →</button>
       </div>
     </div>
   </section>
@@ -898,6 +900,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <span>Recharge en espèces</span>
         <span>Résiliation en 1 clic</span>
       </div>
+      <p class="plans-launch rv">Koltz n'est pas encore disponible. Choisis ton forfait pour te pré-inscrire gratuitement : on te prévient au lancement, sans paiement ni engagement.</p>
     </div>
   </section>
 
@@ -907,7 +910,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
       <span class="mq__it">Pas de blabla <span class="s"></span></span>
       <span class="mq__it dim">5G partout</span>
       <span class="mq__it">Sans engagement <span class="s"></span></span>
-      <span class="mq__it dim">eSIM en 90 sec</span>
+      <span class="mq__it dim">eSIM au lancement</span>
       <span class="mq__it">Dès 6,99€ <span class="s"></span></span>
       <span class="mq__it dim">#VibeSansLimite</span>
       <span class="mq__it">Support 8 sec <span class="s"></span></span>
@@ -915,7 +918,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
       <span class="mq__it">Pas de blabla <span class="s"></span></span>
       <span class="mq__it dim">5G partout</span>
       <span class="mq__it">Sans engagement <span class="s"></span></span>
-      <span class="mq__it dim">eSIM en 90 sec</span>
+      <span class="mq__it dim">eSIM au lancement</span>
       <span class="mq__it">Dès 6,99€ <span class="s"></span></span>
       <span class="mq__it dim">#VibeSansLimite</span>
       <span class="mq__it">Support 8 sec <span class="s"></span></span>
@@ -932,8 +935,8 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
           <div class="proof-item__l">Sur la waitlist<br/>et ça grandit</div>
         </div>
         <div class="proof-item">
-          <div class="proof-item__n">90s</div>
-          <div class="proof-item__l">Pour activer<br/>ton eSIM</div>
+          <div class="proof-item__n">0€</div>
+          <div class="proof-item__l">À payer pour<br/>te pré-inscrire</div>
         </div>
         <div class="proof-item">
           <div class="proof-item__n">4,8★</div>
@@ -950,7 +953,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
         <div>
           <div class="ref-teaser__eyebrow">Programme parrainage</div>
           <div class="ref-teaser__h">Parraine.<br/>Gagne. <span class="bl">Répète.</span></div>
-          <p class="ref-teaser__p">15€ de réduction par filleul actif. Le 1er à 100 parrainages gagne 1 000€. Sans limite.</p>
+          <p class="ref-teaser__p">Au lancement : 15€ de réduction par filleul actif. Le 1er à 100 parrainages gagne 1 000€. Sans limite.</p>
         </div>
         <button class="btn-orange" onclick="nav('parrainage')">Voir →</button>
       </div>
@@ -962,10 +965,11 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
     <div class="wrap">
       <h2 class="faq-sec__title rv">On répond<br/>à <span class="bl">tout.</span></h2>
       <div class="rv">
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Comment activer mon eSIM ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Après commande, tu reçois un QR code par email en moins de 2 minutes. Scanne-le dans Réglages → Données mobiles. Actif en 90 secondes.</p></div></div>
+        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Quand Koltz sera disponible ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>On finalise notre lancement. Pré-inscris-toi gratuitement : on te prévient par email dès l'ouverture, sans engagement ni paiement.</p></div></div>
+        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Comment activer mon eSIM ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Au lancement, tu recevras ton QR code par email après ta commande. Il suffira de le scanner dans Réglages → Données mobiles.</p></div></div>
         <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Mon téléphone est-il compatible ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>iPhone 12+, Samsung S20+, Pixel 4+ et la majorité des flagships depuis 2020. SIM physique disponible si nécessaire.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Puis-je garder mon numéro ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Portabilité gratuite en 24h. Entre ton RIO (appelle le 3179) lors de la commande. On s'occupe du reste.</p></div></div>
-        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Comment recharger en espèces ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Via Transcash dans 30 000 points de vente (tabacs, taxiphones, épiceries). Tu paies cash, tu reçois un code, tu crédites ton compte en 30 secondes.</p></div></div>
+        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Puis-je garder mon numéro ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Oui, la portabilité sera gratuite au lancement. Tu entreras ton RIO (appelle le 3179) au moment de la commande, on s'occupera du reste.</p></div></div>
+        <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Comment recharger en espèces ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>C'est prévu au lancement, via des points de vente partenaires (tabacs, taxiphones, épiceries) : tu paies cash, tu reçois un code, tu crédites ton compte.</p></div></div>
         <div class="qa"><div class="qa__q" onclick="faq(this)"><span>Le prix peut-il augmenter ?</span><span class="qa__ic">+</span></div><div class="qa__a"><p>Non. Ton prix est garanti. Si on change nos tarifs, on te prévient 30 jours avant avec possibilité de partir sans frais.</p></div></div>
       </div>
     </div>
@@ -975,10 +979,10 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
   <section class="band">
     <div class="band__glow"></div>
     <div class="wrap band__inner">
-      <span class="band__eyebrow">Prêt ?</span>
-      <h2 class="band__h rv">On t'attend.<br/><span class="bl">Toi ?</span></h2>
-      <p class="band__sub">eSIM instantanée · Sans engagement · Prix garanti</p>
-      <button class="btn-orange" onclick="nav('forfaits')" style="margin:0 auto">Choisir mon forfait ⚡</button>
+      <span class="band__eyebrow">Bientôt</span>
+      <h2 class="band__h rv">On arrive.<br/><span class="bl">Et toi ?</span></h2>
+      <p class="band__sub">Pré-inscription gratuite · Sans engagement · Aucun paiement aujourd'hui</p>
+      <button class="btn-orange" onclick="openCo()" style="margin:0 auto">Me pré-inscrire ⚡</button>
     </div>
   </section>
 
@@ -988,7 +992,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
       <div class="foot__top">
         <div class="foot__brand">
           <div class="foot__brand-logo"><span class="foot__brand-gem"></span>KOLTZ</div>
-          <p class="foot__brand-desc">Opérateur mobile 5G nouvelle génération. Made in France.</p>
+          <p class="foot__brand-desc">Opérateur mobile 5G nouvelle génération. Lancement bientôt. Made in France.</p>
         </div>
         <div class="foot__col">
           <h5>Produit</h5>
@@ -1023,16 +1027,16 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 <div class="view" id="v-forfaits">
   <div class="wrap">
     <div class="page-head">
-      <span class="page-head__eyebrow">Catalogue 2026</span>
+      <span class="page-head__eyebrow">Catalogue de lancement</span>
       <h1 class="page-head__h">Simple.<br/><span class="bl">Transparent.</span><br/>Ton prix.</h1>
-      <p class="page-head__p">TVA incluse. Prix garanti. Résiliation en un clic. Zéro frais caché.</p>
+      <p class="page-head__p">Prix prévus au lancement, TVA incluse. Prix garanti. Résiliation en un clic. Zéro frais caché. Pré-inscription gratuite, sans paiement.</p>
     </div>
     <div class="plans-grid" style="margin-bottom:clamp(32px,5vh,56px)">
       <div class="plan-card" onclick="openCo('mini')">
         <div class="plan-idx">001 / MINI</div>
         <div class="plan-data">30<span class="unit"> Go</span></div>
         <div class="plan-price">6,99€<span class="per"> /mois</span></div>
-        <div class="plan-anchor">Dès aujourd'hui</div>
+        <div class="plan-anchor">Dès le lancement</div>
         <div class="plan-div"></div>
         <ul class="plan-feats">
           <li>30 Go en 5G</li><li>Appels & SMS illimités</li><li>5 Go en Europe</li><li>eSIM instantanée</li><li>Data Boost 2€/10Go</li>
@@ -1100,7 +1104,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 <div class="view" id="v-parrainage">
   <div class="wrap ref-page">
     <h1 class="ref-hero-h">Parraine.<br/>Gagne. <span class="bl">Répète.</span></h1>
-    <p class="ref-hero-p">Chaque ami qui reste 3 mois = 500 pts + 15€ de réduction. Le 1er à 100 parrainages gagne 1 000€. Aucune limite.</p>
+    <p class="ref-hero-p">Au lancement, chaque ami qui reste 3 mois = 500 pts + 15€ de réduction. Le 1er à 100 parrainages gagne 1 000€. Aucune limite.</p>
     <div class="code-box">
       <div class="code-box__lbl">Ton code personnel</div>
       <div class="code-box__code">KOLTZ-2847</div>
@@ -1124,7 +1128,7 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
       </div>
       <div class="ref-card">
         <div class="ref-card__head">Comment ça marche</div>
-        <div class="step"><div class="step__n">1</div><div><div class="step__h">Tu partages</div><div class="step__p">Ton ami commande avec ton code. Son 1er mois est offert.</div></div></div>
+        <div class="step"><div class="step__n">1</div><div><div class="step__h">Tu partages</div><div class="step__p">Au lancement, ton ami commande avec ton code. Son 1er mois est offert.</div></div></div>
         <div class="step"><div class="step__n">2</div><div><div class="step__h">Il reste 3 mois</div><div class="step__p">Après 3 mois actifs, ta récompense est créditée.</div></div></div>
         <div class="step"><div class="step__n">3</div><div><div class="step__h">Tu gagnes</div><div class="step__p">500 pts + 15€ de réduction. À l'infini.</div></div></div>
         <div class="chips">
@@ -1137,25 +1141,24 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
   </div>
 </div>
 
-<!-- ════════ CHECKOUT ════════ -->
+<!-- ════════ PRÉ-INSCRIPTION (ex-checkout) ════════ -->
 <div class="view" id="v-checkout">
   <div class="wrap co-page">
     <div class="co-head">
-      <h1>Activer ma <span class="bl">SIM.</span></h1>
-      <p>Activation en 90 secondes · Paiement sécurisé · Résiliation libre</p>
+      <h1>Me <span class="bl">pré-inscrire.</span></h1>
+      <p>Gratuit · Aucun paiement · On te prévient au lancement</p>
     </div>
     <div class="co-steps">
       <div class="co-st on" data-s="1"><div class="co-st__no">01</div><div class="co-st__l">Forfait</div></div>
       <div class="co-st" data-s="2"><div class="co-st__no">02</div><div class="co-st__l">Infos</div></div>
-      <div class="co-st" data-s="3"><div class="co-st__no">03</div><div class="co-st__l">Paiement</div></div>
-      <div class="co-st" data-s="4"><div class="co-st__no">04</div><div class="co-st__l">Confirmé</div></div>
+      <div class="co-st" data-s="3"><div class="co-st__no">03</div><div class="co-st__l">Confirmé</div></div>
     </div>
     <div class="co-layout">
       <div>
         <!-- Step 1 -->
         <div class="scr on" id="s-1">
           <div class="co-box">
-            <div class="co-box__h">Choisis ton forfait</div>
+            <div class="co-box__h">Quel forfait t'intéresse ?</div>
             <div class="co-box__b">
               <div class="opt on" data-p="max" onclick="pickP('max')"><div class="opt__r"></div><div><div class="opt__n">Koltz Max ⭐</div><div class="opt__d">100 Go 5G · Appels illimités · 20 Go EU</div></div><div class="opt__p">11,99€<small>/mois</small></div></div>
               <div class="opt" data-p="mini" onclick="pickP('mini')"><div class="opt__r"></div><div><div class="opt__n">Koltz Mini</div><div class="opt__d">30 Go 5G · Appels illimités · 5 Go EU</div></div><div class="opt__p">6,99€<small>/mois</small></div></div>
@@ -1163,68 +1166,29 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
               <div class="opt" data-p="infinity" onclick="pickP('infinity')"><div class="opt__r"></div><div><div class="opt__n">Koltz Infinity</div><div class="opt__d">300 Go · 75 pays · Netflix ou Spotify</div></div><div class="opt__p">19,99€<small>/mois</small></div></div>
             </div>
           </div>
-          <div class="co-box">
-            <div class="co-box__h">Type de SIM</div>
-            <div class="co-box__b">
-              <div class="sim-row">
-                <div class="sim-btn on" id="t-esim" onclick="pickS('esim')">eSIM<small>Instantanée · gratuite</small></div>
-                <div class="sim-btn" id="t-phys" onclick="pickS('phys')">Carte physique<small>J+1 · 4,99€ port</small></div>
-              </div>
-              <label class="co-chk"><input type="checkbox" id="porto" onchange="tPorto()"/>Je garde mon numéro (portabilité gratuite)</label>
-              <div id="porto-f" style="display:none;margin-top:12px"><div class="fld"><label>Code RIO (appelle le 3179)</label><input maxlength="12" placeholder="XXXXXXXXXXXX"/></div></div>
-            </div>
-          </div>
-          <div class="co-box">
-            <div class="co-box__h">Code parrain (optionnel)</div>
-            <div class="co-box__b">
-              <div class="fld"><label>Code parrain</label><input id="parr" placeholder="KOLTZ-XXXX" oninput="this.value=this.value.toUpperCase();parrCheck(this.value)"/></div>
-              <div class="co-hint">⚡ 1er mois offert avec un code valide</div>
-            </div>
-          </div>
+          <p class="co-note">Koltz n'est pas encore disponible. Ta pré-inscription est gratuite et sans engagement : on te prévient au lancement.</p>
         </div>
         <!-- Step 2 -->
         <div class="scr" id="s-2">
           <div class="co-box">
-            <div class="co-box__h">Tes coordonnées</div>
+            <div class="co-box__h">Où te prévenir ?</div>
             <div class="co-box__b">
-              <div class="r2"><div class="fld"><label>Prénom *</label><input id="f-pre" placeholder="Léna" autocomplete="given-name"/></div><div class="fld"><label>Nom *</label><input id="f-nom" placeholder="Dupont" autocomplete="family-name"/></div></div>
-              <div class="fld"><label>Email *</label><input id="f-em" type="email" placeholder="lena@exemple.fr" autocomplete="email"/></div>
-              <div class="r2"><div class="fld"><label>Téléphone</label><input id="f-tel" type="tel" placeholder="06 12 34 56 78" maxlength="14" oninput="ftel(this)" autocomplete="tel"/></div><div class="fld"><label>Date de naissance *</label><input id="f-dob" type="date" autocomplete="bday"/></div></div>
-              <div class="fld"><label>Adresse *</label><input id="f-adr" placeholder="12 rue de la Paix" autocomplete="street-address"/></div>
-              <div class="r2"><div class="fld"><label>Code postal *</label><input id="f-cp" maxlength="5" placeholder="75011" autocomplete="postal-code"/></div><div class="fld"><label>Ville *</label><input id="f-vil" placeholder="Paris" autocomplete="address-level2"/></div></div>
-              <div class="fld"><label>Pièce d'identité *</label><select id="f-id"><option value="">Choisir…</option><option>Carte nationale d'identité</option><option>Passeport</option><option>Titre de séjour</option></select></div>
+              <div class="fld"><label for="f-pre">Prénom *</label><input id="f-pre" placeholder="Léna" autocomplete="given-name" aria-required="true"/></div>
+              <div class="fld"><label for="f-em">Email *</label><input id="f-em" type="email" placeholder="lena@exemple.fr" autocomplete="email" aria-required="true"/></div>
+              <p class="co-note">On t'écrit uniquement pour te prévenir du lancement de Koltz.</p>
             </div>
           </div>
+          <div class="co-err" id="co-err" role="alert" hidden></div>
         </div>
         <!-- Step 3 -->
         <div class="scr" id="s-3">
-          <div class="co-box">
-            <div class="co-box__h">Paiement sécurisé</div>
-            <div class="co-box__b">
-              <div class="pay-tabs">
-                <div class="pay-tab on" id="pb-card" onclick="pickPay('card')"><span class="pt-ic">💳</span>Carte</div>
-                <div class="pay-tab" id="pb-pp" onclick="pickPay('pp')"><span class="pt-ic">🅿</span>PayPal</div>
-                <div class="pay-tab" id="pb-ap" onclick="pickPay('ap')"><span class="pt-ic"></span>Apple Pay</div>
-              </div>
-              <div id="card-section">
-                <div class="fld"><label>Numéro de carte</label><input id="cc-n" maxlength="19" placeholder="1234 5678 9012 3456" oninput="fc(this)"/></div>
-                <div class="r3"><div class="fld"><label>Titulaire</label><input placeholder="LÉNA DUPONT" autocomplete="cc-name"/></div><div class="fld"><label>Expiration</label><input maxlength="5" placeholder="MM/AA" oninput="fe(this)"/></div><div class="fld"><label>CVV</label><input type="password" maxlength="4" placeholder="•••"/></div></div>
-              </div>
-              <div class="alt-block" id="alt-section" style="display:none">Redirection vers <span id="alt-name">PayPal</span> →</div>
-              <div class="secure-row">🔒 SSL 256 bits · Données non stockées · Stripe</div>
-            </div>
-          </div>
-        </div>
-        <!-- Step 4 -->
-        <div class="scr" id="s-4">
           <div class="done">
             <div class="done__gem"><span>⚡</span></div>
-            <div class="done__h">C'est <span class="bl">parti.</span></div>
-            <p class="done__sub" id="d-msg">Ton forfait est activé. Ton eSIM arrive sur <b id="d-em"></b> dans 90 secondes.</p>
-            <div class="done__ref">Référence : <b id="d-ref">KLZ-XXXXXX</b></div>
+            <div class="done__h">Tu es sur <span class="bl">la liste.</span></div>
+            <p class="done__sub" id="d-msg">On te prévient au lancement sur <b id="d-em"></b>. Forfait choisi : <b id="d-plan"></b>. Aucun paiement n'a été effectué.</p>
             <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
-              <button class="btn-orange" onclick="nav('profil')">Mon espace Koltz ⚡</button>
-              <button onclick="nav('home')" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);cursor:pointer;padding:8px">Retour à l'accueil</button>
+              <button class="btn-orange" onclick="nav('home')">Retour à l'accueil</button>
+              <button onclick="nav('forfaits')" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);cursor:pointer;padding:8px">Revoir les forfaits</button>
             </div>
           </div>
         </div>
@@ -1241,20 +1205,17 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
           <div class="order-card__price" id="oc-price">11,99€/mois</div>
           <span class="order-card__edit" onclick="coGo(1)">Modifier</span>
           <div class="order-lines">
-            <div class="order-line"><span>Activation</span><span class="v" style="color:var(--green)">Gratuit</span></div>
-            <div class="order-line"><span>SIM</span><span class="v" id="oc-sim">eSIM</span></div>
-            <div class="order-line" id="oc-port-row" style="display:none"><span>Port carte</span><span class="v">4,99€</span></div>
-            <div class="order-line" id="oc-parr-row" style="display:none"><span>Code parrain</span><span class="v" style="color:var(--green)">1er mois offert</span></div>
+            <div class="order-line"><span>Paiement aujourd'hui</span><span class="v" style="color:var(--green)">0€</span></div>
+            <div class="order-line"><span>Engagement</span><span class="v">Aucun</span></div>
           </div>
-          <div class="order-total"><span>Total/mois</span><span class="v" id="oc-total">11,99€</span></div>
-          <div class="order-note">TVA incluse · Prix garanti</div>
+          <div class="order-total"><span>Prix/mois au lancement</span><span class="v" id="oc-total">11,99€</span></div>
+          <div class="order-note">TVA incluse · Prix prévus au lancement</div>
         </div>
         <div class="trust-card">
-          <h4>Pourquoi Koltz ?</h4>
+          <h4>Pourquoi se pré-inscrire ?</h4>
+          <div class="trust-item">🔔 Prévenu·e en premier au lancement</div>
+          <div class="trust-item">💸 Aucun paiement aujourd'hui</div>
           <div class="trust-item">⚡ Sans engagement</div>
-          <div class="trust-item">📲 eSIM en 90 secondes</div>
-          <div class="trust-item">🔒 Paiement sécurisé</div>
-          <div class="trust-item">💬 Support IA 8 sec</div>
           <div class="trust-item">💰 Prix garanti à vie</div>
         </div>
       </div>
@@ -1345,13 +1306,11 @@ footer{border-top:1px solid var(--bd);background:rgba(255,255,255,.01);}
 
 
 <script>
-// ══ SUPABASE + STRIPE INIT ══
+// ══ SUPABASE INIT ══
 const SUPA_URL  = "https://qzjqmksizkzkhvgrejvx.supabase.co";
 const SUPA_KEY  = "sb_publishable_dAR0Oogw_2ja2R_fQTJDCg_D9K3k3cZ";
-const STRIPE_PK = "pk_live_51TAFfhAA7S3oer6uV60O4tuDO7vuChktzlbfmW0irdRX2c54WJkh3z69XjlHHbtp2lgmTozw30oURekgYywuGSk6004NyyXaHU";
 
-const supa   = window.supabase.createClient(SUPA_URL, SUPA_KEY);
-const stripe = Stripe(STRIPE_PK);
+const supa   = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA_URL, SUPA_KEY) : null;
 
 // ── USER SESSION ──
 let koltzUser = null;
@@ -1371,28 +1330,33 @@ function updateNavUser() {
 
 // ── WAITLIST ──
 async function saveWaitlist(email, source) {
-  if (!email || !email.includes('@')) return false;
+  if (!supa || !email || !email.includes('@')) return false;
   try {
-    const { error } = await supa.from('waitlist').upsert([{ email, source: source||'site' }], {onConflict:'email'});
+    // ignoreDuplicates : ON CONFLICT DO NOTHING (une ré-inscription n'écrase rien)
+    const { error } = await supa.from('waitlist').upsert([{ email, source: source||'site' }], {onConflict:'email', ignoreDuplicates:true});
+    if (error) console.warn('waitlist:', error.message);
     return !error;
-  } catch(e) { return false; }
+  } catch(e) { console.warn('waitlist:', e && e.message); return false; }
 }
 
 // ── ABONNÉS ──
 async function saveAbonne(data) {
+  if (!supa) return false;
   try {
-    const { data:res, error } = await supa.from('abonnes').insert([{
+    // pas de .select() : l'insert fonctionne avec une RLS « insert only » pour anon
+    const { error } = await supa.from('abonnes').insert([{
       email: data.email, nom: data.nom, prenom: data.prenom,
       forfait: data.forfait, statut: 'pending',
       code_parrain: data.codeParrain||null, points: 0
-    }]).select().single();
+    }]);
     if(error) throw error;
-    return res;
-  } catch(e) { return null; }
+    return true;
+  } catch(e) { console.warn('abonnes:', e && e.message); return false; }
 }
 
 // ── COMPTEUR WAITLIST ──
 async function loadWaitlistCount() {
+  if (!supa) return;
   try {
     const { count } = await supa.from('waitlist').select('*', {count:'exact',head:true});
     if (count && count > 0) {
@@ -1428,46 +1392,39 @@ function mob(){const b=document.getElementById('burger'),m=document.getElementBy
 function lit(){requestAnimationFrame(()=>document.getElementById('hero').classList.add('lit'));}
 function faq(el){const q=el.closest('.qa'),o=q.classList.contains('open');document.querySelectorAll('.qa.open').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}
 const P={mini:{n:'Koltz Mini',p:'6,99 €'},max:{n:'Koltz Max',p:'11,99 €'},ultra:{n:'Koltz Ultra',p:'14,99 €'},infinity:{n:'Koltz Infinity',p:'19,99 €'}};
-let st=1,pl='max',sm='esim',py='card';
+let st=1,pl='max';
 function setT(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
 function showEl(id,on,d){const e=document.getElementById(id);if(e)e.style.display=on?(d||'block'):'none';}
 function pickP(p){if(!P[p])return;pl=p;document.querySelectorAll('.opt').forEach(o=>o.classList.toggle('on',o.dataset.p===p));su();}
-function pickS(s){sm=s;document.getElementById('t-esim').classList.toggle('on',s==='esim');document.getElementById('t-phys').classList.toggle('on',s==='phys');setT('oc-sim',s==='esim'?'eSIM':'Carte physique');showEl('oc-port-row',s==='phys','flex');}
-function tPorto(){document.getElementById('porto-f').style.display=document.getElementById('porto').checked?'block':'none';}
-function pickPay(m){py=m;['card','pp','ap'].forEach(x=>document.getElementById('pb-'+x).classList.toggle('on',x===m));showEl('card-section',m==='card');showEl('alt-section',m!=='card');if(m!=='card')setT('alt-name',m==='pp'?'PayPal':'Apple Pay');}
-function parrCheck(v){showEl('oc-parr-row',v.trim().length>=6,'flex');}
 function su(){const x=P[pl]||P.max;setT('oc-plan',x.n);setT('oc-price',x.p+'/mois');setT('oc-total',x.p);}
-function coGo(n){st=n;document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+n).classList.add('on');document.querySelectorAll('.co-st').forEach(s=>{const sn=+s.dataset.s;s.classList.toggle('on',sn===n);s.classList.toggle('done',sn<n);});showEl('co-bk',n>1&&n<4,'inline-flex');showEl('co-nav',n!==4,'flex');setT('co-nx',n===3?'Confirmer ⚡':'Continuer →');}
-function coN(){if(st===1){su();coGo(2);}else if(st===2){if(vco())coGo(3);}else if(st===3){proc();}}
+function coGo(n){st=n;document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+n).classList.add('on');document.querySelectorAll('.co-st').forEach(s=>{const sn=+s.dataset.s;s.classList.toggle('on',sn===n);s.classList.toggle('done',sn<n);});showEl('co-bk',n===2,'inline-flex');showEl('co-nav',n!==3,'flex');setT('co-nx',n===2?'Me pré-inscrire ⚡':'Continuer →');const er=document.getElementById('co-err');if(er)er.hidden=true;}
+function coN(){if(st===1){su();coGo(2);}else if(st===2){if(vco())proc();}}
 function coP(){if(st>1)coGo(st-1);}
-function vco(){const C=[['f-pre',v=>v.trim()],['f-nom',v=>v.trim()],['f-em',v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)],['f-dob',v=>!!v],['f-adr',v=>v.trim().length>3],['f-cp',v=>/^\d{5}$/.test(v)],['f-vil',v=>v.trim()]];let ok=1;C.forEach(([id,t])=>{const e=document.getElementById(id);if(!e)return;const v=!!t(e.value);e.classList.toggle('bad',!v);if(!v&&ok){e.focus();ok=0;}e.addEventListener('input',()=>e.classList.remove('bad'),{once:1});});return ok;}
+function vco(){const C=[['f-pre',v=>v.trim()],['f-em',v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())]];let ok=1;C.forEach(([id,t])=>{const e=document.getElementById(id);if(!e)return;const v=!!t(e.value);e.classList.toggle('bad',!v);if(!v&&ok){e.focus();ok=0;}e.addEventListener('input',()=>e.classList.remove('bad'),{once:1});});return ok;}
+let busy=false;
 async function proc(){
-  const b=document.getElementById('co-nx');
-  b.innerHTML='<span class="spin"></span>';b.disabled=1;
-  const email  = (document.getElementById('f-em')||{}).value||'';
-  const prenom = (document.getElementById('f-pre')||{}).value||'';
-  const nom    = (document.getElementById('f-nom')||{}).value||'';
-  try {
-    // 1. Sauvegarder dans Supabase
-    const abonne = await saveAbonne({email,prenom,nom,forfait:pl,codeParrain:(document.getElementById('parr')||{}).value||''});
-    // 2. Sauvegarder aussi dans la waitlist
-    await saveWaitlist(email,'checkout');
-    // 3. Mettre à jour le user local
-    if(abonne) setUser({id:abonne.id,email,prenom,nom,forfait:pl});
-  } catch(e){ console.error('Supabase error:',e); }
-  // 4. Afficher la confirmation
-  setTimeout(()=>{
-    const r='KLZ-'+Math.random().toString(36).slice(2,8).toUpperCase();
-    document.getElementById('d-ref').textContent=r;
-    document.getElementById('d-em').textContent=email||'ton email';
-    const dm=document.getElementById('d-msg');
-    if(sm==='phys'&&dm){dm.innerHTML='Ton forfait <b>'+(P[pl]||{n:pl}).n+'</b> est activé. Ta carte SIM arrive demain chez toi.';}
-    coGo(4);b.innerHTML='Continuer →';b.disabled=0;
-  },2000);
+  if(busy)return;busy=true;
+  const b=document.getElementById('co-nx'),er=document.getElementById('co-err');
+  const email=(document.getElementById('f-em').value||'').trim();
+  const prenom=(document.getElementById('f-pre').value||'').trim();
+  if(er)er.hidden=true;
+  b.innerHTML='<span class="spin"></span>';b.disabled=true;
+  let ok=false;
+  try{
+    // Enregistrement réel : succès seulement si Supabase confirme au moins une écriture
+    const [w,a]=await Promise.all([saveWaitlist(email,'preinscription'),saveAbonne({email,prenom,nom:null,forfait:pl,codeParrain:null})]);
+    ok=!!(w||a);
+  }catch(e){console.warn('pré-inscription:',e&&e.message);}
+  b.disabled=false;busy=false;
+  if(!ok){
+    b.textContent='Réessayer ⚡';
+    if(er){er.textContent="Oups, ta pré-inscription n'a pas pu être enregistrée. Vérifie ta connexion et réessaie, ou écris-nous à contact@koltz.fr.";er.hidden=false;}
+    return;
+  }
+  setUser({email,prenom,forfait:pl});
+  setT('d-em',email);setT('d-plan',(P[pl]||{n:pl}).n);
+  coGo(3);
 }
-function ftel(e){let v=e.value.replace(/\D/g,'').slice(0,10);e.value=v.replace(/(\d{2})(?=\d)/g,'$1 ').trim();}
-function fc(e){let v=e.value.replace(/\D/g,'').slice(0,16);e.value=v.replace(/(.{4})/g,'$1 ').trim();}
-function fe(e){let v=e.value.replace(/\D/g,'').slice(0,4);if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);e.value=v;}
 const CODE='KOLTZ-2847',LINK='https://koltz.fr/?ref=KOLTZ-2847';
 function clip(text){
   if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(text);}
