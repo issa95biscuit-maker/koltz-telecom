@@ -84,13 +84,13 @@ alter table public.abonnes  enable row level security;
 
 drop policy if exists "anon insert waitlist" on public.waitlist;
 create policy "anon insert waitlist" on public.waitlist for insert to anon
-  with check (true);
+  with check (consentement = true and consentement_version is not null);
 drop policy if exists "anon insert abonnes" on public.abonnes;
 create policy "anon insert abonnes" on public.abonnes for insert to anon
-  with check (statut = 'pending' and points = 0 and code_parrain is null and nom is null);
--- Quand la case de consentement sera en ligne (branche feat/legal-draft), durcir avec :
---   ... with check (consentement = true)        -- sur les deux tables
--- (voir le bloc « 6. Consentement obligatoire » en bas, à décommenter à ce moment-là)
+  with check (consentement = true and consentement_version is not null
+              and statut = 'pending' and points = 0 and code_parrain is null and nom is null);
+-- Branche feat/legal-draft : la case de consentement est obligatoire dans le formulaire ET en base.
+-- (Si tu déploies une version du site SANS case à cocher, utilise le bloc 6 bis en bas.)
 
 -- ── 5. Compteur public (optionnel) ────────────────────────────────────────────
 -- Le site fait un « HEAD count » sur waitlist ; sans droit SELECT il échoue et le compteur reste masqué
@@ -102,14 +102,12 @@ create policy "anon insert abonnes" on public.abonnes for insert to anon
 -- grant execute on function public.waitlist_count() to anon;
 -- (puis remplacer loadWaitlistCount() dans assets/js/koltz.js par un appel supa.rpc('waitlist_count'))
 
--- ── 6. Consentement obligatoire (à activer avec la case à cocher) ─────────────
+-- ── 6 bis. Version du site sans case de consentement (feat/squad-rebrand seule) ──
 -- drop policy if exists "anon insert waitlist" on public.waitlist;
--- create policy "anon insert waitlist" on public.waitlist for insert to anon
---   with check (consentement = true and consentement_version is not null);
+-- create policy "anon insert waitlist" on public.waitlist for insert to anon with check (true);
 -- drop policy if exists "anon insert abonnes" on public.abonnes;
 -- create policy "anon insert abonnes" on public.abonnes for insert to anon
---   with check (consentement = true and consentement_version is not null
---               and statut = 'pending' and points = 0 and code_parrain is null and nom is null);
+--   with check (statut = 'pending' and points = 0 and code_parrain is null and nom is null);
 
 -- ── 7. Anti-abus (optionnel) ──────────────────────────────────────────────────
 -- L'email unique empêche déjà les inscriptions en double. Supabase applique aussi ses propres limites
