@@ -5,12 +5,14 @@ Site 100 % statique, sans framework ni build : `index.html` + `assets/`.
 | Fichier | Rôle |
 |---|---|
 | `assets/css/koltz.css` | Tout le style (mobile-first, palette Void/Orange/Volt/Plasma, polices auto-hébergées) |
+| `assets/js/config.js` | **URL + clé publishable Supabase** (2 lignes à changer, voir `supabase/SETUP.md`) |
 | `assets/js/plans.js` | **Source unique des forfaits** (noms, data, prix, Europe) |
 | `assets/js/koltz.js` | Nav mobile, curseur squad, partage, tunnel de pré-inscription (Supabase), modale légale |
 | `assets/fonts/` | Unbounded, Inter, JetBrains Mono (woff2 latin, variables) |
 | `assets/img/` | Wordmark SVG (provisoire), favicon, apple-touch-icon |
 | `vercel.json` | En-têtes de sécurité, CSP stricte **sans `unsafe-inline`** |
-| `supabase/schema-suggestion.sql` | Colonnes squad / code créateur + RLS insert-only (**non appliqué**) |
+| `supabase/schema-suggestion.sql` | Tables, contraintes, privilèges par colonne, RLS insert-only (**non appliqué**, testé sur PostgreSQL 17 local) |
+| `supabase/SETUP.md` | Guide pas à pas pour recréer le projet Supabase |
 
 Règle CSP : aucun `style="…"`, aucun `<style>`, aucun `<script>` inline, aucun `onclick`. Tout passe par les fichiers.
 

@@ -30,6 +30,7 @@ async function newPage(b, vp, opt) {
       if (r.method() === 'HEAD' || r.method() === 'GET') return r.respond({ status: 200, headers: h, body: '[]' });
       const table = u.split('/rest/v1/')[1].split('?')[0];
       posts.push({ table, url: u, prefer: r.headers()['prefer'] || '', body: JSON.parse(r.postData() || 'null') });
+      if (opt.mode === 'dup') return r.respond({ status: 409, headers: h, body: JSON.stringify({ code: '23505', message: 'duplicate key value violates unique constraint' }) });
       if (opt.mode === 'partial' && table === 'abonnes') return r.respond({ status: 401, headers: h, body: JSON.stringify({ message: 'new row violates row-level security policy' }) });
       return r.respond({ status: 201, headers: h, body: '' });
     }
@@ -187,9 +188,9 @@ async function fillJoin(pg, o) {
     await fillJoin(pg, o);
     const w = pg._posts.find(x => x.table === 'waitlist'), a = pg._posts.find(x => x.table === 'abonnes');
     const ab = a && a.body && a.body[0];
-    const okW = w && w.body[0].email === o.email && w.body[0].source === 'preinscription' && /on_conflict=email/.test(w.url) && /ignore-duplicates/.test(w.prefer);
+    const okW = w && w.body[0].email === o.email && w.body[0].source === 'preinscription' && !/on_conflict/.test(w.url);
     const expMode = mode === 'solo' ? null : mode;
-    const okA = ab && ab.email === o.email && ab.prenom === o.prenom && ab.forfait === plan && ab.statut === 'pending' && ab.nom === null && ab.points === 0 && ab.squad_mode === expMode
+    const okA = ab && ab.email === o.email && ab.prenom === o.prenom && ab.forfait === plan && !('statut' in ab) && !('points' in ab) && !('nom' in ab) && ab.squad_mode === expMode
       && (mode === 'creer' ? /^SQD-[A-HJ-NP-Z2-9]{6}$/.test(ab.squad_code) && ab.squad_nom === 'Les Clutchers' : mode === 'rejoindre' ? ab.squad_code === 'SQD-AB2CD3' && ab.squad_nom === null : ab.squad_code === null && ab.squad_nom === null)
       && ab.code_createur === (crea ? crea.toUpperCase() : null) && !/^Prefer.*return=representation/.test(a.prefer);
     const s3 = await step(pg);
@@ -240,6 +241,11 @@ async function fillJoin(pg, o) {
   await fillJoin(pg, { plan: 'max', prenom: 'Ry', email: 'ry@exemple.fr', mode: 'creer', crea: 'KOLTZ' });
   const pc = await pg.evaluate(() => ({ sq: document.getElementById('d-squad').hidden, note: document.getElementById('d-note').textContent }));
   R(await step(pg) === 3 && pc.sq && /n'ont pas pu être enregistrées/.test(pc.note), 'waitlist OK mais abonnes refusé (RLS) → confirmé, aucun code squad affiché, note explicative');
+  await pg.close();
+  pg = await newPage(b, DESK, { mode: 'dup' }); await load(pg);
+  await fillJoin(pg, { plan: 'max', prenom: 'Ry', email: 'RY@Exemple.fr', mode: 'creer' });
+  const dp = await pg.evaluate(() => ({ sq: document.getElementById('d-squad').hidden, note: document.getElementById('d-note').textContent }));
+  R(await step(pg) === 3 && dp.sq && /déjà pré-inscrit/.test(dp.note) && pg._posts[0].body[0].email === 'ry@exemple.fr', 'email déjà inscrit (409/23505) → confirmé honnêtement, aucun nouveau code squad, email normalisé en minuscules');
   await pg.close();
   pg = await newPage(b, DESK, { mode: 'real' }); await load(pg);
   await fillJoin(pg, { plan: 'max', prenom: 'Ry', email: 'test-e2e@exemple.fr' });

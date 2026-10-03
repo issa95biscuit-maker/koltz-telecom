@@ -3,9 +3,10 @@
   'use strict';
 
   // ══ CONFIG ══
-  var SUPA_URL = 'https://qzjqmksizkzkhvgrejvx.supabase.co';
-  var SUPA_KEY = 'sb_publishable_dAR0Oogw_2ja2R_fQTJDCg_D9K3k3cZ';
-  var SITE = 'https://www.koltz.fr/';
+  // Valeurs dans assets/js/config.js (une ligne à changer pour pointer vers un autre projet Supabase)
+  var CFG = window.KOLTZ_CONFIG || {};
+  var SUPA_URL = CFG.supabaseUrl, SUPA_KEY = CFG.supabaseKey;
+  var SITE = CFG.site || 'https://www.koltz.fr/';
   var PLANS = {};
   (window.KOLTZ_PLANS || []).forEach(function (p) { PLANS[p.id] = p; });
 
@@ -15,24 +16,27 @@
 
   // ══ SUPABASE (client créé seulement si la lib est chargée) ══
   var supa = null;
-  try { if (window.supabase && window.supabase.createClient) supa = window.supabase.createClient(SUPA_URL, SUPA_KEY); } catch (e) { supa = null; }
+  try { if (SUPA_URL && SUPA_KEY && window.supabase && window.supabase.createClient) supa = window.supabase.createClient(SUPA_URL, SUPA_KEY); } catch (e) { supa = null; }
 
   function saveWaitlist(email, source) {
     if (!supa || !email) return Promise.resolve(false);
-    // ignoreDuplicates : ON CONFLICT DO NOTHING (une ré-inscription n'écrase rien)
-    return supa.from('waitlist').upsert([{ email: email, source: source || 'site' }], { onConflict: 'email', ignoreDuplicates: true })
-      .then(function (r) { if (r.error) console.warn('waitlist:', r.error.message); return !r.error; })
+    // INSERT simple (aucun droit de lecture requis). Email déjà présent (23505) = déjà sur la liste = succès.
+    return supa.from('waitlist').insert([{ email: email, source: source || 'site' }])
+      .then(function (r) { if (!r.error || r.error.code === '23505') return true; console.warn('waitlist:', r.error.message); return false; })
       .catch(function (e) { console.warn('waitlist:', e && e.message); return false; });
   }
   function saveAbonne(d) {
     if (!supa) return Promise.resolve(false);
-    // pas de .select() : fonctionne avec une RLS « insert only » pour anon
+    // Uniquement les colonnes autorisées pour anon (statut, points, dates : valeurs par défaut côté base).
+    // Pas de .select() : fonctionne avec une RLS « insert only ».
     return supa.from('abonnes').insert([{
-      email: d.email, nom: null, prenom: d.prenom, forfait: d.forfait, statut: 'pending',
-      code_parrain: null, points: 0,
+      email: d.email, prenom: d.prenom, forfait: d.forfait,
       squad_mode: d.squadMode, squad_nom: d.squadNom, squad_code: d.squadCode, code_createur: d.codeCreateur
-    }]).then(function (r) { if (r.error) console.warn('abonnes:', r.error.message); return !r.error; })
-      .catch(function (e) { console.warn('abonnes:', e && e.message); return false; });
+    }]).then(function (r) {
+      if (!r.error) return true;
+      if (r.error.code === '23505') return 'dup'; // email déjà pré-inscrit : la 1re inscription est conservée
+      console.warn('abonnes:', r.error.message); return false;
+    }).catch(function (e) { console.warn('abonnes:', e && e.message); return false; });
   }
   function loadWaitlistCount() {
     if (!supa) return;
@@ -159,7 +163,7 @@
       if (busy) return; busy = true;
       var mode = squadMode();
       var d = {
-        email: fEm.value.trim(), prenom: fPre.value.trim(), forfait: plan(),
+        email: fEm.value.trim().toLowerCase(), prenom: fPre.value.trim(), forfait: plan(),
         squadMode: mode === 'solo' ? null : mode,
         squadNom: mode === 'creer' ? (fNom.value.trim() || null) : null,
         squadCode: mode === 'creer' ? genSquadCode() : mode === 'rejoindre' ? fCode.value : null,
@@ -179,6 +183,10 @@
         var sq = document.getElementById('d-squad'), sh = document.getElementById('d-share'), note = document.getElementById('d-note');
         sq.hidden = true; sh.hidden = true; note.hidden = true; lastSquadCode = null;
         var extras = d.squadMode || d.codeCreateur;
+        if (a === 'dup') {
+          note.textContent = "Cet email est déjà pré-inscrit\u00a0: on garde ta première inscription. Pour la modifier, écris-nous à contact@koltz.fr.";
+          note.hidden = false; go(3, true); return;
+        }
         if (a && d.squadMode === 'creer') {
           lastSquadCode = d.squadCode;
           sq.innerHTML = '';
