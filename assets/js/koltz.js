@@ -15,8 +15,9 @@
   function setT(el, t) { if (typeof el === 'string') el = document.getElementById(el); if (el) el.textContent = t; }
 
   // ══ SUPABASE (client créé seulement si la lib est chargée) ══
+  // persistSession: false → aucun stockage navigateur (pas de cookie ni localStorage)
   var supa = null;
-  try { if (SUPA_URL && SUPA_KEY && window.supabase && window.supabase.createClient) supa = window.supabase.createClient(SUPA_URL, SUPA_KEY); } catch (e) { supa = null; }
+  try { if (SUPA_URL && SUPA_KEY && window.supabase && window.supabase.createClient) supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } }); } catch (e) { supa = null; }
 
   function saveWaitlist(email, source) {
     if (!supa || !email) return Promise.resolve(false);

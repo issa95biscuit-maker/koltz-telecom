@@ -200,6 +200,9 @@ async function fillJoin(pg, o) {
       && (crea ? conf.note.includes(crea.toUpperCase()) : !conf.note);
     R(okW && okA && okC && pg._log.length === 0, `${plan} × ${mode}${crea ? ' + code créateur' : ''} : waitlist ${okW ? 'OK' : 'KO'}, abonnes ${okA ? 'OK' : 'KO ' + JSON.stringify(ab)}, confirmation ${okC ? 'OK' : 'KO ' + JSON.stringify(conf)}`);
     if (k === 2) {
+      const store = await pg.evaluate(() => ({ ls: Object.keys(localStorage), ss: Object.keys(sessionStorage), ck: document.cookie }));
+      const cks = await pg.cookies();
+      R(!store.ls.length && !store.ss.length && !store.ck && !cks.length, 'aucun cookie ni stockage local après inscription ' + JSON.stringify(store));
       console.log('  exemple payload abonnes :', JSON.stringify(ab));
       // partage de l'invitation squad
       await pg.click('#d-share [data-share="squad"]').catch(() => {}); await sleep(200);
