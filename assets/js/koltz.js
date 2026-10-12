@@ -227,7 +227,7 @@
     window.KOLTZ = { go: go, state: function () { return st; } };
   }
 
-  // ══ MODAL LÉGALE — BROUILLON À VALIDER (voir LEGAL-REVIEW.md) ══
+  // ══ MODAL LÉGALE — textes de la pré-inscription (relecture juridique recommandée, voir LEGAL-REVIEW.md) ══
   const LEGAL={
  mentions:{t:'Mentions légales',b:'<p><em>Dernière mise à jour : 12 octobre 2026.</em></p><h4>Éditeur du site</h4><p>KOLTZ MOBILE SAS, société par actions simplifiée<br/>Immatriculée au RCS de Paris sous le numéro 988 421 770<br/>Siège social : Paris, France<br/>Email : contact@koltz.fr</p><h4>Directeur de la publication</h4><p>Le représentant légal de KOLTZ MOBILE SAS.</p><h4>Hébergement du site</h4><p>Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis. Site : vercel.com.</p><h4>Hébergement des données de pré-inscription</h4><p>Supabase Inc. (base de données), la région d\'hébergement sera précisée ici dès la mise en service de la base.</p><h4>Activité</h4><p>KOLTZ est un projet d\'offre mobile en cours de lancement. À ce jour, aucun service de téléphonie n\'est commercialisé ni fourni sur ce site : il permet uniquement de se pré-inscrire pour être informé du lancement.</p><h4>Propriété intellectuelle</h4><p>Les textes, visuels, logos et éléments graphiques du site sont la propriété de KOLTZ MOBILE SAS ou utilisés avec autorisation. Toute reproduction sans accord préalable est interdite. Les noms de forfaits affichés sont provisoires.</p><h4>Contact</h4><p>contact@koltz.fr</p>'},
  cgv:{t:'Conditions de la pré-inscription',b:'<p><em>Dernière mise à jour : 12 octobre 2026.</em></p><h4>Objet</h4><p>Les présentes conditions encadrent la pré-inscription gratuite à KOLTZ (« Saison 0 ») sur www.koltz.fr, éditée par KOLTZ MOBILE SAS. KOLTZ n\'est pas encore lancé : <strong>aucun forfait mobile n\'est vendu ni fourni à ce stade</strong>.</p><h4>Ce que la pré-inscription est</h4><p>Une inscription gratuite, sans paiement et sans engagement, qui permet d\'être prévenu du lancement, de réserver un pseudo de squad et d\'indiquer un code créateur. Elle ne constitue ni un contrat d\'abonnement, ni une commande, ni une réservation de numéro.</p><h4>Offres et prix affichés</h4><p>Les forfaits, volumes de données, prix et contenus présentés sur le site sont <strong>indicatifs et prévisionnels</strong>. Ils pourront évoluer d\'ici le lancement, notamment selon les conditions de notre opérateur hôte. Les montants de la remise squad, de l\'XP, des récompenses et du bonus « Founder » ne sont pas encore fixés et seront annoncés au lancement.</p><h4>Squads, XP et codes</h4><p>Le code squad généré lors de la pré-inscription sert uniquement à regrouper des personnes inscrites. Le code créateur saisi est enregistré tel quel et vérifié au lancement ; un code non reconnu sera ignoré. Les avantages liés aux squads, à l\'XP, au parrainage et aux codes créateurs seront décrits dans les conditions de l\'offre au lancement. Tout concours (ex. « Hall of Fame ») fera l\'objet d\'un règlement spécifique publié avant son ouverture.</p><h4>Au lancement</h4><p>Avant toute souscription, tu recevras les conditions générales de vente et d\'utilisation du service, la fiche d\'information standardisée et le récapitulatif contractuel prévus par le Code de la consommation. Tu seras libre de souscrire ou non. Le droit de rétractation de 14 jours s\'appliquera aux souscriptions à distance, dans les conditions prévues par la loi.</p><h4>Annulation de la pré-inscription</h4><p>Tu peux annuler ta pré-inscription à tout moment, sans frais ni justification, en écrivant à contact@koltz.fr. KOLTZ peut mettre fin au programme de pré-inscription ; les personnes inscrites en seront informées par email.</p><h4>Responsabilité</h4><p>KOLTZ s\'efforce de maintenir le site accessible et exact, sans pouvoir garantir une disponibilité permanente. La pré-inscription ne donne droit à aucune indemnité si l\'offre évolue, est reportée ou n\'est pas lancée.</p><h4>Droit applicable</h4><p>Les présentes conditions sont soumises au droit français. En cas de litige, tu peux contacter contact@koltz.fr ; à défaut d\'accord, les tribunaux compétents sont ceux prévus par la loi.</p>'},
@@ -249,7 +249,33 @@
     dlg.addEventListener('close', function () { if (prev) prev.focus(); prev = null; });
   }
 
+  // ══ FONDS & APPARITIONS — images de fond chargées à l'approche (lazy), reveal doux ══
+  function initFx() {
+    var bgs = document.querySelectorAll('.bgph');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!('IntersectionObserver' in window)) { bgs.forEach(function (e) { e.classList.add('in'); }); return; }
+    var ioBg = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); ioBg.unobserve(en.target); } });
+    }, { rootMargin: '600px 0px' });
+    bgs.forEach(function (e) { ioBg.observe(e); });
+    if (reduce) return;
+    var els = [];
+    document.querySelectorAll('.sec .h2').forEach(function (h) { var l = h.previousElementSibling; if (l && l.classList.contains('label') && !h.closest('.join')) { l.classList.add('rv'); els.push(l); } });
+    var groups = ['.sec .h2', '.steps > .step', '.stats > .stat', '.plans > .plan', '.rules > .rule', '.ladder > .rank', '.xpgrid > .card', '.faq > details', '.creator', '.tiers', '.facts', '.squadcalc'];
+    groups.forEach(function (sel) {
+      var list = document.querySelectorAll(sel);
+      list.forEach(function (e, i) {
+        if (e.closest('.hero') || e.closest('.join')) return;
+        e.classList.add('rv', 'rv--d' + Math.min(i, 5)); els.push(e);
+      });
+    });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting || en.boundingClientRect.top < 0) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    hydratePlans(); initNav(); initSquadCalc(); initShare(); initJoin(); initLegal(); loadWaitlistCount();
+    hydratePlans(); initNav(); initSquadCalc(); initShare(); initJoin(); initLegal(); initFx(); loadWaitlistCount();
   });
 })();

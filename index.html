@@ -12,6 +12,8 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png"/>
 <link rel="preload" href="/assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" as="image" href="/assets/img/bg/hero.avif" type="image/avif" media="(min-width:700px)"/>
+<link rel="preload" as="image" href="/assets/img/bg/hero-m.avif" type="image/avif" media="(max-width:699px)"/>
 <link rel="stylesheet" href="/assets/css/koltz.css"/>
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website"/>
@@ -67,6 +69,7 @@
 
 <!-- 1. Hero -->
 <section class="hero" aria-labelledby="hero-h">
+  <div class="hero__bg" aria-hidden="true"></div><div class="hero__photo" aria-hidden="true"></div>
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <p class="label"><span class="tag tag--plasma">Saison 0</span> Pré-lancement · Sans engagement</p>
@@ -103,6 +106,7 @@
 
 <!-- 2. Le constat -->
 <section class="sec" id="constat" aria-labelledby="constat-h">
+  <div class="bgph bgph--r bgph--solo" aria-hidden="true"></div>
   <div class="wrap split">
     <div>
       <p class="label label--o">01 · Le constat</p>
@@ -139,6 +143,7 @@
 
 <!-- 4. Le prix squad -->
 <section class="sec sec--panel" id="prix-squad" aria-labelledby="prix-h">
+  <div class="bgph bgph--l bgph--squad" aria-hidden="true"></div>
   <div class="wrap split">
     <div>
       <p class="label label--o">03 · Le prix squad</p>
@@ -228,6 +233,7 @@
 
 <!-- 6. XP, rangs & saisons -->
 <section class="sec sec--panel" id="xp" aria-labelledby="xp-h">
+  <div class="bgph bgph--r bgph--xp" aria-hidden="true"></div>
   <div class="wrap">
     <p class="label label--o">05 · XP, rangs &amp; saisons</p>
     <h2 id="xp-h" class="h2">Chaque mois compte. Chaque Go aussi.</h2>
@@ -257,6 +263,7 @@
 
 <!-- 7. Code créateur -->
 <section class="sec" id="createurs" aria-labelledby="crea-h">
+  <div class="bgph bgph--r bgph--streamer" aria-hidden="true"></div>
   <div class="wrap split">
     <div>
       <p class="label label--plasma">06 · Code créateur</p>
@@ -371,6 +378,7 @@
 
 <!-- 13. CTA final + pré-inscription -->
 <section class="sec join" id="rejoindre" aria-labelledby="join-h">
+  <div class="bgph bgph--l bgph--win" aria-hidden="true"></div>
   <div class="wrap join__grid">
     <div class="join__intro">
       <p class="label label--o">12 · Saison 0</p>
