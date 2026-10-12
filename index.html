@@ -416,7 +416,11 @@
         </fieldset>
 
         <div class="fld"><label for="f-crea">Code créateur (optionnel)</label><input id="f-crea" name="code_createur" maxlength="20" autocomplete="off" spellcheck="false" aria-describedby="f-crea-hint f-crea-err"/><p class="fld__hint" id="f-crea-hint">Le code de ton streamer ou créateur. Vérifié au lancement.</p><p class="fld__err" id="f-crea-err" hidden>Lettres, chiffres et tirets uniquement (3 à 20).</p></div>
-        <p class="fine">On t'écrit uniquement pour te prévenir du lancement de KOLTZ. <button type="button" class="linkbtn" data-legal="privacy">Confidentialité</button></p>
+        <div class="fld fld--check">
+          <label class="check" for="f-consent"><input type="checkbox" id="f-consent" name="consentement" value="1" aria-required="true" aria-describedby="f-consent-err"/><span>J'accepte que KOLTZ utilise mon email et mes réponses pour me prévenir du lancement et gérer ma pré-inscription (squad, code créateur). Je peux retirer mon accord à tout moment. *</span></label>
+          <p class="fld__err" id="f-consent-err" hidden>Coche la case pour qu'on puisse te prévenir du lancement.</p>
+        </div>
+        <p class="fine">Pas de pub, pas de revente. Détails&nbsp;: <button type="button" class="linkbtn" data-legal="privacy">Confidentialité</button> · <button type="button" class="linkbtn" data-legal="cgv">Conditions de la pré-inscription</button></p>
         <div class="err" id="join-err" role="alert" hidden></div>
       </fieldset>
 
@@ -464,7 +468,7 @@
       <nav class="foot__col" aria-label="Informations légales">
         <p class="label">Légal</p>
         <button type="button" data-legal="mentions">Mentions légales</button>
-        <button type="button" data-legal="cgv">CGV</button>
+        <button type="button" data-legal="cgv">Conditions</button>
         <button type="button" data-legal="privacy">Confidentialité</button>
         <button type="button" data-legal="cookies">Cookies</button>
       </nav>

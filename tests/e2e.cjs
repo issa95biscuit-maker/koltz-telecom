@@ -55,6 +55,8 @@ async function fillJoin(pg, o) {
   if (o.nom) await pg.type('#f-squad-nom', o.nom);
   if (o.code) await pg.type('#f-squad-code', o.code);
   if (o.crea) await pg.type('#f-crea', o.crea);
+  const ck = await pg.$eval('#f-consent', e => e.checked);
+  if ((o.consent !== false) !== ck) await pg.click('#f-consent');
   await pg.click('#j-next'); await sleep(400);
 }
 
@@ -192,7 +194,7 @@ async function fillJoin(pg, o) {
     const expMode = mode === 'solo' ? null : mode;
     const okA = ab && ab.email === o.email && ab.prenom === o.prenom && ab.forfait === plan && !('statut' in ab) && !('points' in ab) && !('nom' in ab) && ab.squad_mode === expMode
       && (mode === 'creer' ? /^SQD-[A-HJ-NP-Z2-9]{6}$/.test(ab.squad_code) && ab.squad_nom === 'Les Clutchers' : mode === 'rejoindre' ? ab.squad_code === 'SQD-AB2CD3' && ab.squad_nom === null : ab.squad_code === null && ab.squad_nom === null)
-      && ab.code_createur === (crea ? crea.toUpperCase() : null) && !/^Prefer.*return=representation/.test(a.prefer);
+      && ab.code_createur === (crea ? crea.toUpperCase() : null) && ab.consentement === true && ab.consentement_version === '2026-10-pre1' && w.body[0].consentement === true && !/^Prefer.*return=representation/.test(a.prefer);
     const s3 = await step(pg);
     const conf = await pg.evaluate(() => ({ em: document.getElementById('d-em').textContent, plan: document.getElementById('d-plan').textContent, sq: document.getElementById('d-squad').hidden ? '' : document.getElementById('d-squad').textContent, share: !document.getElementById('d-share').hidden, note: document.getElementById('d-note').hidden ? '' : document.getElementById('d-note').textContent, focus: document.activeElement.id }));
     const okC = s3 === 3 && conf.em === o.email && conf.plan.length > 0 && conf.focus === 's-3'
@@ -213,10 +215,13 @@ async function fillJoin(pg, o) {
 
   console.log('\n# 8. Validations');
   pg = await newPage(b, DESK); await load(pg);
-  await fillJoin(pg, { plan: 'max' });
-  R(await step(pg) === 2 && pg._posts.length === 0, 'champs vides → reste à l’étape 2, aucun envoi');
+  await fillJoin(pg, { plan: 'max', consent: false });
+  R(await step(pg) === 2 && pg._posts.length === 0 && await vis(pg, '#f-consent-err'), 'champs vides → reste à l’étape 2, aucun envoi');
   R(await pg.$eval('#f-pre', e => e.getAttribute('aria-invalid')) === 'true' && await vis(pg, '#f-pre-err') && await vis(pg, '#f-em-err'), 'erreurs prénom + email affichées, aria-invalid');
   R(await pg.evaluate(() => document.activeElement.id) === 'f-pre', 'focus sur le 1er champ en erreur');
+  await pg.click('#j-back'); await sleep(50);
+  await fillJoin(pg, { prenom: 'Ry', email: 'ry@exemple.fr', consent: false });
+  R(await step(pg) === 2 && pg._posts.length === 0 && await vis(pg, '#f-consent-err') && await pg.evaluate(() => document.activeElement.id) === 'f-consent' && await pg.$eval('#f-consent', e => !e.checked && e.getAttribute('aria-invalid') === 'true'), 'case de consentement non cochée (et non pré-cochée) → refus, focus sur la case');
   await pg.click('#j-back'); await sleep(50);
   await fillJoin(pg, { prenom: 'Ry', email: 'pas-un-email' });
   R(await step(pg) === 2 && await vis(pg, '#f-em-err') && !(await vis(pg, '#f-pre-err')), 'email invalide refusé');
@@ -272,8 +277,14 @@ async function fillJoin(pg, o) {
     const d = await pg.evaluate(() => ({ open: document.getElementById('lmodal').open, focus: document.activeElement.id, len: document.getElementById('lm-body').textContent.length }));
     await pg.keyboard.press('Escape'); await sleep(100);
     const back = await pg.evaluate(k => document.activeElement.getAttribute('data-legal') === k, kd);
+    const lt = await pg.evaluate(() => document.getElementById('lm-body').textContent).catch(() => '');
     R(d.open && d.focus === 'lm-close' && d.len > 50 && back, `modale ${kd} : ouverte, focus sur Fermer, Échap → focus rendu au déclencheur`);
   }
+  const legalAll = await pg.evaluate(async () => { let out = ''; for (const k of ['mentions', 'cgv', 'privacy', 'cookies']) { document.querySelector('footer [data-legal="' + k + '"]').click(); out += document.getElementById('lm-body').textContent + ' '; document.getElementById('lmodal').close(); } return out; });
+  R(!/garantis? 12 mois/i.test(legalAll) && !/espace client/i.test(legalAll), 'textes légaux : plus de « prix garantis 12 mois » ni de « résiliation depuis l’espace client »');
+  R(/consentement/i.test(legalAll) && /article 6\.1\.a/.test(legalAll) && /CNIL/.test(legalAll) && /Durée de conservation/.test(legalAll) && /privacy@koltz\.fr/.test(legalAll), 'confidentialité : finalité, base légale (consentement), conservation, droits, contact, CNIL');
+  R(/aucun cookie/i.test(legalAll) && /Google Fonts/.test(legalAll) && /Supabase/.test(legalAll), 'cookies : aucun cookie, polices auto-hébergées, Supabase mentionné');
+  R((legalAll.match(/\[à compléter/g) || []).length >= 5, 'placeholders [à compléter] présents (capital, adresse, TVA, directeur de publication…)');
   await pg.click('[data-share="copy"]'); await sleep(200);
   R(/Lien copié|koltz\.fr/.test(await txt(pg, '#toast')), 'partage « Copier le lien » → toast');
   const wa = await pg.$eval('[data-share="wa"], a[href*="wa.me"]', e => e.getAttribute('href') || '').catch(() => '');

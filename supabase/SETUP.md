@@ -25,8 +25,8 @@ le site affiche honnêtement « ta pré-inscription n'a pas pu être enregistré
 2. Ouvre `supabase/schema-suggestion.sql` (dans le repo), copie **tout**, colle, clique **Run**.
    Résultat attendu : `Success. No rows returned` (des « NOTICE … skipping » sont normaux).
 3. Vérifie : menu **Table Editor** → tu dois voir `waitlist` et `abonnes`, avec le badge **RLS enabled**.
-4. Quand la case de consentement sera en ligne (branche `feat/legal-draft`), relance le bloc **6. Consentement obligatoire**
-   (décommente-le, c'est-à-dire supprime les `-- ` en début de ligne, puis Run).
+4. Sur cette branche (`feat/legal-draft`), la base **exige** la case de consentement cochée. Si tu mets en ligne une version
+   du site sans cette case, relance le bloc **6 bis** (décommente-le : supprime les `-- ` en début de ligne, puis Run).
 
 ## 3. Récupérer l'URL et la clé publique
 1. En haut de la page du projet, bouton **Connect** (ou **Project Settings → Data API**) → copie la **Project URL**
@@ -59,6 +59,7 @@ Sur GitHub : ouvre le fichier sur la branche, icône crayon ✏️, remplace les
 | Lire la liste des emails (SELECT) | ❌ refusé |
 | Modifier / supprimer des lignes | ❌ refusé |
 | Écrire `statut`, `points`, `created_at` | ❌ refusé (valeurs fixées par la base) |
+| Inscription sans consentement coché | ❌ refusé |
 | Forfait inconnu, code squad mal formé, email en majuscules / trop long | ❌ refusé (contraintes) |
 
 Pour consulter ou exporter les inscrits : uniquement depuis le dashboard Supabase (Table Editor → Export CSV), jamais depuis le site.
