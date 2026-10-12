@@ -284,7 +284,7 @@ async function fillJoin(pg, o) {
   R(!/garantis? 12 mois/i.test(legalAll) && !/espace client/i.test(legalAll), 'textes légaux : plus de « prix garantis 12 mois » ni de « résiliation depuis l’espace client »');
   R(/consentement/i.test(legalAll) && /article 6\.1\.a/.test(legalAll) && /CNIL/.test(legalAll) && /Durée de conservation/.test(legalAll) && /privacy@koltz\.fr/.test(legalAll), 'confidentialité : finalité, base légale (consentement), conservation, droits, contact, CNIL');
   R(/aucun cookie/i.test(legalAll) && /Google Fonts/.test(legalAll) && /Supabase/.test(legalAll), 'cookies : aucun cookie, polices auto-hébergées, Supabase mentionné');
-  R((legalAll.match(/\[à compléter/g) || []).length >= 5, 'placeholders [à compléter] présents (capital, adresse, TVA, directeur de publication…)');
+  R(!/\[à compléter/.test(legalAll), 'aucun placeholder [à compléter] visible en production');
   await pg.click('[data-share="copy"]'); await sleep(200);
   R(/Lien copié|koltz\.fr/.test(await txt(pg, '#toast')), 'partage « Copier le lien » → toast');
   const wa = await pg.$eval('[data-share="wa"], a[href*="wa.me"]', e => e.getAttribute('href') || '').catch(() => '');
