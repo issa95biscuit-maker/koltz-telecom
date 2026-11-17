@@ -5,7 +5,7 @@
  * NE JAMAIS mettre ici une clé « secret » (sb_secret_…) ou service_role.
  */
 window.KOLTZ_CONFIG = {
-  supabaseUrl: 'https://qzjqmksizkzkhvgrejvx.supabase.co',
-  supabaseKey: 'sb_publishable_dAR0Oogw_2ja2R_fQTJDCg_D9K3k3cZ',
+  supabaseUrl: 'https://wgubnwmfmtoqlemwvmsn.supabase.co',
+  supabaseKey: 'sb_publishable__KvMPENaDGr_wPHqbstQqA_xhWfNj15',
   site: 'https://www.koltz.fr/'
 };
