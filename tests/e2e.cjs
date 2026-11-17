@@ -256,9 +256,10 @@ async function fillJoin(pg, o) {
   R(await step(pg) === 3 && dp.sq && /déjà pré-inscrit/.test(dp.note) && pg._posts[0].body[0].email === 'ry@exemple.fr', 'email déjà inscrit (409/23505) → confirmé honnêtement, aucun nouveau code squad, email normalisé en minuscules');
   await pg.close();
   pg = await newPage(b, DESK, { mode: 'real' }); await load(pg);
-  await fillJoin(pg, { plan: 'max', prenom: 'Ry', email: 'test-e2e@exemple.fr' });
+  const realEmail = 'test-e2e-' + Date.now() + '@exemple.fr';
+  await fillJoin(pg, { plan: 'max', prenom: 'TestE2E', email: realEmail });
   await sleep(2500);
-  R(await step(pg) === 2 && await vis(pg, '#join-err'), 'vrai projet Supabase (actuellement injoignable) → erreur honnête, pas de fausse confirmation');
+  R(await step(pg) === 3 && (await txt(pg, '#d-em')) === realEmail, 'vrai projet Supabase → inscription enregistrée, confirmation affichée');
   await pg.close();
 
   console.log('\n# 10. Renommage des forfaits (plans.js = source unique)');
